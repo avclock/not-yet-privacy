@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support: Not Yet: Checkout Blocker</title>
+<style>
+  :root {
+    --bg: #EDEFF3;
+    --bg-elevated: #F8F9FC;
+    --text-primary: #24262E;
+    --text-secondary: #6B7280;
+    --accent: #7C8598;
+    --hairline: #DCE0E8;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text-primary); }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    line-height: 1.6;
+  }
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 56px 24px 100px;
+  }
+  h1 {
+    font-family: ui-serif, "New York", Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    margin: 0 0 8px;
+  }
+  h2 {
+    font-family: ui-serif, "New York", Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 40px 0 12px;
+  }
+  p, li { font-size: 16px; color: var(--text-primary); }
+  .updated { color: var(--text-secondary); font-size: 14px; margin: 0 0 28px; }
+  .lede {
+    background: var(--bg-elevated);
+    border: 1px solid var(--hairline);
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin: 0 0 32px;
+  }
+  .lede p { margin: 0; }
+  a { color: var(--accent); }
+  ul { padding-left: 22px; }
+  li { margin-bottom: 10px; }
+  strong { font-weight: 600; }
+  .contact {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--hairline);
+  }
+  footer {
+    margin-top: 56px;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <h1>Support</h1>
+    <p class="updated">Not Yet: Checkout Blocker</p>
+
+    <div class="lede">
+      <p>Not Yet pauses checkout and payment pages so you have a moment before completing a purchase. If something isn't working, start here. Most reports come down to one of the first two things below.</p>
+    </div>
+
+    <h2>Nothing is blocking, on any site</h2>
+    <p>This is almost always Safari's permission, not a problem with your settings. Installing the app is only half of it: Safari also has to be told the extension may run on pages.</p>
+    <p><strong>On iPhone or iPad:</strong> open Settings, then Apps, then Safari, then Extensions. Tap "Not Yet" and turn it on. Tap Website Access and set it to "All Websites."</p>
+    <p><strong>On Mac:</strong> open Safari, then Safari &gt; Settings &gt; Extensions. Tick "Not Yet," then set its website access to "Always Allow on Every Website."</p>
+    <p>Until that's done, the settings and onboarding screens will look perfectly configured while nothing ever blocks, because those pages run in their own context and don't need site permission.</p>
+
+    <h2>One particular site isn't handled right</h2>
+    <p>A site that should pause and doesn't, a site that pauses when it shouldn't, an amount that fills in wrong, or a shield sitting over the wrong button. There are a great many checkout pages on the internet and no set of rules catches every one of them.</p>
+    <p>The app has a built-in report form: open Not Yet's settings, go to <strong>Setup &amp; help</strong>, and use "Report a site that isn't working right." It opens a pre-filled email draft in your own mail app. Nothing is sent automatically, and nothing about your browsing is attached beyond what you type.</p>
+
+    <h2>An update doesn't seem to have applied</h2>
+    <p>Safari can keep running a previously loaded copy of an extension. Turn Not Yet off and on again in Safari's extension settings, or quit Safari completely and reopen it. The build number at the very bottom of Not Yet's settings page tells you which version is actually running.</p>
+
+    <h2>Subscriptions and purchases</h2>
+    <p>Not Yet's core blocking is free and stays free. A subscription or the one-time lifetime purchase unlocks the extra features, and the lifetime purchase includes every premium feature added later.</p>
+    <p><strong>Restoring a purchase:</strong> open the Not Yet app and use "Restore Purchases." This is the right step on a new device, or after reinstalling.</p>
+    <p><strong>Managing or cancelling a subscription:</strong> this is handled by Apple, not by us. On iPhone or iPad, open Settings, tap your name, then Subscriptions. On Mac, open the App Store, click your name, then Account Settings. You can also use <a href="https://apps.apple.com/account/subscriptions">apps.apple.com/account/subscriptions</a>.</p>
+    <p><strong>Refunds</strong> are handled by Apple through <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>. We have no ability to issue them ourselves.</p>
+    <p>If you turn on Guard Mode and your subscription later ends, Guard Mode stays on. Your protection is never removed because of a payment, and your own PIN always opens it.</p>
+
+    <h2>Forgotten PIN</h2>
+    <p>Not Yet's settings include a master reset. It asks you to retype a long generated code, then clears every setting and starts you over at setup. It's deliberately harder than the PIN itself, because it exists for genuinely being locked out rather than as a quick way around your own protection.</p>
+
+    <h2>Your data</h2>
+    <p>Not Yet has no server and collects nothing. Everything it remembers, including any photos you add to your quiet place, stays on your own device. Full details are in the <a href="../">Privacy Policy</a>.</p>
+
+    <div class="contact">
+      <h2 style="margin-top:0;">Still stuck?</h2>
+      <p>Email us and we'll help:<br><strong><a href="mailto:avclock@protonmail.com">avclock@protonmail.com</a></strong></p>
+      <p>It helps a lot to include which device and OS version you're on, the build number from the bottom of Not Yet's settings page, and the address of the site if it's about one particular page.</p>
+    </div>
+
+    <footer>Not Yet: Checkout Blocker &middot; <a href="../">Privacy Policy</a></footer>
+  </div>
+</body>
+</html>
