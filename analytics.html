@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analytics — Not Yet</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="images/app-icon.png">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .stat-grid { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 20px; }
+  .stat-tile { flex: 1 1 160px; background: var(--panel-2); border: 1px solid var(--hairline); border-radius: var(--radius); padding: 18px 20px; }
+  .stat-tile .num { font-family: var(--mono); font-size: 28px; font-weight: 800; color: var(--accent-strong); }
+  .stat-tile .lbl { color: var(--text-tertiary); font-size: 12.5px; margin-top: 4px; }
+  .data-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 14px; }
+  .data-table th { text-align: left; color: var(--text-tertiary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; padding: 8px 10px; border-bottom: 1px solid var(--hairline-strong); }
+  .data-table td { padding: 9px 10px; border-bottom: 1px solid var(--hairline); color: var(--text-secondary); }
+  .data-table td.n { font-family: var(--mono); color: var(--text-primary); text-align: right; }
+  .data-table tr:last-child td { border-bottom: none; }
+  .panel-block { background: var(--panel-2); border: 1px solid var(--hairline); border-radius: var(--radius); padding: 20px; margin-top: 28px; }
+  .live-feed { max-height: 340px; overflow-y: auto; margin-top: 14px; }
+  .live-row { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--hairline); font-size: 13px; font-family: var(--mono); }
+  .live-row:last-child { border-bottom: none; }
+  .live-row .kind { color: var(--accent-strong); font-weight: 700; width: 70px; flex-shrink: 0; }
+  .live-row .when { color: var(--text-tertiary); margin-left: auto; flex-shrink: 0; }
+  .refresh-note { color: var(--text-tertiary); font-size: 12.5px; font-family: var(--mono); margin-top: 6px; }
+  .setup-note { border-left: 3px solid var(--accent); background: var(--panel-2); border-radius: var(--radius-sm); padding: 16px 18px; margin-top: 20px; font-size: 13.5px; color: var(--text-secondary); }
+  .setup-note code { background: var(--bg); padding: 1px 5px; border-radius: 4px; font-family: var(--mono); font-size: 0.92em; }
+</style>
+</head>
+<body>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">Private &middot; noindex</div>
+      <h2>Not Yet Site Analytics</h2>
+      <p>Live pageviews, scroll completion, backlink clicks, and shares, reads directly from <code>/api/stats</code>, refreshes every 10 seconds.</p>
+    </div>
+
+    <div id="kv-warning" class="setup-note" style="display:none;">
+      <strong>Not connected yet.</strong> This page needs a Cloudflare KV namespace bound to this Worker project as <code>ANALYTICS_KV</code> before any data will show up. In the Cloudflare dashboard: your Worker project &rarr; <strong>Settings &rarr; Bindings</strong> &rarr; add a KV namespace binding named <code>ANALYTICS_KV</code> (create a new KV namespace if you don't have one yet). See <code>README.md</code> for the full walkthrough, including how to keep this page actually private with Cloudflare Access.
+    </div>
+
+    <div class="stat-grid" id="totals-tiles"></div>
+
+    <div class="panel-block">
+      <div class="label-caps">Pageviews by page</div>
+      <table class="data-table" id="views-table"><tbody></tbody></table>
+    </div>
+
+    <div class="panel-block">
+      <div class="label-caps">Scroll-to-bottom by page</div>
+      <table class="data-table" id="scroll-table">
+        <thead><tr><th>Page</th><th style="text-align:right;">Reached 100%</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="panel-block">
+      <div class="label-caps">Backlink / outbound clicks</div>
+      <table class="data-table" id="outbound-table"><tbody></tbody></table>
+    </div>
+
+    <div class="panel-block">
+      <div class="label-caps">Shares / reposts by page</div>
+      <table class="data-table" id="share-table"><tbody></tbody></table>
+    </div>
+
+    <div class="panel-block">
+      <div class="label-caps">Live activity</div>
+      <div class="live-feed" id="live-feed"></div>
+      <div class="refresh-note" id="refresh-note">loading&hellip;</div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  function relTime(ts) {
+    var s = Math.round((Date.now() - ts) / 1000);
+    if (s < 5) return "just now";
+    if (s < 60) return s + "s ago";
+    var m = Math.round(s / 60);
+    if (m < 60) return m + "m ago";
+    var h = Math.round(m / 60);
+    return h + "h ago";
+  }
+
+  function row(cells) {
+    var tr = document.createElement("tr");
+    cells.forEach(function (c, i) {
+      var td = document.createElement("td");
+      if (i > 0) td.className = "n";
+      td.textContent = c;
+      tr.appendChild(td);
+    });
+    return tr;
+  }
+
+  function tile(num, label) {
+    var d = document.createElement("div");
+    d.className = "stat-tile";
+    d.innerHTML = '<div class="num">' + num + '</div><div class="lbl">' + label + '</div>';
+    return d;
+  }
+
+  function render(data) {
+    var totals = data.totals || {};
+    document.getElementById("kv-warning").style.display = data.error ? "block" : "none";
+
+    var views = {}, scroll = {}, outbound = {}, share = {};
+    var totalViews = 0, totalShares = 0, totalOutbound = 0;
+
+    Object.keys(totals).forEach(function (key) {
+      var parts = key.split("|");
+      var type = parts[0], path = parts[1], detail = parts[2];
+      var n = totals[key];
+      if (type === "view") { views[path] = (views[path] || 0) + n; totalViews += n; }
+      else if (type === "scroll") { scroll[path] = (scroll[path] || 0) + n; }
+      else if (type === "outbound") { outbound[detail] = (outbound[detail] || 0) + n; totalOutbound += n; }
+      else if (type === "share") { share[path] = (share[path] || 0) + n; totalShares += n; }
+    });
+
+    var tiles = document.getElementById("totals-tiles");
+    tiles.innerHTML = "";
+    tiles.appendChild(tile(totalViews, "Total pageviews"));
+    tiles.appendChild(tile(totalShares, "Total shares"));
+    tiles.appendChild(tile(totalOutbound, "Backlink clicks"));
+    tiles.appendChild(tile((data.recent || []).length, "Recent events tracked"));
+
+    var vt = document.querySelector("#views-table tbody");
+    vt.innerHTML = "";
+    Object.keys(views).sort(function (a, b) { return views[b] - views[a]; }).forEach(function (p) {
+      vt.appendChild(row([p, views[p]]));
+    });
+    if (!Object.keys(views).length) vt.appendChild(row(["No pageviews logged yet", ""]));
+
+    var st = document.querySelector("#scroll-table tbody");
+    st.innerHTML = "";
+    Object.keys(scroll).sort(function (a, b) { return scroll[b] - scroll[a]; }).forEach(function (p) {
+      st.appendChild(row([p, scroll[p]]));
+    });
+    if (!Object.keys(scroll).length) st.appendChild(row(["No scroll data yet", ""]));
+
+    var ot = document.querySelector("#outbound-table tbody");
+    ot.innerHTML = "";
+    Object.keys(outbound).sort(function (a, b) { return outbound[b] - outbound[a]; }).forEach(function (h) {
+      ot.appendChild(row([h, outbound[h]]));
+    });
+    if (!Object.keys(outbound).length) ot.appendChild(row(["No outbound clicks yet", ""]));
+
+    var sht = document.querySelector("#share-table tbody");
+    sht.innerHTML = "";
+    Object.keys(share).sort(function (a, b) { return share[b] - share[a]; }).forEach(function (p) {
+      sht.appendChild(row([p, share[p]]));
+    });
+    if (!Object.keys(share).length) sht.appendChild(row(["No shares logged yet", ""]));
+
+    var feed = document.getElementById("live-feed");
+    feed.innerHTML = "";
+    (data.recent || []).forEach(function (ev) {
+      var d = document.createElement("div");
+      d.className = "live-row";
+      d.innerHTML = '<span class="kind">' + ev.type + '</span><span>' + ev.path + (ev.detail ? " &rarr; " + ev.detail : "") + '</span><span class="when">' + relTime(ev.t) + '</span>';
+      feed.appendChild(d);
+    });
+    if (!(data.recent || []).length) feed.innerHTML = '<div class="live-row"><span>Nothing tracked yet, visit the site to generate activity.</span></div>';
+
+    document.getElementById("refresh-note").textContent = "last updated " + new Date().toLocaleTimeString() + " · auto-refreshes every 10s";
+  }
+
+  function load() {
+    fetch("/api/stats", { cache: "no-store" })
+      .then(function (r) { return r.json(); })
+      .then(render)
+      .catch(function () {
+        document.getElementById("refresh-note").textContent = "couldn't reach /api/stats, this page only works once deployed on Cloudflare with the Worker running.";
+      });
+  }
+
+  load();
+  setInterval(load, 10000);
+})();
+</script>
+
+</body>
+</html>

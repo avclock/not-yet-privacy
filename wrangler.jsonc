@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "not-yet-website",
+  "compatibility_date": "2026-09-05",
+  "main": "src/index.js",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS"
+    // Do NOT set "html_handling": "none" -- avclock-website tried this
+    // and it took the whole site down (confirmed live: "/" started
+    // 404ing, only "/index.html" still served). "none" disables ALL
+    // automatic URL resolution, not just the .html-extension redirect
+    // it was meant to stop. Leave this on Cloudflare's default
+    // ("auto-trailing-slash").
+  }
+  // No kv_namespaces here yet -- add one once you create a real KV
+  // namespace in the Cloudflare dashboard for analytics (see
+  // README.md's "Live analytics" section). Until then, js/track.js's
+  // beacon calls just fail silently and analytics.html shows
+  // "couldn't reach /api/stats" -- both harmless, not bugs.
+}

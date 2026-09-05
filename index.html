@@ -3,122 +3,238 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy Policy — Not Yet: Checkout Blocker</title>
-<style>
-  :root {
-    /* Same "Calm" palette as the extension's own default theme
-       (styles/themes.css) -- this site is Not Yet's, so it should read
-       as Not Yet, not as a generic gray legal-page template. */
-    --bg: #F0EEE9;
-    --bg-elevated: #F9F8F5;
-    --text-primary: #2E2C28;
-    --text-secondary: #83807A;
-    --accent: #A39B8B;
-    --hairline: #E3E0D8;
-  }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text-primary); }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
-    line-height: 1.6;
-  }
-  .page {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 56px 24px 100px;
-  }
-  h1 {
-    font-family: ui-serif, "New York", Georgia, serif;
-    font-size: 32px;
-    font-weight: 500;
-    margin: 0 0 8px;
-  }
-  h2 {
-    font-family: ui-serif, "New York", Georgia, serif;
-    font-size: 20px;
-    font-weight: 500;
-    margin: 40px 0 12px;
-  }
-  p, li { font-size: 16px; color: var(--text-primary); }
-  .updated { color: var(--text-secondary); font-size: 14px; margin: 0 0 28px; }
-  .lede {
-    background: var(--bg-elevated);
-    border: 1px solid var(--hairline);
-    border-radius: 16px;
-    padding: 20px 22px;
-    margin: 0 0 32px;
-  }
-  .lede p { margin: 0; }
-  a { color: var(--accent); }
-  ul { padding-left: 22px; }
-  li { margin-bottom: 10px; }
-  strong { font-weight: 600; }
-  .contact {
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid var(--hairline);
-  }
-  footer {
-    margin-top: 56px;
-    font-size: 13px;
-    color: var(--text-secondary);
-  }
-</style>
+
+<title>Not Yet: Checkout Blocker — A Pause Before You Buy</title>
+<meta name="description" content="A Safari and Chrome extension that pauses checkout and payment pages behind a freshly generated, retyped code. Not a countdown, not a snooze button. Free for the essentials, always.">
+<link rel="canonical" href="https://notyetapp.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Not Yet: Checkout Blocker — A Pause Before You Buy">
+<meta property="og:description" content="A typed code, not a timer. Not Yet pauses checkout and payment pages until you've actually thought it through. Free for the essentials, always.">
+<meta property="og:image" content="https://notyetapp.com/images/app-icon.png">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" type="image/png" href="images/app-icon.png">
+<link rel="apple-touch-icon" href="images/app-icon.png">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="page">
-    <h1>Privacy Policy</h1>
-    <p class="updated">Not Yet: Checkout Blocker — Last updated: August 26, 2026</p>
 
-    <div class="lede">
-      <p>Not Yet: Checkout Blocker ("Not Yet," "the app," "the extension") is a Safari Web Extension for iOS, iPadOS, and macOS that pauses checkout and payment pages so you have a moment before completing a purchase.</p>
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <img src="images/app-icon.png" alt="Not Yet app icon">
+      Not Yet
+    </a>
+    <div class="nav-links">
+      <a href="index.html#free">Free</a>
+      <a href="index.html#premium">Premium</a>
+      <a href="blog/index.html">Blog</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="support/">Support</a>
     </div>
-
-    <p>The short version: <strong>Not Yet has no server, collects nothing, and sends nothing anywhere.</strong> Everything it does happens entirely on your own device. This policy explains exactly what that means and why.</p>
-
-    <h2>No servers, no collection</h2>
-    <p>Not Yet does not have a backend. There is no company server, no database, no analytics service, and no third-party SDK anywhere in this app. The extension makes no network requests of its own at all: not to us, not to any analytics or advertising company, not to anyone. We have no way to see how you use the app, what sites you visit, what you almost bought, or anything else, because nothing is ever sent to us. There is nothing to breach, nothing to subpoena, and nothing to sell, because nothing leaves your device in the first place.</p>
-
-    <h2>What's stored, and where</h2>
-    <p>Everything Not Yet remembers is stored locally on your own device, using Safari's standard on-device extension storage. It never syncs to a server, and it's never transmitted anywhere. This includes:</p>
-    <ul>
-      <li><strong>Your settings</strong> — which categories or sites you've chosen to pause, your chosen theme, your unlock method and its settings, and similar preferences.</li>
-      <li><strong>A few local counters</strong> — how many times a checkout page has been paused, how many times you've chosen to go somewhere calmer instead, and a running total of money you've told the app you skipped spending (only ever added when you actively choose to enter an amount and decide not to buy — see "The savings total," below).</li>
-      <li><strong>A PIN, if you turn on Guard Mode</strong> — stored only as a one-way cryptographic hash (SHA-256), never in plain text. Not Yet can check whether a PIN you enter matches, but the actual PIN is never stored or recoverable, including by us.</li>
-    </ul>
-    <p>If you delete the extension or use its "Reset everything" option, this data is erased. We have no copy of it anywhere, because we never had one to begin with.</p>
-
-    <h2>The savings total</h2>
-    <p>Not Yet's "actually saved" total is not a guess or an estimate pulled from your spending. It only ever changes when:</p>
-    <ul>
-      <li><strong>You add to it yourself</strong> — by typing an amount on the "are you sure you want to buy this?" screen and choosing "somewhere calmer" instead of completing the purchase. If you enable the experimental "subtract completed purchases" setting, landing on a real order-confirmation page can also subtract an amount from this total, using the same on-device pattern matching described below — no data about the purchase is sent anywhere to make that calculation.</li>
-    </ul>
-    <p>This number lives in the same local, on-device storage as everything else here, and is never sent anywhere.</p>
-
-    <h2>About the Safari permission</h2>
-    <p>When you turn Not Yet's extension on in Safari, Safari shows a standard warning that the extension can "read and alter the pages you visit" and similar language, including a mention of passwords and payment information. <strong>This is Apple's own standard wording for any extension with this level of access</strong> — every extension capable of acting on a page you visit shows this same warning, regardless of what that extension actually does with it. It is not language we chose, and it does not describe what Not Yet actually does.</p>
-    <p>In practice, Not Yet's content script only ever:</p>
-    <ul>
-      <li>Checks the current page's web address (URL) and nearby button text against a built-in list of patterns, to recognize a checkout, payment, or (if you turn on the experimental setting above) order-confirmation page.</li>
-      <li>Optionally reads a nearby dollar amount on the page, only when you are on the confirmation screen described above, so it can suggest a number instead of asking you to type one from memory.</li>
-    </ul>
-    <p>Not Yet never reads, stores, or transmits anything you type into a page, including passwords, card numbers, addresses, or any other form field. It has no way to see your keystrokes at all; it only ever looks at text and structure that's already rendered on the page for anyone to see, the same way a browser's built-in "Find on Page" feature does.</p>
-
-    <h2>No accounts, no tracking, no third parties</h2>
-    <p>Not Yet has no sign-in, no user accounts, and does not set or read tracking cookies. It does not use any advertising, analytics, or crash-reporting service. Apple's own App Store purchase and diagnostic systems (if you buy the app, or if you've opted into sharing device analytics with Apple) are governed by Apple's own privacy policy, not this one; Not Yet itself has no visibility into that data either way.</p>
-
-    <h2>Children's privacy</h2>
-    <p>Not Yet is not directed at children and does not knowingly collect information from anyone, of any age, because it does not collect information from anyone, full stop, regardless of age.</p>
-
-    <h2>Changes to this policy</h2>
-    <p>If this policy ever changes, the "Last updated" date above will change, and any material change will be reflected in the app itself. Given that Not Yet has no server and no way to reach you directly, checking this page is the only way to stay current with any updates.</p>
-
-    <div class="contact">
-      <h2 style="margin-top:0;">Contact</h2>
-      <p>Questions about this policy or the app can be sent to:<br><strong><a href="mailto:avclock@protonmail.com">avclock@protonmail.com</a></strong></p>
-    </div>
-
-    <footer>Not Yet: Checkout Blocker &middot; <a href="terms/">Terms of Use</a> &middot; <a href="support/">Support</a></footer>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
+</nav>
+
+<!-- SECTION 1 — HERO -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-icon">
+        <img src="images/app-icon.png" alt="Not Yet: Checkout Blocker app icon">
+      </div>
+      <div>
+        <div class="label-caps">SAFARI &amp; CHROME &middot; FREE CORE, ALWAYS &middot; NOTHING COLLECTED</div>
+        <h1>A Pause, Right Before You Buy</h1>
+        <p class="subhead">Not Yet blocks checkout and payment pages until you retype a freshly generated code, character for character. Not a countdown you can wait out. Not a snooze button you tap through without thinking.</p>
+        <div class="badge-row">
+          <!-- Placeholder hrefs -- swap in the real App Store / Chrome
+               Web Store listing URLs once each is actually live. -->
+          <a class="store-badge" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+            Add to Safari
+          </a>
+          <a class="store-badge secondary" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 2c2.09 0 3.99.79 5.43 2.08l-2.4 4.16A5.98 5.98 0 0012 8a5.98 5.98 0 00-3.03.82L6.57 6.08A7.96 7.96 0 0112 4zM4 12c0-1.5.4-2.9 1.1-4.12l2.4 4.16A5.98 5.98 0 007 12c0 1.06.28 2.05.77 2.91l-3.6 2.08A7.96 7.96 0 014 12zm8 8a7.96 7.96 0 01-5.43-2.13l3.6-2.08c.82.5 1.79.79 2.83.79.5 0 .98-.07 1.44-.19l2.13 3.69A7.96 7.96 0 0112 20zm2.9-9.09a2.9 2.9 0 11-5.8 0 2.9 2.9 0 015.8 0zm3.13 6.28l-2.13-3.69c.68-.84 1.1-1.9 1.1-3.05 0-.9-.25-1.75-.68-2.47l3.6-2.08c.63 1.29.98 2.75.98 4.3 0 2.74-1.09 5.22-2.87 7.03z"/></svg>
+            Add to Chrome
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mock overlay -- an honest, hand-built illustration of the real
+         mechanism, not a real screenshot (this environment can't
+         produce those) and not stock art. Matches the extension's own
+         block-screen wording and layout exactly. -->
+    <div class="mock-overlay" aria-hidden="true">
+      <div class="mock-eyebrow">checkout.example.com &middot; Not Yet</div>
+      <h3>Take a moment first</h3>
+      <p>Retype the code below to continue to checkout.</p>
+      <div class="mock-code">7F3&nbsp;K9Q&nbsp;2LM</div>
+      <input class="mock-input" value="" placeholder="Type the code above" readonly>
+      <div class="mock-actions">
+        <div class="mock-btn primary">Continue to checkout</div>
+        <div class="mock-btn calm">Take me somewhere calmer instead</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- SECTION 2 — WHY THIS EXISTS -->
+<section id="about">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">Why Not Yet exists</div>
+      <h2>Impulse doesn't wait for a timer to run out</h2>
+      <p>A countdown just asks you to wait it out, which most people do without thinking about anything in particular. A "snooze" button is worse: tap it once and the moment's already gone. Not Yet works differently. It shows a random code and asks you to retype it, character for character, before a checkout or payment page will continue. Nothing is cached or reused: reload the page and you get a brand new code. The point is a genuine pause, not a puzzle you solve once and remember.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 — FREE TIER -->
+<section id="free">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">Free tier</div>
+      <h2>Free, genuinely</h2>
+      <p>No account, no ads, and nothing collected, ever. Every category, the code unlock, and your own Quiet Place all work with no purchase at all, on both Safari and Chrome.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-item"><span class="tag">BLOCK</span><span class="label">Checkout &amp; payment pages, automatically recognized</span></div>
+      <div class="feature-item"><span class="tag">CODE</span><span class="label">The typed-code unlock, permanent and free</span></div>
+      <div class="feature-item"><span class="tag">CALM</span><span class="label">Your own Quiet Place, never paywalled</span></div>
+      <div class="feature-item"><span class="tag">CAT</span><span class="label">13 built-in categories, plus your own custom sites</span></div>
+      <div class="feature-item"><span class="tag">GAMB</span><span class="label">An opt-in gambling &amp; betting category</span></div>
+      <div class="feature-item"><span class="tag">WAY</span><span class="label">Or answer a reflection prompt, or just wait it out instead</span></div>
+      <div class="feature-item"><span class="tag">STAT</span><span class="label">Basic pause counters and totals</span></div>
+      <div class="feature-item"><span class="tag">THEME</span><span class="label">Four calm, non-alarm color themes</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 — PREMIUM (Safari only) -->
+<section id="premium">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">Premium &middot; Safari only</div>
+      <h2>A little more friction, on purpose</h2>
+      <p>A monthly subscription or a one-time lifetime unlock. Chrome has no way to sell an extension without a license server, so it stays fully free instead, on purpose, with no locked UI anywhere.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-item premium"><span class="tag">GUARD</span><span class="label">Guard Mode: a PIN that protects your own settings</span></div>
+      <div class="feature-item premium"><span class="tag">WRITE</span><span class="label">Write your own reflection prompts</span></div>
+      <div class="feature-item premium"><span class="tag">SKIN</span><span class="label">Custom gradient themes</span></div>
+      <div class="feature-item premium"><span class="tag">PIN</span><span class="label">The Quiet Place's photo pinboard</span></div>
+      <div class="feature-item premium"><span class="tag">SHLD</span><span class="label">Wallet &amp; Buy Now, Pay Later button matching</span></div>
+      <div class="feature-item premium"><span class="tag">RECAP</span><span class="label">Full weekly recap: trends, categories, mood log</span></div>
+      <div class="feature-item premium"><span class="tag">WDGT</span><span class="label">Home Screen widgets</span></div>
+    </div>
+
+    <p style="margin-top:24px;">
+      <span class="cat-chip free">FREE ON BOTH</span>
+      <span class="cat-chip premium">SAFARI PREMIUM</span>
+      <span class="cat-chip gambling">GAMBLING &amp; BETTING, OPT-IN</span>
+    </p>
+
+    <div class="price-callout">Guard Mode never locks you out for a lapsed subscription. Your own PIN always opens it.</div>
+  </div>
+</section>
+
+<!-- SECTION 5 — WHO IT'S FOR -->
+<section>
+  <div class="container">
+    <div class="section-head">
+      <h2>Built for a pause, not a punishment</h2>
+    </div>
+    <div class="two-col">
+      <div class="who-card">
+        <h3>Anyone who shops on impulse</h3>
+        <p>A checkout page that's one tap away from a purchase you'll second-guess an hour later. Not Yet buys back the few seconds that a "Buy Now" button usually skips right past.</p>
+      </div>
+      <div class="who-card">
+        <h3>Anyone pausing gambling or betting sites</h3>
+        <p>A real, opt-in category with credible precedent (Gamban, BetBlocker). Not Yet doesn't simulate or facilitate anything, it only ever pauses access, the same as it does for ordinary checkout pages.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6 — FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head">
+      <h2>Frequently asked questions</h2>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Is Not Yet free?</summary>
+        <p>Yes. The core blocking, the code unlock, and your Quiet Place are all completely free on both Safari and Chrome, with no account required. A Safari-only Premium unlock adds Guard Mode, custom themes, a full recap, widgets, and more.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does Not Yet collect my data?</summary>
+        <p>No. Not Yet has no server and makes no network requests to us at all. Every setting, counter, and PIN hash stays on your own device. See the <a href="privacy/">Privacy Policy</a> for the full detail.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I still buy something if I really mean to?</summary>
+        <p>Yes, always. Not Yet is a friction tool, not a hard block: retyping the code, answering a reflection prompt, or waiting out a timer all let a purchase through, by design. It's meant to buy a moment of thought, not stop you outright.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What is Guard Mode?</summary>
+        <p>A PIN you set yourself that protects your own settings from your own impulses, like turning off a category mid-browse. If a subscription ever lapses, Guard Mode stays fully on. Your own PIN always opens it, and a built-in master reset is the only other way in if you forget it.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is this a treatment program?</summary>
+        <p>No. Not Yet is a pause and friction tool, not a substitute for professional financial, medical, or mental health advice. If you're dealing with compulsive spending or gambling and need more than a pause, please talk to a qualified professional or a relevant support organization.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does it work the same in Chrome?</summary>
+        <p>The core blocking is identical. Chrome ships as a single, fully free build with no Premium tier at all, since Chrome has no built-in way to sell an extension without standing up a license server, and Not Yet doesn't run one.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7 — FOOTER CTA -->
+<section style="padding-bottom:64px;">
+  <div class="container" style="text-align:center;">
+    <h2>Get Not Yet</h2>
+    <div class="badge-row" style="justify-content:center;">
+      <a class="store-badge" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        Add to Safari
+      </a>
+      <a class="store-badge secondary" href="#" target="_blank" rel="noopener">
+        Add to Chrome
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <a class="brand" href="index.html">
+        <img src="images/app-icon.png" alt="Not Yet app icon">
+        Not Yet
+      </a>
+      <div class="footer-links">
+        <a href="blog/index.html">Blog</a>
+        <a href="support/">Support</a>
+        <a href="privacy/">Privacy Policy</a>
+        <a href="terms/">Terms of Use</a>
+        <a href="mailto:avclock@protonmail.com">Contact</a>
+      </div>
+    </div>
+    <p class="footer-note">Not Yet: Checkout Blocker is a pause and friction tool, not a treatment program, and is not affiliated with or endorsed by any gambling harm-reduction organization.</p>
+  </div>
+</footer>
+
+<script src="js/nav.js" defer></script>
+<script src="js/track.js" defer></script>
+
 </body>
 </html>

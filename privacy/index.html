@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Not Yet: Checkout Blocker</title>
+<meta name="description" content="Not Yet's privacy policy: no servers, no collection, everything stays on your own device.">
+<link rel="canonical" href="https://notyetapp.com/privacy/">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="../images/app-icon.png">
+<link rel="apple-touch-icon" href="../images/app-icon.png">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand" href="../index.html">
+      <img src="../images/app-icon.png" alt="Not Yet app icon">
+      Not Yet
+    </a>
+    <div class="nav-links">
+      <a href="../index.html#free">Free</a>
+      <a href="../index.html#premium">Premium</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../support/">Support</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section>
+  <div class="container">
+    <article class="legal">
+      <h1>Privacy Policy</h1>
+      <p class="updated">Not Yet: Checkout Blocker &middot; Last updated: August 26, 2026</p>
+
+      <div class="lede">
+        <p>Not Yet: Checkout Blocker ("Not Yet," "the app," "the extension") is a Safari and Chrome extension that pauses checkout and payment pages so you have a moment before completing a purchase.</p>
+      </div>
+
+      <p>The short version: <strong>Not Yet has no server, collects nothing, and sends nothing anywhere.</strong> Everything it does happens entirely on your own device. This policy explains exactly what that means and why.</p>
+
+      <h2>No servers, no collection</h2>
+      <p>Not Yet does not have a backend. There is no company server, no database, no analytics service, and no third-party SDK anywhere in this app. The extension makes no network requests of its own at all: not to us, not to any analytics or advertising company, not to anyone. We have no way to see how you use the app, what sites you visit, what you almost bought, or anything else, because nothing is ever sent to us. There is nothing to breach, nothing to subpoena, and nothing to sell, because nothing leaves your device in the first place.</p>
+
+      <h2>What's stored, and where</h2>
+      <p>Everything Not Yet remembers is stored locally on your own device, using the browser's standard on-device extension storage. It never syncs to a server, and it's never transmitted anywhere. This includes:</p>
+      <ul>
+        <li><strong>Your settings</strong> &mdash; which categories or sites you've chosen to pause, your chosen theme, your unlock method and its settings, and similar preferences.</li>
+        <li><strong>A few local counters</strong> &mdash; how many times a checkout page has been paused, how many times you've chosen to go somewhere calmer instead, and a running total of money you've told the app you skipped spending (only ever added when you actively choose to enter an amount and decide not to buy &mdash; see "The savings total," below).</li>
+        <li><strong>A PIN, if you turn on Guard Mode</strong> &mdash; stored only as a one-way cryptographic hash (SHA-256), never in plain text. Not Yet can check whether a PIN you enter matches, but the actual PIN is never stored or recoverable, including by us.</li>
+      </ul>
+      <p>If you delete the extension or use its "Reset everything" option, this data is erased. We have no copy of it anywhere, because we never had one to begin with.</p>
+
+      <h2>The savings total</h2>
+      <p>Not Yet's "actually saved" total is not a guess or an estimate pulled from your spending. It only ever changes when:</p>
+      <ul>
+        <li><strong>You add to it yourself</strong> &mdash; by typing an amount on the "are you sure you want to buy this?" screen and choosing "somewhere calmer" instead of completing the purchase. If you enable the experimental "subtract completed purchases" setting, landing on a real order-confirmation page can also subtract an amount from this total, using the same on-device pattern matching described below &mdash; no data about the purchase is sent anywhere to make that calculation.</li>
+      </ul>
+      <p>This number lives in the same local, on-device storage as everything else here, and is never sent anywhere.</p>
+
+      <h2>About the browser permission</h2>
+      <p>When you turn Not Yet's extension on, your browser shows a standard warning that the extension can "read and alter the pages you visit" and similar language, including a mention of passwords and payment information. <strong>This is the browser's own standard wording for any extension with this level of access</strong> &mdash; every extension capable of acting on a page you visit shows this same warning, regardless of what that extension actually does with it. It is not language we chose, and it does not describe what Not Yet actually does.</p>
+      <p>In practice, Not Yet's content script only ever:</p>
+      <ul>
+        <li>Checks the current page's web address (URL) and nearby button text against a built-in list of patterns, to recognize a checkout, payment, or (if you turn on the experimental setting above) order-confirmation page.</li>
+        <li>Optionally reads a nearby dollar amount on the page, only when you are on the confirmation screen described above, so it can suggest a number instead of asking you to type one from memory.</li>
+      </ul>
+      <p>Not Yet never reads, stores, or transmits anything you type into a page, including passwords, card numbers, addresses, or any other form field. It has no way to see your keystrokes at all; it only ever looks at text and structure that's already rendered on the page for anyone to see, the same way a browser's built-in "Find on Page" feature does.</p>
+
+      <h2>No accounts, no tracking, no third parties</h2>
+      <p>Not Yet has no sign-in, no user accounts, and does not set or read tracking cookies. It does not use any advertising, analytics, or crash-reporting service. Apple's own App Store purchase and diagnostic systems (if you buy the app, or if you've opted into sharing device analytics with Apple) are governed by Apple's own privacy policy, not this one; Not Yet itself has no visibility into that data either way.</p>
+
+      <h2>Children's privacy</h2>
+      <p>Not Yet is not directed at children and does not knowingly collect information from anyone, of any age, because it does not collect information from anyone, full stop, regardless of age.</p>
+
+      <h2>Changes to this policy</h2>
+      <p>If this policy ever changes, the "Last updated" date above will change, and any material change will be reflected in the app itself. Given that Not Yet has no server and no way to reach you directly, checking this page is the only way to stay current with any updates.</p>
+
+      <div class="contact">
+        <h2 style="margin-top:0;">Contact</h2>
+        <p>Questions about this policy or the app can be sent to:<br><strong><a href="mailto:avclock@protonmail.com">avclock@protonmail.com</a></strong></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <a class="brand" href="../index.html">
+        <img src="../images/app-icon.png" alt="Not Yet app icon">
+        Not Yet
+      </a>
+      <div class="footer-links">
+        <a href="../blog/index.html">Blog</a>
+        <a href="../support/">Support</a>
+        <a href="../terms/">Terms of Use</a>
+        <a href="mailto:avclock@protonmail.com">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/nav.js" defer></script>
+<script src="../js/track.js" defer></script>
+</body>
+</html>

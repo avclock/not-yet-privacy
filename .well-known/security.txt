@@ -1,0 +1,4 @@
+Contact: mailto:avclock@protonmail.com
+Expires: 2027-09-05T00:00:00.000Z
+Canonical: https://notyetapp.com/.well-known/security.txt
+Preferred-Languages: en
