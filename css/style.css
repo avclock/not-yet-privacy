@@ -202,7 +202,7 @@ section:last-of-type { border-bottom: none; }
 .mock-btn.calm { color: var(--accent-strong); border: 1px solid var(--hairline-strong); }
 
 /* ============ How it works — numbered steps ============ */
-.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); border-radius: var(--radius); overflow: hidden; }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); border-radius: var(--radius); overflow: hidden; }
 .step { background: var(--panel-2); padding: 26px 24px; }
 .step-num { font-family: var(--serif); font-size: 26px; color: var(--accent-strong); margin-bottom: 10px; }
 .step h3 { font-size: 16.5px; margin-bottom: 8px; }
@@ -437,7 +437,7 @@ article.legal .contact { margin-top: 48px; padding-top: 24px; border-top: 1px so
   .badge-row { justify-content: center; }
   .mock-overlay { margin-left: auto; margin-right: auto; }
   .two-col { grid-template-columns: 1fr; }
-  .steps { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: repeat(2, 1fr); }
   .showcase { grid-template-columns: 1fr; }
   .showcase.reverse .showcase-visual { order: -1; }
   .recap-stat-row { grid-template-columns: repeat(3, 1fr); }
@@ -455,4 +455,8 @@ article.legal .contact { margin-top: 48px; padding-top: 24px; border-top: 1px so
   .nav-links a:last-child { border-bottom: none; }
   .site-nav.nav-open .nav-links { max-height: 320px; opacity: 1; pointer-events: auto; }
   section { padding: 56px 0; }
+}
+
+@media (max-width: 560px) {
+  .steps { grid-template-columns: 1fr; }
 }
