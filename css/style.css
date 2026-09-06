@@ -242,42 +242,85 @@ section:last-of-type { border-bottom: none; }
   border: 1px solid var(--hairline-strong);
   border-radius: var(--radius);
   box-shadow: 0 30px 70px -30px rgba(46, 44, 40, 0.22);
-  padding: 30px 24px;
-  min-height: 300px;
+  padding: 30px 24px 24px;
 }
 .mock-pinboard .mock-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 18px; }
-.pin-grid { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; }
+
+/* Draggable board -- position:relative bounding box; each pin is
+   positioned absolutely within it via inline left/top percentages, so
+   it reflows sanely at any container width without JS having to know
+   the width itself. */
+.pinboard-surface { position: relative; min-height: 260px; touch-action: none; }
 .pin-photo {
+  position: absolute;
   width: 92px; height: 110px;
+  transform: rotate(var(--pin-rot, 0deg));
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.pin-photo:active,
+.pin-photo.dragging { cursor: grabbing; z-index: 30; }
+.pin-photo:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 5px; border-radius: 4px; }
+.pin-photo-inner {
+  box-sizing: border-box;
+  width: 100%; height: 100%;
   background: var(--bg-elevated);
+  display: flex; align-items: center; justify-content: center;
   border: 6px solid #fff;
   border-radius: 3px;
   box-shadow: 0 8px 18px -6px rgba(46, 44, 40, 0.3);
-  position: relative;
+  transition: border-radius 0.2s ease, border-width 0.2s ease, clip-path 0.2s ease;
 }
-.pin-photo::before {
-  content: "";
-  position: absolute; inset: 6px 6px 22px;
-  background: var(--accent-gradient);
-  opacity: 0.5;
-  border-radius: 2px;
-}
+.pin-photo-inner img { width: 62%; height: 62%; object-fit: contain; }
+.pin-photo-inner svg { width: 56%; height: 56%; color: var(--accent-strong); }
 .pin-photo::after {
   content: "";
-  position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+  position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
   width: 10px; height: 10px; border-radius: 50%;
   background: var(--accent-strong);
   box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+  z-index: 1;
 }
-.pin-photo:nth-child(1) { transform: rotate(-6deg); }
-.pin-photo:nth-child(2) { transform: rotate(4deg); margin-top: 14px; }
-.pin-photo:nth-child(3) { transform: rotate(-2deg); }
-.pin-photo:nth-child(4) { transform: rotate(7deg); margin-top: 8px; }
-.mock-mood-row { display: flex; gap: 8px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+
+/* Border style variants -- picked via the .pinboard-border-picker
+   buttons below, applied as a class on .pinboard-surface so every pin
+   updates together. */
+.pinboard-surface.style-rounded .pin-photo-inner { border-width: 4px; border-radius: 16px; }
+.pinboard-surface.style-torn .pin-photo-inner {
+  border-width: 6px;
+  border-color: #fdfaf3;
+  border-radius: 0;
+  clip-path: polygon(2% 4%, 12% 0%, 30% 3%, 48% 0%, 68% 4%, 84% 1%, 98% 5%, 100% 22%, 97% 45%, 100% 68%, 96% 88%, 100% 98%, 78% 96%, 60% 100%, 40% 97%, 22% 100%, 4% 96%, 0% 76%, 3% 52%, 0% 28%);
+}
+
+.pinboard-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 12px; padding-top: 16px; border-top: 1px solid var(--hairline); }
+.pinboard-border-picker { display: flex; gap: 6px; flex-wrap: wrap; }
+.border-swatch {
+  font-family: var(--sans); font-size: 12.5px; font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg); border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-sm); padding: 6px 12px;
+  cursor: pointer;
+}
+.border-swatch.active { color: var(--accent-strong); border-color: var(--accent); background: var(--accent-wash); }
+.pinboard-reset {
+  font-family: var(--sans); font-size: 12.5px; font-weight: 600;
+  color: var(--text-tertiary);
+  background: none; border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 6px 0;
+}
+.pinboard-reset:hover { color: var(--text-primary); }
+
+.mock-mood-row { display: flex; gap: 8px; justify-content: center; margin-top: 22px; flex-wrap: wrap; }
 .mock-mood-chip {
+  font-family: var(--sans);
   font-size: 13px; font-weight: 600; color: var(--text-secondary);
   background: var(--bg); border: 1px solid var(--hairline-strong);
   border-radius: var(--radius-sm); padding: 7px 13px;
+  cursor: pointer;
 }
 .mock-mood-chip.active { color: var(--accent-strong); border-color: var(--accent); background: var(--accent-wash); }
 
