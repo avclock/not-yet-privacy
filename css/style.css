@@ -201,29 +201,106 @@ section:last-of-type { border-bottom: none; }
 .mock-btn.primary { background: var(--accent-gradient); color: #fff; }
 .mock-btn.calm { color: var(--accent-strong); border: 1px solid var(--hairline-strong); }
 
-/* ============ Feature grid ============ */
-.feature-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1px;
-  background: var(--hairline);
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-.feature-item { display: flex; align-items: center; gap: 14px; background: var(--panel-2); padding: 18px 20px; flex: 1 1 250px; }
-.feature-item .tag {
-  font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.02em;
+/* ============ How it works — numbered steps ============ */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); border-radius: var(--radius); overflow: hidden; }
+.step { background: var(--panel-2); padding: 26px 24px; }
+.step-num { font-family: var(--serif); font-size: 26px; color: var(--accent-strong); margin-bottom: 10px; }
+.step h3 { font-size: 16.5px; margin-bottom: 8px; }
+.step p { font-size: 14.5px; margin: 0; }
+
+/* ============ Feature cards — replaced an earlier cryptic
+   three-letter-tag layout (BLOCK/CAT/GAMB/etc.) borrowed from
+   AvClock's aviation-code vernacular, which doesn't mean anything on
+   a checkout blocker. Every card now leads with a real short title a
+   visitor can read on its own. ============ */
+.feature-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); border-radius: var(--radius); overflow: hidden; }
+.feature-card { background: var(--panel-2); padding: 22px 22px 24px; }
+.feature-card h4 { font-size: 15.5px; margin-bottom: 6px; color: var(--text-primary); }
+.feature-card p { font-size: 14px; margin: 0; }
+.feature-card .badge {
+  display: inline-block;
+  font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
   color: var(--accent-strong);
-  border: 1px solid rgba(163, 155, 139, 0.4);
   background: var(--accent-wash);
   border-radius: var(--radius-sm);
-  padding: 3px 7px;
-  white-space: nowrap;
-  flex-shrink: 0;
+  padding: 2px 8px;
+  margin-bottom: 10px;
 }
-.feature-item.premium .tag { color: #8A6D3B; border-color: rgba(212, 165, 90, 0.4); background: rgba(212, 165, 90, 0.12); }
-.feature-item span.label { color: var(--text-primary); font-weight: 600; font-size: 14.5px; }
+.feature-card.premium .badge { color: #8A6D3B; background: rgba(212, 165, 90, 0.14); }
+
+/* ============ Quiet Place / pinboard showcase — an honest mock of
+   the real corkboard (pinboard.js): CSS "photos" (gradient tiles, no
+   stock imagery) pinned at slight angles, not a screenshot. ============ */
+.showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.showcase-copy p { font-size: 16px; }
+.showcase-feature-list { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.showcase-feature-list li { font-size: 14.5px; color: var(--text-secondary); padding-left: 22px; position: relative; }
+.showcase-feature-list li::before { content: "\2022"; color: var(--accent-strong); position: absolute; left: 4px; font-weight: 700; }
+.mock-pinboard {
+  position: relative;
+  background: var(--panel-2);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius);
+  box-shadow: 0 30px 70px -30px rgba(46, 44, 40, 0.22);
+  padding: 30px 24px;
+  min-height: 300px;
+}
+.mock-pinboard .mock-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 18px; }
+.pin-grid { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; }
+.pin-photo {
+  width: 92px; height: 110px;
+  background: var(--bg-elevated);
+  border: 6px solid #fff;
+  border-radius: 3px;
+  box-shadow: 0 8px 18px -6px rgba(46, 44, 40, 0.3);
+  position: relative;
+}
+.pin-photo::before {
+  content: "";
+  position: absolute; inset: 6px 6px 22px;
+  background: var(--accent-gradient);
+  opacity: 0.5;
+  border-radius: 2px;
+}
+.pin-photo::after {
+  content: "";
+  position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent-strong);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+}
+.pin-photo:nth-child(1) { transform: rotate(-6deg); }
+.pin-photo:nth-child(2) { transform: rotate(4deg); margin-top: 14px; }
+.pin-photo:nth-child(3) { transform: rotate(-2deg); }
+.pin-photo:nth-child(4) { transform: rotate(7deg); margin-top: 8px; }
+.mock-mood-row { display: flex; gap: 8px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+.mock-mood-chip {
+  font-size: 13px; font-weight: 600; color: var(--text-secondary);
+  background: var(--bg); border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-sm); padding: 7px 13px;
+}
+.mock-mood-chip.active { color: var(--accent-strong); border-color: var(--accent); background: var(--accent-wash); }
+
+/* ============ Recap / analytics showcase — a real mock of the recap
+   page's stat tiles + trend chart, plain CSS bars, no chart library
+   and no fabricated real data. ============ */
+.mock-recap {
+  background: var(--panel-2);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius);
+  box-shadow: 0 30px 70px -30px rgba(46, 44, 40, 0.22);
+  padding: 28px 26px;
+}
+.mock-recap .mock-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 18px; }
+.recap-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 26px; }
+.recap-stat { text-align: center; }
+.recap-stat .num { font-family: var(--serif); font-size: 26px; color: var(--text-primary); }
+.recap-stat .lbl { font-size: 11.5px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 2px; }
+.recap-chart { display: flex; align-items: flex-end; gap: 10px; height: 90px; padding: 0 4px; }
+.recap-chart .bar { flex: 1; background: var(--accent-gradient); border-radius: 5px 5px 2px 2px; opacity: 0.85; }
+.recap-chart .bar.peak { opacity: 1; }
+.recap-chart-labels { display: flex; gap: 10px; padding: 0 4px; margin-top: 8px; }
+.recap-chart-labels span { flex: 1; text-align: center; font-size: 10.5px; color: var(--text-tertiary); font-family: var(--mono); }
 
 .price-callout {
   margin-top: 36px;
@@ -317,6 +394,10 @@ article.legal .contact { margin-top: 48px; padding-top: 24px; border-top: 1px so
   .badge-row { justify-content: center; }
   .mock-overlay { margin-left: auto; margin-right: auto; }
   .two-col { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .showcase { grid-template-columns: 1fr; }
+  .showcase.reverse .showcase-visual { order: -1; }
+  .recap-stat-row { grid-template-columns: repeat(3, 1fr); }
   .nav-toggle { display: flex; }
   .nav-links {
     position: absolute; top: 100%; left: 0; right: 0;
