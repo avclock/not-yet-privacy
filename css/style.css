@@ -164,24 +164,89 @@ section:last-of-type { border-bottom: none; }
 .store-badge.secondary { background: transparent; color: var(--text-primary); border: 1px solid var(--hairline-strong); }
 .store-badge svg { width: 17px; height: 17px; }
 
-/* ============ Mock overlay card — a real, honest illustration of the
-   actual mechanism (a typed-code block screen), not stock art or a
-   real screenshot this environment can't produce. Same visual
-   language as the extension's own overlay.css: soft glass card, large
-   radius, calm palette, monospace code. ============ */
-.mock-overlay {
+/* ============ Mock store frame — a real, honest illustration of the
+   actual mechanism, not stock art or a real screenshot this
+   environment can't produce. Ported from the extension's own "See it
+   in action" demo (onboarding.js's wireCheckoutDemo()): a fake store
+   page, a real Not Yet on/off toggle, and a paused/success view swap,
+   restyled in the site's own calm palette instead of the extension's
+   literal overlay.css classes. One card, three interchangeable inner
+   views (.mock-store-page/.mock-pause-view/.mock-success-view),
+   swapped via [hidden] by js/hero-demo.js -- only one is ever visible
+   at a time, so there's no layered-overlay z-index bookkeeping to get
+   wrong. ============ */
+.mock-frame {
   margin: 46px auto 0;
   border: 1px solid var(--hairline-strong);
   border-radius: var(--radius);
   background: var(--panel-2);
   box-shadow: 0 30px 70px -30px rgba(46, 44, 40, 0.22);
-  padding: 32px;
   max-width: 420px;
   text-align: left;
+  overflow: hidden;
 }
-.mock-overlay .mock-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 16px; }
-.mock-overlay h3 { font-size: 20px; margin-bottom: 8px; }
-.mock-overlay p { font-size: 14.5px; margin-bottom: 20px; }
+.mock-chrome { display: flex; align-items: center; gap: 5px; padding: 14px 20px; background: var(--bg); border-bottom: 1px solid var(--hairline); }
+.mock-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--hairline-strong); flex-shrink: 0; }
+.mock-url { margin-left: 8px; font-family: var(--mono); font-size: 11.5px; color: var(--text-tertiary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.mock-toggle { display: flex; gap: 6px; padding: 20px 20px 0; }
+.mock-toggle-btn {
+  flex: 1;
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-elevated); border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-sm); padding: 8px 10px;
+  cursor: pointer;
+}
+.mock-toggle-btn.active { color: #fff; background: var(--accent-gradient); border-color: transparent; }
+.mock-toggle-hint { padding: 0 20px; font-size: 12.5px; color: var(--text-tertiary); margin: 10px 0 0; }
+
+.mock-store-page { padding: 20px; }
+.mock-store-name { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 14px; }
+.mock-store-field { height: 34px; border-radius: var(--radius-sm); background: var(--bg); border: 1px solid var(--hairline-strong); margin-bottom: 8px; }
+.mock-store-order { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--hairline); }
+.mock-store-row { display: flex; justify-content: space-between; font-size: 13.5px; color: var(--text-secondary); padding: 4px 0; }
+.mock-store-order .mock-btn { margin-top: 14px; }
+.mock-wallet-label { font-size: 12px; color: var(--text-tertiary); text-align: center; margin: 14px 0 8px; }
+/* display:none as the default, grid only when :not([hidden]) -- same
+   [hidden]-vs-author-rule cascade footgun as .mock-wallet-shield
+   above, hit for real here on the first render check: an unconditional
+   display:grid here beat the UA [hidden]{display:none} rule, so this
+   row and the shield banner both showed at once instead of swapping. */
+.mock-wallet-row { display: none; grid-template-columns: 1fr 1fr; gap: 8px; }
+.mock-wallet-row:not([hidden]) { display: grid; }
+.mock-wallet-btn { font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--text-secondary); background: var(--bg-elevated); border: 1px solid var(--hairline-strong); border-radius: var(--radius-sm); padding: 10px; cursor: pointer; }
+/* Only shown while the toggle is on -- swaps in for the two wallet
+   buttons above rather than layering on top of them, same "one thing
+   visible at a time" rule as the three main views. Mirrors the real
+   buy-button shield's own click-to-continue behavior. */
+.mock-wallet-shield {
+  width: 100%;
+  /* [hidden] alone isn't enough here: the UA stylesheet's [hidden] {
+     display:none } rule loses to an equally-specific author rule that
+     sets display, so an unconditional display:flex on this class
+     would win and defeat the hidden attribute when JS toggles it. */
+  display: none;
+  align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  color: var(--accent-strong);
+  background: var(--accent-wash); border: 1px dashed var(--accent);
+  border-radius: var(--radius-sm); padding: 10px;
+  cursor: pointer;
+}
+.mock-wallet-shield:not([hidden]) { display: flex; }
+
+.mock-pause-view { padding: 20px; }
+.mock-pause-view .mock-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 16px; }
+.mock-pause-view h3 { font-size: 20px; margin-bottom: 8px; }
+.mock-pause-view p { font-size: 14.5px; margin-bottom: 20px; }
+
+.mock-success-view { padding: 40px 24px; text-align: center; }
+.mock-success-check { width: 46px; height: 46px; margin: 0 auto 16px; border-radius: 50%; background: var(--accent-gradient); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.mock-success-title { font-family: var(--serif); font-size: 19px; color: var(--text-primary); margin-bottom: 4px; }
+.mock-success-method { font-size: 13.5px; color: var(--text-secondary); min-height: 1.4em; margin-bottom: 8px; }
+.mock-success-note { font-size: 12.5px; color: var(--text-tertiary); margin-bottom: 22px; }
+.mock-success-view .mock-btn { display: inline-block; width: auto; padding: 10px 20px; }
 
 /* Tabs -- one real unlock-method demo each, matching content.js's
    setupCode()/setupReflect()/setupWait(). Plain buttons, not an
@@ -241,17 +306,27 @@ section:last-of-type { border-bottom: none; }
 .mock-input:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 2px; }
 .mock-textarea { font-family: var(--sans); resize: none; }
 .mock-actions { display: flex; flex-direction: column; gap: 10px; }
+/* Applied to a mix of real <button> and plain <div> elements (the
+   store buy/reset buttons are real buttons; the pause view's
+   continue/calm are too, now converted from the div-styled-as-button
+   this started as) -- reset button chrome so both render identically
+   regardless of which element carries the class. */
 .mock-btn {
+  display: block;
+  width: 100%;
   text-align: center;
   padding: 12px;
   border-radius: var(--radius-sm);
   font-weight: 600;
   font-size: 14.5px;
+  font-family: var(--sans);
+  border: none;
+  cursor: pointer;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 .mock-btn.primary { background: var(--accent-gradient); color: #fff; opacity: 0.55; }
 .mock-btn.primary.mock-btn-ready { opacity: 1; }
-.mock-btn.calm { color: var(--accent-strong); border: 1px solid var(--hairline-strong); }
+.mock-btn.calm { color: var(--accent-strong); background: transparent; border: 1px solid var(--hairline-strong); }
 
 /* ============ How it works — numbered steps ============ */
 .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); border-radius: var(--radius); overflow: hidden; }
