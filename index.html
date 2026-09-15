@@ -17,6 +17,26 @@
 <link rel="icon" type="image/png" href="images/app-icon.png">
 <link rel="apple-touch-icon" href="images/app-icon.png">
 <link rel="stylesheet" href="css/style.css">
+
+<!-- Organization + logo structured data, added 2026-09-15 so Google
+     has something to key a brand-search logo off of (Knowledge Panel /
+     search result icon). The favicon link above already satisfies
+     Google's separate, simpler favicon-in-search-results requirement
+     on its own (square PNG, 512x512, well over the 48x48 minimum) --
+     this schema is the other half, for the larger logo shown on a
+     direct brand search. Google decides if/when to actually show
+     either one; nothing here can force or guarantee it, only make the
+     site eligible once it's live and crawled. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Not Yet: Checkout Blocker",
+  "url": "https://notyetcb.com",
+  "logo": "https://notyetcb.com/images/app-icon.png",
+  "description": "A mindful checkout blocker for iPhone, iPad, Mac, and Chrome. Pauses checkout and payment pages behind a freshly generated, retyped code."
+}
+</script>
 </head>
 <body>
 
