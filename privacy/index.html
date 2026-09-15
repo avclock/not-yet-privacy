@@ -33,7 +33,7 @@
   <div class="container">
     <article class="legal">
       <h1>Privacy Policy</h1>
-      <p class="updated">Not Yet: Checkout Blocker &middot; Last updated: August 26, 2026</p>
+      <p class="updated">Not Yet: Checkout Blocker &middot; Last updated: September 15, 2026</p>
 
       <div class="lede">
         <p>Not Yet: Checkout Blocker ("Not Yet," "the app," "the extension") is a Safari and Chrome extension that pauses checkout and payment pages so you have a moment before completing a purchase.</p>
@@ -43,15 +43,25 @@
 
       <h2>No servers, no collection</h2>
       <p>Not Yet does not have a backend. There is no company server, no database, no analytics service, and no third-party SDK anywhere in this app. The extension makes no network requests of its own at all: not to us, not to any analytics or advertising company, not to anyone. We have no way to see how you use the app, what sites you visit, what you almost bought, or anything else, because nothing is ever sent to us. There is nothing to breach, nothing to subpoena, and nothing to sell, because nothing leaves your device in the first place.</p>
+      <p>The one exception is described fully under "Cross-device sync (Safari)" below: on Safari, some settings sync between your own devices through Apple's iCloud, not through anything we operate.</p>
 
       <h2>What's stored, and where</h2>
-      <p>Everything Not Yet remembers is stored locally on your own device, using the browser's standard on-device extension storage. It never syncs to a server, and it's never transmitted anywhere. This includes:</p>
+      <p>Everything Not Yet remembers is stored locally on your own device, using the browser's standard on-device extension storage, and is never sent to us or to any server we operate. This includes:</p>
       <ul>
-        <li><strong>Your settings</strong> &mdash; which categories or sites you've chosen to pause, your chosen theme, your unlock method and its settings, and similar preferences.</li>
-        <li><strong>A few local counters</strong> &mdash; how many times a checkout page has been paused, how many times you've chosen to go somewhere calmer instead, and a running total of money you've told the app you skipped spending (only ever added when you actively choose to enter an amount and decide not to buy &mdash; see "The savings total," below).</li>
-        <li><strong>A PIN, if you turn on Guard Mode</strong> &mdash; stored only as a one-way cryptographic hash (SHA-256), never in plain text. Not Yet can check whether a PIN you enter matches, but the actual PIN is never stored or recoverable, including by us.</li>
+        <li><strong>Your settings</strong> &mdash; which categories or sites you've chosen to pause, your chosen theme, your unlock method and its settings, and similar preferences. On Safari, these sync across your own devices through Apple's iCloud &mdash; see "Cross-device sync (Safari)," below.</li>
+        <li><strong>A few local counters</strong> &mdash; how many times a checkout page has been paused, how many times you've chosen to go somewhere calmer instead, and a running total of money you've told the app you skipped spending (only ever added when you actively choose to enter an amount and decide not to buy &mdash; see "The savings total," below). These stay on the one device that recorded them and do not sync.</li>
+        <li><strong>A PIN, if you turn on Guard Mode</strong> &mdash; stored only as a one-way cryptographic hash (SHA-256), never in plain text. Not Yet can check whether a PIN you enter matches, but the actual PIN is never stored or recoverable, including by us. On Safari, this hash is included in the same cross-device sync as your settings, so the same PIN works on each of your own devices.</li>
       </ul>
       <p>If you delete the extension or use its "Reset everything" option, this data is erased. We have no copy of it anywhere, because we never had one to begin with.</p>
+
+      <h2>Cross-device sync (Safari)</h2>
+      <p>On Safari (iPhone, iPad, and Mac), Not Yet syncs your settings and blocklists across your own devices through Apple's iCloud, using Apple's own CloudKit framework &mdash; the same underlying mechanism Apple's own apps like Notes and Reminders use to sync your own data across your own devices. This is the one exception to "no network requests of its own" described above, so it deserves its own precise explanation rather than a footnote:</p>
+      <ul>
+        <li>It moves only between devices signed into your own Apple ID, through your own private iCloud account. We never see this data, have no server of our own involved anywhere in the process, and have no way to access your iCloud account or what it stores.</li>
+        <li>What syncs is the same list above marked as syncing: your settings and blocklists, and your Guard Mode PIN's hash (never the PIN itself). Your local counters (times paused, amount saved, and similar) do not sync &mdash; each device keeps its own.</li>
+        <li>Chrome has no access to iCloud at all, so none of this applies there. Chrome's storage stays exactly as local as everything else in this policy describes.</li>
+        <li>iCloud syncing for any app, including this one, can be turned off at any time in your device's own Settings app, under your name, then iCloud &mdash; this is a background convenience Not Yet uses, not a separate account or sign-in you have to set up inside the app itself.</li>
+      </ul>
 
       <h2>The savings total</h2>
       <p>Not Yet's "actually saved" total is not a guess or an estimate pulled from your spending. It only ever changes when:</p>
