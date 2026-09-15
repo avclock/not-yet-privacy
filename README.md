@@ -84,9 +84,26 @@ Worker. You'll get a live URL like `not-yet-website.<your-subdomain>.workers.dev
    git commit -m "Full marketing site + blog"
    git push -u origin main
    ```
-2. Cloudflare dashboard → **Workers & Pages** → **Create** → connect to
-   this GitHub repo → it detects `wrangler.jsonc` automatically.
-3. Every future `git push` auto-deploys.
+2. **Create this under the "Workers" tab, not "Pages."** Cloudflare
+   dashboard → **Workers & Pages** → **Workers** → **Import a
+   repository** → connect this GitHub repo. Picking **Pages** instead
+   is a real, easy-to-hit mistake here: Pages has its own build
+   pipeline that never reads `wrangler.jsonc`'s `main`/`assets` config
+   at all, and instead guesses a build output directory by name
+   (`dist`, `public`, `build`...). Since this repo's static files sit
+   at the true repo root, none of those guesses match, and Pages fails
+   with "Could not detect a directory containing static files" before
+   ever running a real deploy -- confirmed 2026-09-15 by reproducing
+   the exact same `wrangler deploy` locally with the exact CI-reported
+   Wrangler version and watching it read all 271 files from the
+   assets directory and build clean. If a Pages project already exists
+   for this repo and hit that error, delete it and recreate under
+   Workers instead of debugging Pages' build settings further.
+3. Once created as a Workers project, it detects `wrangler.jsonc`
+   automatically; the default **Deploy command** (`npx wrangler
+   deploy`) is correct as-is. Confirm **Root directory** is blank or
+   `/`, not a subfolder.
+4. Every future `git push` auto-deploys.
 
 ## Live analytics — private stats dashboard
 
