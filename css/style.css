@@ -203,7 +203,9 @@ section:last-of-type { border-bottom: none; }
 
 .mock-store-page { padding: 20px; }
 .mock-store-name { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 14px; }
-.mock-store-field { height: 34px; border-radius: var(--radius-sm); background: var(--bg); border: 1px solid var(--hairline-strong); margin-bottom: 8px; }
+/* Fake placeholder text, not just a blank bar -- an empty box here
+   read as a broken button rather than a decorative form field. */
+.mock-store-field { display: flex; align-items: center; height: 34px; padding: 0 12px; border-radius: var(--radius-sm); background: var(--bg); border: 1px solid var(--hairline-strong); margin-bottom: 8px; font-size: 13px; color: var(--text-tertiary); }
 .mock-store-order { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--hairline); }
 .mock-store-row { display: flex; justify-content: space-between; font-size: 13.5px; color: var(--text-secondary); padding: 4px 0; }
 .mock-store-order .mock-btn { margin-top: 14px; }
@@ -451,15 +453,23 @@ section:last-of-type { border-bottom: none; }
 }
 .pinboard-reset:hover { color: var(--text-primary); }
 
-.mock-mood-row { display: flex; gap: 8px; justify-content: center; margin-top: 22px; flex-wrap: wrap; }
-.mock-mood-chip {
+/* Shared pill styling for both the mood check-in and activity rows --
+   ported from the extension's own Quiet Place (calm.html/calm.js):
+   clicking either shows the same real confirmation copy that page
+   uses ("Noted. Thanks for checking in." / "Logged. That'll show up
+   in your recap."), not just a silent active-state toggle. */
+.mock-pill-label { font-size: 13px; font-weight: 600; color: var(--text-secondary); text-align: center; margin: 22px 0 10px; }
+.pinboard-controls + .mock-pill-label { margin-top: 22px; }
+.mock-pill-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.mock-pill {
   font-family: var(--sans);
   font-size: 13px; font-weight: 600; color: var(--text-secondary);
   background: var(--bg); border: 1px solid var(--hairline-strong);
   border-radius: var(--radius-sm); padding: 7px 13px;
   cursor: pointer;
 }
-.mock-mood-chip.active { color: var(--accent-strong); border-color: var(--accent); background: var(--accent-wash); }
+.mock-pill.active { color: var(--accent-strong); border-color: var(--accent); background: var(--accent-wash); }
+.mock-pill-confirm { min-height: 1.4em; text-align: center; font-size: 12.5px; color: var(--accent-strong); margin: 8px 0 0; }
 
 /* ============ Recap / analytics showcase — a real mock of the recap
    page's stat tiles + trend chart, plain CSS bars, no chart library
@@ -561,6 +571,125 @@ article.legal .lede p { margin: 0; }
 article.legal ul { padding-left: 22px; }
 article.legal li { margin-bottom: 10px; }
 article.legal .contact { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--hairline); }
+
+/* ============ Info-button popovers — ported from the extension's own
+   Settings page (.nyc-info-wrap/.nyc-info-btn/.nyc-info-popover in
+   pages.css, nycWireInfoButtons() in options.js/onboarding.js): a
+   tap-to-reveal "i" bubble next to a jargon term, instead of a
+   permanently-on-screen explanation paragraph. Click toggles it open
+   (only one at a time), and it also opens on hover for anyone with a
+   mouse. ============ */
+.info-wrap { position: relative; display: inline-flex; vertical-align: middle; margin-left: 6px; }
+.info-btn {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  background: none; color: inherit; opacity: 0.55;
+  font-size: 10.5px; font-style: italic; font-family: Georgia, "Times New Roman", serif;
+  line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+.info-btn:hover, .info-btn:focus-visible { opacity: 1; }
+.info-popover {
+  display: none;
+  position: absolute;
+  top: 24px; left: 0;
+  z-index: 30;
+  width: 280px;
+  max-width: min(280px, 80vw);
+  background: var(--panel-2);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  font-weight: 400;
+  font-family: var(--sans);
+  color: var(--text-secondary);
+  box-shadow: 0 6px 20px rgba(46, 44, 40, 0.16);
+}
+.info-wrap-end .info-popover { left: auto; right: 0; }
+.info-wrap.info-open .info-popover, .info-wrap:hover .info-popover { display: block; }
+@media (max-width: 600px) {
+  /* A 280px popover anchored to an "i" button near a phone's right
+     edge runs past it -- same real bug the extension's own Settings
+     page hit and fixed the same way: pin it to the bottom of the
+     screen instead, where it can't overflow anything. */
+  .info-popover {
+    position: fixed;
+    left: 12px; right: 12px; bottom: 12px; top: auto;
+    width: auto; max-width: none;
+    z-index: 100;
+    box-shadow: 0 8px 30px rgba(46, 44, 40, 0.22);
+  }
+}
+
+/* ============ Rope border — ported from the extension's own shared
+   scripts/rope-frame.js + styles/pages.css, used there on onboarding
+   and Settings. Applied here only to the Setup & Help page (below),
+   the one page on this site that's structurally the same kind of
+   "app-like utility page" the extension uses it on -- not forced onto
+   the homepage, where the app icon already carries its own rope-circle
+   artwork and a second rope frame around it would read as redundant.
+   Behavior lives in js/rope-frame.js, an near-verbatim port since the
+   module was already fully parameterized (SVG ids, no extension
+   globals). ============ */
+.rope-frame-wrap { position: relative; max-width: 740px; margin: 0 auto; padding: 30px 0; }
+.rope-frame {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+.rope-stroke {
+  stroke: var(--accent-strong);
+  stroke-width: 9;
+  stroke-dasharray: 5 0.9;
+  opacity: 0.4;
+}
+@media (max-width: 600px) {
+  /* Two rounds of fixing the JS inset math and matching CSS padding
+     didn't converge on a real phone for the extension's own version
+     of this border either -- same call made there: gone outright on
+     phone widths rather than a third blind guess in an environment
+     that can't test against a real device. */
+  .rope-frame { display: none; }
+}
+
+/* ============ Setup & Help page — mirrors the extension's own
+   Settings page layout (a single centered column of cards), since
+   it's describing that same page to someone who hasn't opened it
+   yet. ============ */
+.help-page { max-width: 640px; margin: 0 auto; position: relative; }
+.help-card { background: var(--panel-2); border: 1px solid var(--hairline); border-radius: var(--radius); padding: 26px 28px; margin-bottom: 20px; }
+.help-card h2 { font-size: 17px; margin-bottom: 10px; }
+.help-card > p:first-of-type { margin-top: 0; }
+.help-steps { margin: 10px 0 0; padding-left: 20px; font-size: 14.5px; color: var(--text-secondary); }
+.help-steps li { margin-bottom: 6px; }
+.help-faq-item { border-top: 1px solid var(--hairline); padding: 14px 0 0; margin-top: 14px; }
+.help-faq-item:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.help-faq-item summary { cursor: pointer; font-weight: 600; font-size: 14.5px; color: var(--text-primary); list-style: none; }
+.help-faq-item summary::-webkit-details-marker { display: none; }
+.help-faq-item summary::before { content: "+ "; color: var(--accent-strong); font-family: var(--mono); }
+.help-faq-item[open] summary::before { content: "\2212 "; }
+.help-faq-item .help-faq-body { margin-top: 10px; font-size: 14px; color: var(--text-secondary); }
+.help-faq-body p { font-size: 14px; margin: 0 0 10px; }
+.help-faq-body p:last-child { margin-bottom: 0; }
+.help-report-field { display: block; font-size: 13px; font-weight: 600; margin: 14px 0 6px; }
+.help-report-input, .help-report-select, .help-report-textarea {
+  width: 100%;
+  font-family: var(--sans); font-size: 14px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--hairline-strong);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+}
+.help-report-textarea { min-height: 80px; resize: vertical; }
+.help-error-text { color: #B5764F; font-size: 12.5px; margin: 8px 0 0; }
 
 /* Responsive */
 @media (max-width: 860px) {

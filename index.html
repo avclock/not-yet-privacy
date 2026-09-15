@@ -52,6 +52,7 @@
       <a href="index.html#premium">Premium</a>
       <a href="blog/index.html">Blog</a>
       <a href="index.html#faq">FAQ</a>
+      <a href="help/index.html">Setup &amp; Help</a>
       <a href="support/">Support</a>
     </div>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -117,8 +118,8 @@
 
       <div class="mock-store-page" id="mock-store-page">
         <p class="mock-store-name">Northfield Goods</p>
-        <div class="mock-store-field" aria-hidden="true"></div>
-        <div class="mock-store-field" aria-hidden="true"></div>
+        <div class="mock-store-field" aria-hidden="true">Name on card</div>
+        <div class="mock-store-field" aria-hidden="true">Card number</div>
         <div class="mock-store-order">
           <div class="mock-store-row" aria-hidden="true"><span>Cedar planter box</span><span>$68.00</span></div>
           <div class="mock-store-row" aria-hidden="true"><span>Shipping</span><span>$8.00</span></div>
@@ -234,7 +235,7 @@
 
     <div class="feature-cards">
       <div class="feature-card">
-        <h4>Automatic checkout detection</h4>
+        <h4>Automatic checkout detection<span class="info-wrap"><button type="button" class="info-btn" aria-label="More info">i</button><span class="info-popover">Catches a checkout page by the page itself (its address and button text), on any site, not just the categories you've picked. If it catches the same site three separate days running, it adds that site to your list on its own. It only ever adds protection this way, never removes it.</span></span></h4>
         <p>Recognizes checkout and payment pages on its own. Nothing to configure per site.</p>
       </div>
       <div class="feature-card">
@@ -318,12 +319,23 @@
             </div>
             <button type="button" class="pinboard-reset" id="pinboard-reset">Reset layout</button>
           </div>
-          <div class="mock-mood-row" role="group" aria-label="Mood check-in, demo only">
-            <button type="button" class="mock-mood-chip">Bored</button>
-            <button type="button" class="mock-mood-chip active">Tempted</button>
-            <button type="button" class="mock-mood-chip">Stressed</button>
-            <button type="button" class="mock-mood-chip">Fine, actually</button>
+          <p class="mock-pill-label">How are you feeling right now?</p>
+          <div class="mock-pill-row" id="mock-mood-row" role="group" aria-label="Mood check-in, demo only">
+            <button type="button" class="mock-pill" data-mock-pill="mood">Bored</button>
+            <button type="button" class="mock-pill" data-mock-pill="mood">Tempted</button>
+            <button type="button" class="mock-pill" data-mock-pill="mood">Stressed</button>
+            <button type="button" class="mock-pill" data-mock-pill="mood">Fine, actually</button>
           </div>
+          <p class="mock-pill-confirm" id="mock-mood-confirm"></p>
+
+          <p class="mock-pill-label">Want to do something else instead?</p>
+          <div class="mock-pill-row" id="mock-activity-row" role="group" aria-label="Activities, demo only">
+            <button type="button" class="mock-pill" data-mock-pill="activity">Take a walk</button>
+            <button type="button" class="mock-pill" data-mock-pill="activity">Stretch</button>
+            <button type="button" class="mock-pill" data-mock-pill="activity">Get some water</button>
+            <button type="button" class="mock-pill" data-mock-pill="activity">Pinterest for inspo</button>
+          </div>
+          <p class="mock-pill-confirm" id="mock-activity-confirm"></p>
         </div>
       </div>
     </div>
@@ -382,7 +394,7 @@
     <div class="feature-cards">
       <div class="feature-card premium">
         <span class="badge">Guard Mode</span>
-        <h4>A PIN on your own settings</h4>
+        <h4>A PIN on your own settings<span class="info-wrap"><button type="button" class="info-btn" aria-label="More info">i</button><span class="info-popover">With it on, a PIN is needed before loosening anything, like turning off a category or removing a site. If a subscription ever lapses, Guard Mode stays fully on. Your own PIN always opens it, and a built-in master reset is the only other way in if you forget it.</span></span></h4>
         <p>Protects your settings from your own impulses. Never locks you out for a lapsed subscription.</p>
       </div>
       <div class="feature-card premium">
@@ -540,6 +552,7 @@
       </a>
       <div class="footer-links">
         <a href="blog/index.html">Blog</a>
+        <a href="help/index.html">Setup &amp; Help</a>
         <a href="support/">Support</a>
         <a href="privacy/">Privacy Policy</a>
         <a href="terms/">Terms of Use</a>
@@ -555,6 +568,7 @@
 <script src="js/track.js" defer></script>
 <script src="js/pinboard-demo.js" defer></script>
 <script src="js/hero-demo.js" defer></script>
+<script src="js/info-popovers.js" defer></script>
 
 </body>
 </html>

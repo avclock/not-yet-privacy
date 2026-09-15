@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Setup &amp; Help — Not Yet: Checkout Blocker</title>
+<meta name="description" content="Not working? Wondering where a setting lives? Everything about how Not Yet actually works, ported straight from the extension's own Setup &amp; Help page.">
+<link rel="canonical" href="https://notyetcb.com/help/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Setup &amp; Help — Not Yet: Checkout Blocker">
+<meta property="og:description" content="Not working? Wondering where a setting lives? Everything about how Not Yet actually works.">
+<meta property="og:image" content="https://notyetcb.com/images/app-icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/png" href="../images/app-icon.png">
+<link rel="apple-touch-icon" href="../images/app-icon.png">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand" href="../index.html">
+      <img src="../images/app-icon.png" alt="Not Yet app icon">
+      Not Yet
+    </a>
+    <div class="nav-links">
+      <a href="../index.html#free">Free</a>
+      <a href="../index.html#premium">Premium</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../index.html#faq">FAQ</a>
+      <a href="index.html">Setup &amp; Help</a>
+      <a href="../support/">Support</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section style="padding-bottom:0;">
+  <div class="container">
+    <div class="section-head">
+      <div class="label-caps" style="margin-bottom:16px;">SETUP &amp; HELP</div>
+      <h2>Everything about how Not Yet actually works</h2>
+      <p>Ported straight from the extension's own Setup &amp; Help page, so the answer here is the same one you'd find in Settings. If something's not blocking, or you're not sure where a setting lives, start here.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <!-- Rope border, same shared module the extension's own Settings
+         page uses (scripts/rope-frame.js) -- see js/rope-frame.js and
+         its own header comment for the port. Plays its draw-in reveal
+         once on load, same as the extension's own Settings page does
+         on every open. Sized against .rope-frame-wrap specifically
+         (not the viewport, unlike the extension's own version): the
+         extension's page IS the full viewport width, but .help-page
+         here is a much narrower centered column inside a wider site
+         container, so the border has to size against that column,
+         not the browser window, or it frames the whole page instead
+         of the actual content. -->
+    <div class="rope-frame-wrap">
+      <svg class="rope-frame" id="rope-frame" aria-hidden="true" preserveAspectRatio="none">
+        <defs>
+          <mask id="rope-reveal">
+            <path id="rope-mask-path" fill="none" stroke="#fff" stroke-width="26" pathLength="100" stroke-linecap="round"/>
+          </mask>
+        </defs>
+        <path id="rope-path" class="rope-stroke" fill="none" mask="url(#rope-reveal)"/>
+      </svg>
+
+      <div class="help-page">
+        <div class="help-card">
+        <h2>Not blocking anything? Check this first</h2>
+        <p>On a Mac</p>
+        <ol class="help-steps">
+          <li>Open Safari &rarr; Safari &rarr; Safari Extensions&hellip;</li>
+          <li>Check the box next to <strong>Not Yet</strong> to turn it on.</li>
+          <li>Click into it (or use the puzzle-piece icon in Safari's toolbar while on any site) and set website access to <strong>"Always Allow on Every Website&hellip;"</strong></li>
+        </ol>
+        <p style="margin-top:16px;">On iPhone or iPad</p>
+        <ol class="help-steps">
+          <li>Open the Settings app &rarr; Apps &rarr; Safari &rarr; Extensions.</li>
+          <li>Tap <strong>Not Yet</strong> and turn it on.</li>
+          <li>Tap Website Access and set it to <strong>"All Websites."</strong></li>
+        </ol>
+        <p style="margin-top:16px;">On Chrome</p>
+        <ol class="help-steps">
+          <li>Open chrome://extensions.</li>
+          <li>Check the toggle next to <strong>Not Yet: Checkout Blocker</strong> is on.</li>
+          <li>Click "Details," then check Site access is set to <strong>"On all sites."</strong></li>
+        </ol>
+      </div>
+
+      <div class="help-card">
+        <h2>About the permission warning</h2>
+        <p>Your browser's own wording for this extension's permission ("read and alter the pages you visit," "see your browsing history," even mentioning passwords and card numbers) is the same standard warning every extension with this level of access shows, not language specific to what Not Yet actually does. Not Yet only ever checks a page's web address and button text to spot a checkout page. It never reads what you type, never touches passwords or card numbers, and never sends anything anywhere; there's no server behind this app at all. The handful of numbers it saves ("times paused," dollars saved) are the only things it ever saves, and they stay on your own device.</p>
+      </div>
+
+      <div class="help-card">
+        <h2>FAQ</h2>
+
+        <details class="help-faq-item">
+          <summary>Does Not Yet correctly block all websites?</summary>
+          <div class="help-faq-body">
+            <p>No. Not Yet was built with careful systems and a lot of testing behind it, but with as many different websites as there are, it's realistically impossible for it to work perfectly on every single one. If you come across a site that isn't working the way it should, use the report form below to let us know.</p>
+          </div>
+        </details>
+
+        <details class="help-faq-item">
+          <summary>Where do I turn on the buy-button shield?</summary>
+          <div class="help-faq-body">
+            <p>Advanced Settings, then "Shield buy buttons on your tracked sites." Turning on "Shield buy buttons outside checkout pages too" covers product pages that let you buy in one click with no separate checkout page to catch. It only ever runs on sites already covered by a category or your custom list, never on an untracked site.</p>
+            <p>Free catches the checkout/place-order button itself. Premium adds the one-click wallet buttons that often sit right next to it: Apple Pay, Google Pay, PayPal, Klarna, and similar. Both halves are heuristic, so it can occasionally miss a page or shield the wrong thing.</p>
+          </div>
+        </details>
+
+        <details class="help-faq-item">
+          <summary>Where's my recap?</summary>
+          <div class="help-faq-body">
+            <p>"Your Stats," then "See your recap." Free shows the basic totals (times paused, times you chose calm, money saved) and lets you create a shareable snapshot image of them. Premium adds a 14-day trend chart, a by-category breakdown, and your mood and "proud of this" log.</p>
+          </div>
+        </details>
+
+        <details class="help-faq-item">
+          <summary>Where's my Quiet Place?</summary>
+          <div class="help-faq-body">
+            <p>"Your Quiet Place," then "Visit your quiet place now," or the "Take me to my quiet place" link on any block screen. This is always free, on every tier. Premium only adds a private pinboard of your own photos there. You can also point this at your own page instead (a savings goal, a wishlist) by typing an address into the box above "Visit your quiet place now."</p>
+          </div>
+        </details>
+
+        <details class="help-faq-item">
+          <summary>Where do I turn on Guard Mode (the PIN)?</summary>
+          <div class="help-faq-body">
+            <p>Advanced Settings, then "Guard Mode." It's part of Premium, and it's the setting that makes the rest of Advanced Settings stick: with it on, a PIN is needed before loosening anything above, like turning off a category or removing a site. If your subscription ends later, it stays on. Your own PIN always opens it, and a built-in master reset is the permanent way in if you're ever locked out.</p>
+            <p>One thing Guard Mode can't reach on its own: a Private Browsing window. See the next question for what that means and how to close it.</p>
+          </div>
+        </details>
+
+        <details class="help-faq-item">
+          <summary>Does this work in Private Browsing or Incognito?</summary>
+          <div class="help-faq-body">
+            <p>Not by default, and it's not something Not Yet can change from inside the extension. Safari and Chrome both keep every extension out of a private window unless you turn that on yourself, for that extension specifically. Left on its default setting, checkout blocking, Guard Mode, the whole-site block list, all of it, simply doesn't run in a private window. The site just loads.</p>
+            <p>To close that gap: in Safari, go to Settings, then Extensions, then Not Yet, and turn on "Allow in Private Browsing." In Chrome, go to chrome://extensions, open Not Yet's Details, and turn on "Allow in Incognito." Neither switch can be flipped by Not Yet itself. It has to be you, once, in the browser's own settings.</p>
+          </div>
+        </details>
+
+        <details class="help-faq-item">
+          <summary>Recommended settings for parents</summary>
+          <div class="help-faq-body">
+            <p>If you're setting this up on a family member's device, a few settings work especially well together. Turn on Guard Mode first: it needs your own PIN before anything protective can be loosened, so blocking stays on even if someone tries to turn it off. Turn on automatic checkout detection too, so a site you didn't think to add still gets caught. Pick every category that applies, and add specific stores to the guilty-pleasure stores list or the whole-site block list for anything that needs stricter handling than just checkout. The buy-button shield catches one-click buy buttons on product pages too, not just full checkout flows.</p>
+            <p>Leave the unlock method on the typed code, the hardest one to get past without really thinking. Guard Mode already requires your PIN before switching to a reflection prompt or a wait timer instead, since either one is easier to click through. Be careful with "Sites to never pause": it skips Not Yet completely there, no matter what else is turned on. Also check Private Browsing above: it's the one gap Guard Mode can't close by itself, since it's a browser setting, not an extension one. And keep your PIN and the master reset code to yourself. Anyone who has either one can turn any of this back off.</p>
+          </div>
+        </details>
+
+        <details class="help-faq-item">
+          <summary>Where do I turn on automatic checkout detection?</summary>
+          <div class="help-faq-body">
+            <p>Advanced Settings, then "Automatic checkout detection." This catches a checkout page by the page itself (its address and button text), on any site, not just the categories you've picked. If it catches the same site on three separate days, it adds that site to your guilty-pleasure stores list on its own. It only ever adds protection this way, never removes it, and you can always take a site back off the list.</p>
+          </div>
+        </details>
+
+        <details class="help-faq-item">
+          <summary>Where do I turn on gentle reminders while I shop?</summary>
+          <div class="help-faq-body">
+            <p>Advanced Settings, then "Gentle reminders while you shop." Off by default. A small, dismissible corner card, not a block, that shows up every so often while you're browsing (not just at checkout) on a site from your categories or custom list. Each one closes itself after a few seconds and carries a "Not on this site" link to stop them there for good.</p>
+          </div>
+        </details>
+
+        <details class="help-faq-item">
+          <summary>Are widgets available?</summary>
+          <div class="help-faq-body">
+            <p>Yes, on both iPhone/iPad and Mac. Add one the same way as any other app's widget: long-press your Home Screen (or right-click your Mac desktop), choose Edit Widgets, and look for Not Yet. One basic single-stat widget is free. Not Yet Premium adds picking which stat it shows and a full weekly recap widget.</p>
+          </div>
+        </details>
+
+        <details class="help-faq-item">
+          <summary>What platforms is this available on?</summary>
+          <div class="help-faq-body">
+            <p>Not Yet is a Safari Web Extension for iPhone, iPad, and Mac, and a free Chrome extension for Windows, Mac, Linux, and ChromeOS. Not Yet Premium is only available through the Safari version; the Chrome extension is free and covers all of the core checkout blocking, with no premium tier at all.</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="help-card">
+        <h2>Report a site that isn't working right</h2>
+        <p>A site that should block and doesn't, a price that auto-fills wrong, a shield sitting on the wrong element: describe it below and this opens an email draft in your own mail app, addressed to the developer. Nothing is sent automatically, and nothing about your browsing is attached beyond what you type here.</p>
+
+        <label class="help-report-field" for="report-site-url">Site address</label>
+        <input type="text" id="report-site-url" class="help-report-input" placeholder="e.g. example.com/checkout">
+
+        <label class="help-report-field" for="report-site-type">What's going wrong?</label>
+        <select id="report-site-type" class="help-report-select">
+          <option value="not-blocking">Should have blocked, didn't</option>
+          <option value="over-blocking">Blocked when it shouldn't have</option>
+          <option value="wrong-price">Auto-filled amount was wrong</option>
+          <option value="shield">Buy-button shield on the wrong spot</option>
+          <option value="other">Something else</option>
+        </select>
+
+        <label class="help-report-field" for="report-site-notes">Anything else worth knowing? (optional)</label>
+        <textarea id="report-site-notes" class="help-report-textarea" placeholder="What you expected vs. what happened"></textarea>
+
+        <div class="badge-row" style="margin-top:14px;justify-content:flex-start;">
+          <button type="button" class="store-badge" id="report-site-send" style="border-radius:var(--radius-sm);">Open email draft</button>
+        </div>
+        <p class="help-error-text" id="report-site-error" hidden>Add the site address first.</p>
+      </div>
+
+      <div class="help-card" style="text-align:center;">
+        <p style="margin:0;">Looking for the full legal text? <a href="../privacy/">Privacy Policy</a> &middot; <a href="../terms/">Terms of Use</a></p>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <a class="brand" href="../index.html">
+        <img src="../images/app-icon.png" alt="Not Yet app icon">
+        Not Yet
+      </a>
+      <div class="footer-links">
+        <a href="../blog/index.html">Blog</a>
+        <a href="../support/">Support</a>
+        <a href="index.html">Setup &amp; Help</a>
+        <a href="../privacy/">Privacy Policy</a>
+        <a href="../terms/">Terms of Use</a>
+        <a href="../press/">Press</a>
+        <a href="mailto:avclock@protonmail.com">Contact</a>
+      </div>
+    </div>
+    <p class="footer-note">Not Yet: Checkout Blocker is a pause and friction tool, not a treatment program, and is not affiliated with or endorsed by any gambling harm-reduction organization.</p>
+  </div>
+</footer>
+
+<script src="../js/nav.js" defer></script>
+<script src="../js/track.js" defer></script>
+<script src="../js/info-popovers.js" defer></script>
+<script src="../js/rope-frame.js" defer></script>
+<script src="../js/report-site.js" defer></script>
+</body>
+</html>
