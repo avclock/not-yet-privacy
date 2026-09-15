@@ -92,18 +92,44 @@
       </div>
     </div>
 
-    <!-- Mock overlay -- an honest, hand-built illustration of the real
-         mechanism, not a real screenshot (this environment can't
-         produce those) and not stock art. Matches the extension's own
-         block-screen wording and layout exactly. -->
-    <div class="mock-overlay" aria-hidden="true">
+    <!-- Mock overlay -- an honest, hand-built, GENUINELY INTERACTIVE
+         illustration of the real mechanism, not a real screenshot
+         (this environment can't produce those) and not stock art.
+         Matches the extension's own block-screen wording exactly.
+         Three tabs mirror the three real unlock methods
+         (scripts/content.js's setupCode/setupReflect/setupWait) --
+         behavior lives in js/hero-demo.js. -->
+    <div class="mock-overlay" id="mock-overlay">
       <div class="mock-eyebrow">checkout.example.com &middot; Not Yet</div>
-      <h3>Take a moment first</h3>
-      <p>Retype the code below to continue to checkout.</p>
-      <div class="mock-code">7F3&nbsp;K9Q&nbsp;2LM</div>
-      <input class="mock-input" value="" placeholder="Type the code above" readonly>
+      <div class="mock-tabs" role="tablist" aria-label="Try each unlock method">
+        <button type="button" class="mock-tab active" data-mock-tab="code" role="tab" aria-selected="true">Code</button>
+        <button type="button" class="mock-tab" data-mock-tab="prompt" role="tab" aria-selected="false">Prompt</button>
+        <button type="button" class="mock-tab" data-mock-tab="timer" role="tab" aria-selected="false">Timer</button>
+      </div>
+
+      <div class="mock-panel" data-mock-panel="code">
+        <h3>Take a moment first</h3>
+        <p>Retype the code below to continue to checkout. Go ahead, try it.</p>
+        <div class="mock-code" id="mock-code-display" aria-hidden="true"></div>
+        <input class="mock-input" id="mock-code-input" placeholder="Type the code above" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Demo: retype the code above">
+      </div>
+
+      <div class="mock-panel" data-mock-panel="prompt" hidden>
+        <h3>Take a moment first</h3>
+        <p>Answer honestly before continuing to checkout.</p>
+        <div class="mock-code mock-prompt-question" aria-hidden="true">Do I need this, or do I want this right now?</div>
+        <textarea class="mock-input mock-textarea" id="mock-prompt-input" rows="3" placeholder="Type a real answer..." aria-label="Demo: answer the reflection prompt"></textarea>
+      </div>
+
+      <div class="mock-panel" data-mock-panel="timer" hidden>
+        <h3>Take a moment first</h3>
+        <p>Wait it out before continuing to checkout. No typing needed.</p>
+        <div class="mock-code mock-timer-display" id="mock-timer-display" aria-hidden="true">0:10</div>
+        <div class="mock-timer-track"><div class="mock-timer-fill" id="mock-timer-fill"></div></div>
+      </div>
+
       <div class="mock-actions">
-        <div class="mock-btn primary">Continue to checkout</div>
+        <div class="mock-btn primary" id="mock-continue">Continue to checkout</div>
         <div class="mock-btn calm">Take me somewhere calmer instead</div>
       </div>
     </div>
@@ -347,6 +373,11 @@
         <h4>Home Screen widgets</h4>
         <p>Your basic stats, glanceable without opening the app.</p>
       </div>
+      <div class="feature-card premium soon">
+        <span class="badge">Soon</span>
+        <h4>More on the way</h4>
+        <p>New Premium features land here first. The lifetime purchase already includes every one of them, no second purchase, ever.</p>
+      </div>
     </div>
 
     <p style="margin-top:24px;">
@@ -487,6 +518,7 @@
 <script src="js/nav.js" defer></script>
 <script src="js/track.js" defer></script>
 <script src="js/pinboard-demo.js" defer></script>
+<script src="js/hero-demo.js" defer></script>
 
 </body>
 </html>
