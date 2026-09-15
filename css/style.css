@@ -628,15 +628,21 @@ article.legal .contact { margin-top: 48px; padding-top: 24px; border-top: 1px so
 
 /* ============ Rope border — ported from the extension's own shared
    scripts/rope-frame.js + styles/pages.css, used there on onboarding
-   and Settings. Applied here only to the Setup & Help page (below),
-   the one page on this site that's structurally the same kind of
-   "app-like utility page" the extension uses it on -- not forced onto
-   the homepage, where the app icon already carries its own rope-circle
-   artwork and a second rope frame around it would read as redundant.
-   Behavior lives in js/rope-frame.js, an near-verbatim port since the
-   module was already fully parameterized (SVG ids, no extension
-   globals). ============ */
+   and Settings. Used two places on this site: the Setup & Help page
+   (below), structurally the same kind of "app-like utility page" the
+   extension uses it on, and the homepage's "See it in action" demo
+   card, framing the demo itself rather than the hero icon (which
+   already carries its own rope-circle artwork -- a second rope frame
+   around THAT would read as redundant, the demo card doesn't have
+   that problem). Behavior lives in js/rope-frame.js, a near-verbatim
+   port since the module was already fully parameterized (SVG ids, no
+   extension globals). ============ */
 .rope-frame-wrap { position: relative; max-width: 740px; margin: 0 auto; padding: 30px 0; }
+/* Narrower than the default 740px: sized for the ~420px hero demo
+   card instead of the Setup & Help page's much wider column. Using
+   the same wrap/default padding here would frame a wide swath of
+   empty hero space around a narrow card instead of the card itself. */
+.rope-frame-wrap.hero-demo-frame { max-width: 480px; padding: 24px 0; }
 .rope-frame {
   position: absolute;
   top: 0; left: 0;

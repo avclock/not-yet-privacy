@@ -104,6 +104,24 @@
          pause view's tabs mirror the three real unlock methods
          (scripts/content.js's setupCode/setupReflect/setupWait).
          Behavior lives in js/hero-demo.js. -->
+    <!-- Rope border around the demo card, same shared module the
+         extension's own onboarding/Settings pages use (scripts/
+         rope-frame.js). Framing the demo card itself here, not the
+         hero icon (which already carries its own rope-circle artwork
+         and would just double up) -- see js/rope-frame.js and the
+         .rope-frame-wrap.hero-demo-frame rule in css/style.css for the
+         narrower sizing this instance needs vs. the Setup & Help
+         page's wider one. -->
+    <div class="rope-frame-wrap hero-demo-frame">
+      <svg class="rope-frame" id="rope-frame" aria-hidden="true" preserveAspectRatio="none">
+        <defs>
+          <mask id="rope-reveal">
+            <path id="rope-mask-path" fill="none" stroke="#fff" stroke-width="26" pathLength="100" stroke-linecap="round"/>
+          </mask>
+        </defs>
+        <path id="rope-path" class="rope-stroke" fill="none" mask="url(#rope-reveal)"/>
+      </svg>
+
     <div class="mock-frame" id="mock-frame" data-demo-view="store">
       <div class="mock-chrome" aria-hidden="true">
         <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
@@ -175,6 +193,7 @@
         <p class="mock-success-note">This is only a demo. Nothing was bought, and this store isn't real.</p>
         <button type="button" class="mock-btn calm" id="mock-store-reset">Try it again</button>
       </div>
+    </div>
     </div>
   </div>
 </header>
@@ -569,6 +588,7 @@
 <script src="js/pinboard-demo.js" defer></script>
 <script src="js/hero-demo.js" defer></script>
 <script src="js/info-popovers.js" defer></script>
+<script src="js/rope-frame.js" defer></script>
 
 </body>
 </html>
