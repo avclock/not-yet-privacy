@@ -92,45 +92,87 @@
       </div>
     </div>
 
-    <!-- Mock overlay -- an honest, hand-built, GENUINELY INTERACTIVE
+    <!-- Mock store -- an honest, hand-built, GENUINELY INTERACTIVE
          illustration of the real mechanism, not a real screenshot
          (this environment can't produce those) and not stock art.
-         Matches the extension's own block-screen wording exactly.
-         Three tabs mirror the three real unlock methods
-         (scripts/content.js's setupCode/setupReflect/setupWait) --
-         behavior lives in js/hero-demo.js. -->
-    <div class="mock-overlay" id="mock-overlay">
-      <div class="mock-eyebrow">checkout.example.com &middot; Not Yet</div>
-      <div class="mock-tabs" role="tablist" aria-label="Try each unlock method">
-        <button type="button" class="mock-tab active" data-mock-tab="code" role="tab" aria-selected="true">Code</button>
-        <button type="button" class="mock-tab" data-mock-tab="prompt" role="tab" aria-selected="false">Prompt</button>
-        <button type="button" class="mock-tab" data-mock-tab="timer" role="tab" aria-selected="false">Timer</button>
+         Ported from the extension's own "See it in action" demo
+         (onboarding.js's wireCheckoutDemo(), same fake store name,
+         same Not Yet on/off toggle, same three-view store/paused/
+         success flow) -- restyled for the site's own palette instead
+         of copying the extension's overlay.css classes verbatim. The
+         pause view's tabs mirror the three real unlock methods
+         (scripts/content.js's setupCode/setupReflect/setupWait).
+         Behavior lives in js/hero-demo.js. -->
+    <div class="mock-frame" id="mock-frame" data-demo-view="store">
+      <div class="mock-chrome" aria-hidden="true">
+        <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
+        <span class="mock-url">northfieldgoods.example/checkout</span>
       </div>
 
-      <div class="mock-panel" data-mock-panel="code">
-        <h3>Take a moment first</h3>
-        <p>Retype the code below to continue to checkout. Go ahead, try it.</p>
-        <div class="mock-code" id="mock-code-display" aria-hidden="true"></div>
-        <input class="mock-input" id="mock-code-input" placeholder="Type the code above" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Demo: retype the code above">
+      <div class="mock-toggle" role="group" aria-label="Toggle Not Yet on this fake store">
+        <button type="button" class="mock-toggle-btn active" data-demo-toggle="off">Not Yet: off</button>
+        <button type="button" class="mock-toggle-btn" data-demo-toggle="on">Not Yet: on</button>
+      </div>
+      <p class="mock-toggle-hint">Try Place order, or a wallet button, below. Then switch Not Yet on to see the difference.</p>
+
+      <div class="mock-store-page" id="mock-store-page">
+        <p class="mock-store-name">Northfield Goods</p>
+        <div class="mock-store-field" aria-hidden="true"></div>
+        <div class="mock-store-field" aria-hidden="true"></div>
+        <div class="mock-store-order">
+          <div class="mock-store-row" aria-hidden="true"><span>Cedar planter box</span><span>$68.00</span></div>
+          <div class="mock-store-row" aria-hidden="true"><span>Shipping</span><span>$8.00</span></div>
+          <button type="button" class="mock-btn primary" id="mock-store-buy">Place order</button>
+          <p class="mock-wallet-label">or pay with</p>
+          <div class="mock-wallet-row" id="mock-wallet-row">
+            <button type="button" class="mock-wallet-btn" data-demo-wallet="Apple Pay">Apple Pay</button>
+            <button type="button" class="mock-wallet-btn" data-demo-wallet="Klarna">Klarna</button>
+          </div>
+          <button type="button" class="mock-wallet-shield" id="mock-wallet-shield" hidden>Paused. Click to continue.</button>
+        </div>
       </div>
 
-      <div class="mock-panel" data-mock-panel="prompt" hidden>
-        <h3>Take a moment first</h3>
-        <p>Answer honestly before continuing to checkout.</p>
-        <div class="mock-code mock-prompt-question" aria-hidden="true">Do I need this, or do I want this right now?</div>
-        <textarea class="mock-input mock-textarea" id="mock-prompt-input" rows="3" placeholder="Type a real answer..." aria-label="Demo: answer the reflection prompt"></textarea>
+      <div class="mock-pause-view" id="mock-pause-view" hidden>
+        <div class="mock-eyebrow">Not Yet: Checkout Blocker</div>
+        <div class="mock-tabs" role="tablist" aria-label="Try each unlock method">
+          <button type="button" class="mock-tab active" data-mock-tab="code" role="tab" aria-selected="true">Code</button>
+          <button type="button" class="mock-tab" data-mock-tab="prompt" role="tab" aria-selected="false">Prompt</button>
+          <button type="button" class="mock-tab" data-mock-tab="timer" role="tab" aria-selected="false">Timer</button>
+        </div>
+
+        <div class="mock-panel" data-mock-panel="code">
+          <h3>Take a moment first</h3>
+          <p>Retype the code below to continue to checkout. Go ahead, try it.</p>
+          <div class="mock-code" id="mock-code-display" aria-hidden="true"></div>
+          <input class="mock-input" id="mock-code-input" placeholder="Type the code above" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Demo: retype the code above">
+        </div>
+
+        <div class="mock-panel" data-mock-panel="prompt" hidden>
+          <h3>Take a moment first</h3>
+          <p>Answer honestly before continuing to checkout.</p>
+          <div class="mock-code mock-prompt-question" aria-hidden="true">Do I need this, or do I want this right now?</div>
+          <textarea class="mock-input mock-textarea" id="mock-prompt-input" rows="3" placeholder="Type a real answer..." aria-label="Demo: answer the reflection prompt"></textarea>
+        </div>
+
+        <div class="mock-panel" data-mock-panel="timer" hidden>
+          <h3>Take a moment first</h3>
+          <p>Wait it out before continuing to checkout. No typing needed.</p>
+          <div class="mock-code mock-timer-display" id="mock-timer-display" aria-hidden="true">0:10</div>
+          <div class="mock-timer-track"><div class="mock-timer-fill" id="mock-timer-fill"></div></div>
+        </div>
+
+        <div class="mock-actions">
+          <button type="button" class="mock-btn primary" id="mock-continue">Continue to checkout</button>
+          <button type="button" class="mock-btn calm" id="mock-calm">Take me somewhere calmer instead</button>
+        </div>
       </div>
 
-      <div class="mock-panel" data-mock-panel="timer" hidden>
-        <h3>Take a moment first</h3>
-        <p>Wait it out before continuing to checkout. No typing needed.</p>
-        <div class="mock-code mock-timer-display" id="mock-timer-display" aria-hidden="true">0:10</div>
-        <div class="mock-timer-track"><div class="mock-timer-fill" id="mock-timer-fill"></div></div>
-      </div>
-
-      <div class="mock-actions">
-        <div class="mock-btn primary" id="mock-continue">Continue to checkout</div>
-        <div class="mock-btn calm">Take me somewhere calmer instead</div>
+      <div class="mock-success-view" id="mock-success-view" hidden>
+        <div class="mock-success-check" aria-hidden="true">&#10003;</div>
+        <p class="mock-success-title">Thanks for your purchase</p>
+        <p class="mock-success-method" id="mock-success-method"></p>
+        <p class="mock-success-note">This is only a demo. Nothing was bought, and this store isn't real.</p>
+        <button type="button" class="mock-btn calm" id="mock-store-reset">Try it again</button>
       </div>
     </div>
   </div>
@@ -232,7 +274,7 @@
 </section>
 
 <!-- SECTION 5 — QUIET PLACE SHOWCASE -->
-<section>
+<section id="quiet-place">
   <div class="container">
     <div class="showcase">
       <div class="showcase-copy">
