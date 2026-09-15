@@ -138,7 +138,16 @@ section:last-of-type { border-bottom: none; }
   box-shadow: 0 24px 60px -18px rgba(140, 132, 116, 0.45), 0 0 0 1px var(--hairline-strong);
 }
 .hero .label-caps { margin-bottom: 16px; justify-content: center; }
-.hero h1 { font-size: clamp(32px, 4.4vw, 48px); max-width: 15ch; }
+/* margin-left/right:auto is load-bearing, not decorative -- max-width
+   narrows the h1's own box below its centered flex-item parent's
+   width, and text-align:center alone only centers the TEXT LINES
+   inside that box, not the box itself. Without auto margins here the
+   box stays flush against its parent's left edge (confirmed via a
+   real bounding-box measurement: the h1's left edge exactly matched
+   its parent's, off-center by over 200px on a 1400px-wide screen)
+   even though every line of text inside it looked internally
+   centered. .subhead already had this right below; h1 didn't. */
+.hero h1 { font-size: clamp(32px, 4.4vw, 48px); max-width: 15ch; margin-left: auto; margin-right: auto; }
 .hero .subhead { font-size: 19px; max-width: 48ch; margin: 0 auto 30px; color: var(--text-secondary); }
 .badge-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 8px; }
 
@@ -477,12 +486,6 @@ article.legal .lede p { margin: 0; }
 article.legal ul { padding-left: 22px; }
 article.legal li { margin-bottom: 10px; }
 article.legal .contact { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--hairline); }
-
-/* Category-style chips (free / premium / chrome-only), used sparingly */
-.cat-chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 12.5px; font-weight: 700; padding: 4px 10px; border-radius: var(--radius-sm); letter-spacing: 0.02em; }
-.cat-chip.free { color: #5E8A5E; background: rgba(110, 155, 110, 0.12); }
-.cat-chip.premium { color: #8A6D3B; background: rgba(212, 165, 90, 0.14); }
-.cat-chip.gambling { color: var(--gambling); background: rgba(124, 133, 152, 0.12); }
 
 /* Responsive */
 @media (max-width: 860px) {
