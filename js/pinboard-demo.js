@@ -155,13 +155,23 @@
     });
   });
 
-  // ---- Mood chips: demo-only toggle, no persistence needed -- this
-  // just keeps the widget from looking clickable while doing nothing. ----
-  var moodChips = document.querySelectorAll(".mock-mood-chip");
-  moodChips.forEach(function (chip) {
-    chip.addEventListener("click", function () {
-      moodChips.forEach(function (c) { c.classList.remove("active"); });
-      chip.classList.add("active");
+  // ---- Mood and activity chips: demo-only, no persistence needed --
+  // but the click response is the real extension's own copy from
+  // calm.js, not a placeholder. Each row's chips are exclusive within
+  // that row only (picking a mood doesn't clear a picked activity).
+  function wirePillRow(rowId, confirmId, confirmText) {
+    var row = document.getElementById(rowId);
+    var confirm = document.getElementById(confirmId);
+    if (!row) return;
+    var chips = row.querySelectorAll(".mock-pill");
+    chips.forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        chips.forEach(function (c) { c.classList.remove("active"); });
+        chip.classList.add("active");
+        if (confirm) confirm.textContent = confirmText;
+      });
     });
-  });
+  }
+  wirePillRow("mock-mood-row", "mock-mood-confirm", "Noted. Thanks for checking in.");
+  wirePillRow("mock-activity-row", "mock-activity-confirm", "Logged. That'll show up in your recap.");
 })();
