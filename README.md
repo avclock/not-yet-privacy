@@ -17,6 +17,7 @@ blog/what-guard-mode-protects.html          Post (live)
 privacy/index.html                Privacy Policy
 terms/index.html                  Terms of Use
 support/index.html                Support / FAQ
+press/index.html                  Press release + media contact -- fill in the [CITY], [STATE] placeholder in the dateline before publishing
 css/style.css                     Shared styles (the "Calm" palette)
 images/app-icon.png               Real app icon (from Assets.xcassets)
 js/nav.js                         Mobile nav toggle
@@ -48,13 +49,15 @@ in `not-yet-checkout-blocker`) and its docs (`CLAUDE.md`,
 updated in the same pass as this site to point at the new `/privacy/`
 path — see that repo's own history for the exact commit.
 
-## A placeholder domain is baked into the meta tags
+## The real domain
 
-Every `<link rel="canonical">` and Open Graph tag currently says
-`notyetapp.com` — a placeholder, not a purchased domain. Once you pick
-a real domain, find-and-replace `notyetapp.com` across every `.html`
-file (same simple step avclock-website's own README describes for
-`avclockapp.com`).
+`notyetcb.com`, purchased 2026-09-15. Every `<link rel="canonical">`
+and Open Graph tag across the site already points there. The Cloudflare
+Worker deploy below still needs the actual domain connected in the
+Cloudflare dashboard (Workers & Pages → your project → Settings →
+Domains & Routes → Add → `notyetcb.com`) before it resolves for real
+visitors — deploying the Worker alone only gets you the
+`*.workers.dev` URL.
 
 ## Deploying to Cloudflare (free)
 
@@ -110,8 +113,8 @@ Cloudflare Access (part of Cloudflare Zero Trust, free for individual
 use) — same walkthrough as avclock-website's own README:
 - Zero Trust → Access → Applications → Add an application →
   Self-hosted.
-- Application domain/path: `notyetapp.com/analytics.html`.
-- Also gate `notyetapp.com/api/stats*` (the read endpoint).
+- Application domain/path: `notyetcb.com/analytics.html`.
+- Also gate `notyetcb.com/api/stats*` (the read endpoint).
 - **Don't** gate `/api/track` — that one has to stay public or every
   visitor's pageviews silently stop logging.
 
