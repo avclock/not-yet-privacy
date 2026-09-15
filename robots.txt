@@ -3,4 +3,4 @@ Allow: /
 Disallow: /analytics.html
 Disallow: /api/
 
-Sitemap: https://notyetapp.com/sitemap.xml
+Sitemap: https://notyetcb.com/sitemap.xml
