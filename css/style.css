@@ -123,18 +123,24 @@ section:last-of-type { border-bottom: none; }
 .section-head h2 { font-size: clamp(26px, 3.6vw, 36px); }
 .section-head p { font-size: 17.5px; }
 
-/* ============ HERO ============ */
+/* ============ HERO — always centered, at every window size, not just
+   below the mobile breakpoint. A single centered column (logo, then
+   headline, then description, then badges, then the demo card) reads
+   better for a calm/pause product than a left-aligned two-column
+   layout, and it means there's no separate "desktop version" of the
+   centering to keep in sync with the mobile one. ============ */
 .hero { padding-top: 60px; padding-bottom: 60px; }
-.hero-grid { display: grid; grid-template-columns: 200px 1fr; gap: 44px; align-items: center; }
+.hero-grid { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.hero-icon { margin-bottom: 30px; }
 .hero-icon img {
   width: 168px; height: 168px;
   border-radius: 40px;
   box-shadow: 0 24px 60px -18px rgba(140, 132, 116, 0.45), 0 0 0 1px var(--hairline-strong);
 }
-.hero .label-caps { margin-bottom: 16px; }
+.hero .label-caps { margin-bottom: 16px; justify-content: center; }
 .hero h1 { font-size: clamp(32px, 4.4vw, 48px); max-width: 15ch; }
-.hero .subhead { font-size: 19px; max-width: 48ch; margin-bottom: 30px; color: var(--text-secondary); }
-.badge-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.hero .subhead { font-size: 19px; max-width: 48ch; margin: 0 auto 30px; color: var(--text-secondary); }
+.badge-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 8px; }
 
 .store-badge {
   display: inline-flex; align-items: center; gap: 10px;
@@ -155,22 +161,41 @@ section:last-of-type { border-bottom: none; }
    language as the extension's own overlay.css: soft glass card, large
    radius, calm palette, monospace code. ============ */
 .mock-overlay {
-  margin-top: 46px;
+  margin: 46px auto 0;
   border: 1px solid var(--hairline-strong);
   border-radius: var(--radius);
   background: var(--panel-2);
   box-shadow: 0 30px 70px -30px rgba(46, 44, 40, 0.22);
   padding: 32px;
   max-width: 420px;
+  text-align: left;
 }
-.mock-overlay .mock-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 10px; }
+.mock-overlay .mock-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 16px; }
 .mock-overlay h3 { font-size: 20px; margin-bottom: 8px; }
 .mock-overlay p { font-size: 14.5px; margin-bottom: 20px; }
+
+/* Tabs -- one real unlock-method demo each, matching content.js's
+   setupCode()/setupReflect()/setupWait(). Plain buttons, not an
+   actual ARIA tabpanel focus-management implementation (marketing
+   page, not the app itself), but role/aria-selected are still set so
+   it reads sensibly to assistive tech either way. */
+.mock-tabs { display: flex; gap: 6px; margin-bottom: 22px; }
+.mock-tab {
+  flex: 1;
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg); border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-sm); padding: 8px 10px;
+  cursor: pointer;
+}
+.mock-tab.active { color: #fff; background: var(--accent-gradient); border-color: transparent; }
+.mock-panel[hidden] { display: none; }
+
 .mock-code {
   font-family: var(--mono);
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-align: center;
   padding: 14px;
   border-radius: var(--radius-sm);
@@ -178,7 +203,21 @@ section:last-of-type { border-bottom: none; }
   border: 1px dashed var(--hairline-strong);
   color: var(--text-primary);
   margin-bottom: 14px;
+  word-break: break-all;
 }
+/* Matched-so-far prefix bolds and darkens as you type, exactly like
+   the real block screen's own code display -- the rest stays muted.
+   Rendered by js/hero-demo.js. */
+.mock-code .matched { font-weight: 800; color: var(--text-primary); }
+.mock-code .pending { font-weight: 400; color: var(--text-tertiary); opacity: 0.55; }
+.mock-code.mock-code-complete { border-style: solid; border-color: var(--accent); background: var(--accent-wash); }
+
+.mock-prompt-question { font-family: var(--serif); font-size: 17px; font-weight: 500; letter-spacing: normal; text-align: left; }
+
+.mock-timer-display { font-size: 26px; letter-spacing: 0.04em; }
+.mock-timer-track { height: 6px; border-radius: 3px; background: var(--bg); border: 1px solid var(--hairline-strong); overflow: hidden; margin-bottom: 16px; }
+.mock-timer-fill { height: 100%; width: 100%; background: var(--accent-gradient); transform-origin: left; transition: transform 1s linear; }
+
 .mock-input {
   width: 100%;
   font-family: var(--mono);
@@ -187,9 +226,11 @@ section:last-of-type { border-bottom: none; }
   border-radius: var(--radius-sm);
   border: 1px solid var(--hairline-strong);
   background: var(--bg-elevated);
-  color: var(--text-tertiary);
+  color: var(--text-primary);
   margin-bottom: 16px;
 }
+.mock-input:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 2px; }
+.mock-textarea { font-family: var(--sans); resize: none; }
 .mock-actions { display: flex; flex-direction: column; gap: 10px; }
 .mock-btn {
   text-align: center;
@@ -197,8 +238,10 @@ section:last-of-type { border-bottom: none; }
   border-radius: var(--radius-sm);
   font-weight: 600;
   font-size: 14.5px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
-.mock-btn.primary { background: var(--accent-gradient); color: #fff; }
+.mock-btn.primary { background: var(--accent-gradient); color: #fff; opacity: 0.55; }
+.mock-btn.primary.mock-btn-ready { opacity: 1; }
 .mock-btn.calm { color: var(--accent-strong); border: 1px solid var(--hairline-strong); }
 
 /* ============ How it works — numbered steps ============ */
@@ -213,7 +256,14 @@ section:last-of-type { border-bottom: none; }
    AvClock's aviation-code vernacular, which doesn't mean anything on
    a checkout blocker. Every card now leads with a real short title a
    visitor can read on its own. ============ */
-.feature-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); border-radius: var(--radius); overflow: hidden; }
+/* Fixed column counts, not auto-fill -- chosen per section so the
+   card count always divides evenly and no row ever ends with empty
+   trailing grid cells. Free has 9 cards (3x3 exactly); Premium has 8
+   (the 8th is the "More on the way" placeholder added specifically so
+   7 real cards don't leave a gap in a 4-column row -- 4x2 exactly). */
+.feature-cards { display: grid; gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); border-radius: var(--radius); overflow: hidden; }
+#free .feature-cards { grid-template-columns: repeat(3, 1fr); }
+#premium .feature-cards { grid-template-columns: repeat(4, 1fr); }
 .feature-card { background: var(--panel-2); padding: 22px 22px 24px; }
 .feature-card h4 { font-size: 15.5px; margin-bottom: 6px; color: var(--text-primary); }
 .feature-card p { font-size: 14px; margin: 0; }
@@ -227,6 +277,9 @@ section:last-of-type { border-bottom: none; }
   margin-bottom: 10px;
 }
 .feature-card.premium .badge { color: #8A6D3B; background: rgba(212, 165, 90, 0.14); }
+.feature-card.soon { background: var(--bg-elevated); }
+.feature-card.soon .badge { color: var(--text-tertiary); background: var(--hairline); }
+.feature-card.soon h4 { color: var(--text-secondary); }
 
 /* ============ Quiet Place / pinboard showcase — an honest mock of
    the real corkboard (pinboard.js): CSS "photos" (gradient tiles, no
@@ -380,11 +433,15 @@ footer { padding: 52px 0 36px; border-top: 1px solid var(--hairline); }
 
 /* Blog listing */
 .blog-board { border: 1px solid var(--hairline-strong); border-radius: var(--radius); background: var(--panel-2); overflow: hidden; }
-.blog-row { display: grid; grid-template-columns: 58px 1fr 62px; gap: 18px; align-items: center; padding: 20px; border-bottom: 1px solid var(--hairline); color: inherit; }
+/* Tag column widened from the original 58px (sized for AvClock's
+   cryptic 4-letter codes -- CODE/GUARD/CALM/GAMB, which never meant
+   anything on a checkout blocker) to fit a real, readable topic word
+   or two instead. */
+.blog-row { display: grid; grid-template-columns: 118px 1fr 62px; gap: 18px; align-items: center; padding: 20px; border-bottom: 1px solid var(--hairline); color: inherit; }
 .blog-row:last-child { border-bottom: none; }
 a.blog-row { transition: background 0.15s ease; }
 a.blog-row:hover { background: var(--bg); text-decoration: none; }
-.blog-row .tag { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.02em; color: var(--accent-strong); border: 1px solid rgba(163, 155, 139, 0.4); background: var(--accent-wash); border-radius: var(--radius-sm); padding: 4px 6px; text-align: center; }
+.blog-row .tag { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.01em; color: var(--accent-strong); border: 1px solid rgba(163, 155, 139, 0.4); background: var(--accent-wash); border-radius: var(--radius-sm); padding: 5px 10px; text-align: center; line-height: 1.3; }
 .blog-row.stub .tag { color: var(--text-tertiary); border-color: var(--hairline-strong); background: transparent; }
 .row-main { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .row-title { color: var(--text-primary); font-weight: 700; font-size: 16.5px; }
@@ -429,18 +486,20 @@ article.legal .contact { margin-top: 48px; padding-top: 24px; border-top: 1px so
 
 /* Responsive */
 @media (max-width: 860px) {
-  .hero-grid { grid-template-columns: 1fr; text-align: center; }
-  .hero-icon { justify-self: center; }
   .hero-icon img { width: 128px; height: 128px; }
-  .hero .subhead { margin-left: auto; margin-right: auto; }
-  .hero .label-caps { justify-content: center; }
-  .badge-row { justify-content: center; }
-  .mock-overlay { margin-left: auto; margin-right: auto; }
   .two-col { grid-template-columns: 1fr; }
   .steps { grid-template-columns: repeat(2, 1fr); }
   .showcase { grid-template-columns: 1fr; }
   .showcase.reverse .showcase-visual { order: -1; }
   .recap-stat-row { grid-template-columns: repeat(3, 1fr); }
+  /* Still evenly divided at this width: 9 free cards / 1 column = 9
+     clean rows, 8 premium cards / 2 columns = 4 clean rows. Never an
+     intermediate 2-column step for the free grid specifically -- 9
+     isn't divisible by 2, and that's exactly the gap this whole fix
+     exists to avoid. */
+  #free .feature-cards { grid-template-columns: 1fr; }
+  #premium .feature-cards { grid-template-columns: repeat(2, 1fr); }
+  .blog-row { grid-template-columns: 84px 1fr 56px; gap: 12px; }
   .nav-toggle { display: flex; }
   .nav-links {
     position: absolute; top: 100%; left: 0; right: 0;
@@ -459,4 +518,6 @@ article.legal .contact { margin-top: 48px; padding-top: 24px; border-top: 1px so
 
 @media (max-width: 560px) {
   .steps { grid-template-columns: 1fr; }
+  .blog-row { grid-template-columns: 1fr 56px; }
+  .blog-row .tag { grid-column: 1 / -1; justify-self: start; }
 }
