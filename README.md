@@ -107,33 +107,155 @@ Worker. You'll get a live URL like `not-yet-website.<your-subdomain>.workers.dev
 
 ## Live analytics — private stats dashboard
 
-Same setup avclock-website uses. `js/track.js` on every page logs
-pageviews, scroll-to-bottom, outbound/backlink clicks, and post shares
-to `/api/track`, handled by `src/index.js`. `analytics.html` reads
-`/api/stats` and renders a live dashboard, polling every 10 seconds.
-**This only works once deployed on Cloudflare** — a plain local
-`python3 -m http.server` preview has no Worker runtime, so
-`analytics.html` will just show "couldn't reach /api/stats" locally.
-That's expected, not a bug.
+`js/track.js` on every page logs pageviews, scroll-to-bottom,
+outbound/backlink clicks, and post shares to `/api/track`, handled by
+`src/index.js`. `analytics.html` reads `/api/stats` (edge-cached for
+8 seconds — see the "Staying inside the free tier" section below) and
+renders a live dashboard, polling every 10 seconds. **This only works
+once deployed on Cloudflare** — a plain local `python3 -m http.server`
+preview has no Worker runtime, so `analytics.html` will just show
+"couldn't reach /api/stats" locally. That's expected, not a bug.
 
-### 1. Connect a KV namespace (required)
-1. Cloudflare dashboard → **Workers & Pages** → **KV** → **Create a
-   namespace** (e.g. `not-yet-analytics`).
-2. Your Worker project → **Settings → Bindings** → add a KV namespace
-   binding named exactly `ANALYTICS_KV` → bind it to the namespace you
-   just created.
-3. Redeploy. `analytics.html` starts showing real numbers as people
-   visit the site.
+### 1. Create the KV namespace
 
-### 2. Gate the dashboard (strongly recommended)
-Cloudflare Access (part of Cloudflare Zero Trust, free for individual
-use) — same walkthrough as avclock-website's own README:
-- Zero Trust → Access → Applications → Add an application →
-  Self-hosted.
-- Application domain/path: `notyetcb.com/analytics.html`.
-- Also gate `notyetcb.com/api/stats*` (the read endpoint).
-- **Don't** gate `/api/track` — that one has to stay public or every
-  visitor's pageviews silently stop logging.
+KV is Cloudflare's key-value store — this is where every pageview,
+click, and share count actually lives. It's a separate object from
+the Worker itself, which is why it needs its own creation step and its
+own binding.
+
+1. Cloudflare dashboard → left sidebar **Workers & Pages** → top tab
+   **KV**.
+2. **Create a namespace**. Name it something recognizable, e.g.
+   `not-yet-analytics`. Leave everything else default. Create.
+3. You now have an empty namespace with an ID (a long hex string) —
+   you won't need to copy that ID by hand; the next step's dropdown
+   picks it up automatically.
+
+### 2. Bind it to the Worker
+
+A namespace existing isn't enough on its own — the Worker's code
+reads/writes it through a **binding**, a name the code refers to
+(`env.ANALYTICS_KV`, already written into `src/index.js`) that has to
+be pointed at the real namespace in the dashboard.
+
+1. **Workers & Pages** → your Worker project (`not-yet-website`) →
+   **Settings** → **Bindings** (sometimes labeled **Variables and
+   Bindings**).
+2. **Add binding** → type **KV namespace**.
+3. **Variable name**: exactly `ANALYTICS_KV` (this has to match
+   `src/index.js`'s `env.ANALYTICS_KV` character-for-character — a
+   typo here just makes every write/read silently no-op, no error
+   anywhere, since the code already treats a missing binding as "not
+   set up yet" rather than a bug).
+4. **KV namespace**: pick `not-yet-analytics` (the one from step 1)
+   from the dropdown.
+5. Save/Deploy. A binding takes effect on the *next* request, no code
+   redeploy needed — `analytics.html` starts showing real `0`s
+   immediately, and real numbers as soon as anyone visits any page.
+
+### 3. Gate the dashboard to just your own email
+
+Cloudflare Access (part of Cloudflare Zero Trust, free for up to 50
+users) sits in front of a URL and requires a login before Cloudflare
+even forwards the request to the Worker — this is what makes
+`analytics.html` actually private, since the page itself has no
+password of its own.
+
+1. Cloudflare dashboard → left sidebar **Zero Trust** (if this is the
+   first time opening it, it'll ask you to pick a free plan and a
+   team name — any team name works, it's just an internal label).
+2. **Access** → **Applications** → **Add an application** →
+   **Self-hosted**.
+3. **Application name**: `Not Yet Analytics` (just a label).
+   **Session duration**: how long a login lasts before it asks again —
+   `24 hours` is a reasonable default; pick longer if re-entering a
+   code every day is annoying.
+4. **Application domain**: `notyetcb.com`, **Path**: `/analytics.html`.
+   Click **Add public hostname** again and add a second one — same
+   domain, path `/api/stats*` (the asterisk matters: this covers the
+   endpoint the dashboard's own polling calls, which is a separate URL
+   from the page itself).
+5. Continue to **Policies**. **Add a policy**:
+   - **Policy name**: `Just me`.
+   - **Action**: `Allow`.
+   - **Rule type**: `Emails`. **Value**: your email
+     (`brysonjohansson@gmail.com`) — type it in and hit enter/return so
+     it becomes a chip, not just typed text.
+   - Nothing else needs changing. Save.
+6. **Don't** create a third public hostname for `/api/track` — that
+   one has to stay reachable by every visitor's browser with no login,
+   or every pageview silently stops logging the moment this is set up.
+   It was never included above; just don't add it.
+
+**What this looks like when you actually visit the page**: going to
+`notyetcb.com/analytics.html` redirects to a Cloudflare login screen
+asking for an email. Enter `brysonjohansson@gmail.com`, Cloudflare
+emails a one-time 6-digit code to that address, you type it in, and
+you land on the real dashboard. Anyone else's email gets an "Access
+Denied" page instead — they never even reach the Worker, so there's
+nothing there for them to try to guess a URL around. The session then
+holds for whatever duration you picked in step 3, so this isn't a
+some-time-consuming, every-single-visit thing.
+
+## Staying inside the free tier
+
+Two different daily quotas apply here, and they reset independently
+every day at 00:00 UTC — nothing needs "renewing" or configuring, they
+just refill:
+
+| Quota | Free limit/day | What uses it here |
+| --- | --- | --- |
+| Worker requests | 100,000 | Every page load, asset file, and `/api/*` call |
+| KV reads | 100,000 | `/api/stats` — now edge-cached 8s, see below |
+| KV writes | 1,000 | `/api/track` — 2 writes per pageview/outbound/share event, 1 per scroll event |
+| KV deletes / lists | 1,000 each | `/api/stats`'s `kv.list()` call counts as 1 list per page of up to 1,000 keys, regardless of visitor traffic |
+
+**Requests (100,000/day) and KV reads (100,000/day) are generous
+enough that a marketing site this size won't come close.** The one
+worth actually understanding is **KV writes (1,000/day)**: each
+tracked pageview/outbound-click/share costs 2 writes (a per-day
+counter, plus the "recent activity" feed entry); a scroll-to-bottom
+event costs 1 (the feed entry is skipped for scroll on purpose — see
+`js/track.js`'s own comment). Worst case, roughly **500 real visits/day**
+before that quota is a concern — comfortable headroom for where this
+site is now, and something worth glancing at again if traffic ever
+takes off.
+
+**To check actual usage** (no guessing needed): Cloudflare dashboard →
+**Workers & Pages** → **KV** → your namespace → **Metrics** tab shows
+real daily read/write counts, and the Worker project's own
+**Analytics** tab shows request volume. Both are free to check anytime.
+
+**What already protects the quotas, built into the code:**
+- Scroll milestones were already trimmed to just the 100%-reached
+  event (was 4 milestones, now 1) — see `js/track.js`.
+- `/api/stats` is edge-cached for 8 seconds (`src/index.js`,
+  2026-09-16). Before this, every 10-second dashboard poll re-read
+  *every* counter key ever written, from day one — a cost that only
+  grows over months as more distinct page/event/day combinations pile
+  up, and multiplies further if the dashboard tab is left open for
+  hours. Now, repeat polls within that 8-second window are served from
+  a cached copy instead of re-querying KV, without the dashboard ever
+  showing data staler than one extra poll cycle.
+- Every KV write in `/api/track` is wrapped in a try/catch
+  (2026-09-16): if the daily write quota ever does run out, that one
+  event just quietly isn't counted — normal page serving is
+  completely unaffected either way (analytics has never been able to
+  break the site, per `js/track.js`'s own design), and this specifically
+  keeps a quota hit from showing up as a Worker exception in the
+  dashboard's logs, which used to read like something was actually
+  broken.
+
+**If this site's traffic ever genuinely outgrows the free tier**: the
+$5/month Workers Paid plan removes the hard daily KV caps above
+entirely, replacing them with a much larger bundled monthly allowance
+plus metered pay-as-you-go beyond that — a straightforward dashboard
+upgrade (Workers & Pages → your account → **Plans**), no code changes
+needed. This sandbox couldn't reach Cloudflare's own pricing page to
+confirm the exact current bundled numbers while writing this, so
+check developers.cloudflare.com/kv/platform/pricing/ for the real
+current figures before deciding, rather than trusting a number here
+that could be stale by the time you read it.
 
 ## Adding future blog posts
 
