@@ -44,7 +44,7 @@
   <div class="container">
     <a class="brand" href="index.html">
       <img src="images/app-icon.png" alt="Not Yet app icon">
-      Not Yet
+      Not Yet: Checkout Blocker
     </a>
     <div class="nav-links">
       <a href="index.html#how">How it works</a>
@@ -66,6 +66,7 @@
       <div class="hero-icon">
         <img src="images/app-icon.png" alt="Not Yet: Checkout Blocker app icon">
       </div>
+      <p class="hero-official-name">Not Yet: Checkout Blocker</p>
       <div>
         <div class="label-caps">A MINDFUL CHECKOUT BLOCKER &middot; SPEND WITH INTENTION &middot; IPHONE, IPAD &amp; MAC (SAFARI) &middot; FREE ON CHROME</div>
         <h1>A Pause, Right Before You Buy</h1>
@@ -139,15 +140,31 @@
         <div class="mock-store-field" aria-hidden="true">Name on card</div>
         <div class="mock-store-field" aria-hidden="true">Card number</div>
         <div class="mock-store-order">
+          <p class="mock-order-label">Order summary</p>
           <div class="mock-store-row" aria-hidden="true"><span>Cedar planter box</span><span>$68.00</span></div>
           <div class="mock-store-row" aria-hidden="true"><span>Shipping</span><span>$8.00</span></div>
+          <!-- Static "this is paused" cue right on Place order, matching
+               the extension's own onboarding demo -- pure CSS, driven by
+               the same .mock-demo-blocked class + [data-demo-view] state
+               js/hero-demo.js already sets, no JS changes needed. -->
+          <p class="mock-place-order-note" id="mock-place-order-note" aria-hidden="true">Not Yet pauses this while it's on.</p>
           <button type="button" class="mock-btn primary" id="mock-store-buy">Place order</button>
           <p class="mock-wallet-label">or pay with</p>
+          <!-- Four wallet/BNPL options (matching the extension's own
+               demo), row stays visible under the shield rather than
+               swapping out -- the frosted-glass shield overlays it with
+               a backdrop blur, same as the real buy-button shield does
+               on an actual page (overlay.css's .nyc-btn-shield-root). -->
           <div class="mock-wallet-row" id="mock-wallet-row">
             <button type="button" class="mock-wallet-btn" data-demo-wallet="Apple Pay">Apple Pay</button>
+            <button type="button" class="mock-wallet-btn" data-demo-wallet="Google Pay">Google Pay</button>
+            <button type="button" class="mock-wallet-btn" data-demo-wallet="PayPal">PayPal</button>
             <button type="button" class="mock-wallet-btn" data-demo-wallet="Klarna">Klarna</button>
+            <button type="button" class="mock-wallet-shield" id="mock-wallet-shield" hidden aria-label="These wallet buttons are paused by Not Yet. Click to continue.">
+              <span class="mock-wallet-shield-badge" aria-hidden="true"><img src="images/app-icon.png" alt=""></span>
+              <span aria-hidden="true">Paused. Click to continue.</span>
+            </button>
           </div>
-          <button type="button" class="mock-wallet-shield" id="mock-wallet-shield" hidden>Paused. Click to continue.</button>
         </div>
       </div>
 
@@ -194,6 +211,8 @@
         <button type="button" class="mock-btn calm" id="mock-store-reset">Try it again</button>
       </div>
     </div>
+    <p class="mock-frame-caption">This code is just for the demo. On a real checkout page, it's random every time and never reused.</p>
+    <p class="mock-frame-caption premium"><svg class="mock-lock-badge" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 0 1 6 0v3H9Z"/></svg> Shielding Apple Pay, Google Pay, PayPal, and Klarna like this is part of Not Yet Premium. It's shown here on purpose, so you can see what it looks like either way.</p>
     </div>
   </div>
 </header>
