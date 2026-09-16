@@ -18,6 +18,12 @@
 <link rel="apple-touch-icon" href="../images/app-icon.png">
 <link rel="stylesheet" href="../css/style.css">
 
+<!-- image + publisher.logo added 2026-09-16: Google's structured-data
+     requirements for Article/NewsArticle need both for a search result
+     to show a logo/thumbnail next to it at all -- this page had
+     neither, which is the actual cause of "the press one is missing
+     the web logo on google search." Same fix applied to both blog
+     posts' Article schema for the same reason. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -25,7 +31,17 @@
   "headline": "Not Yet: Checkout Blocker Launches a Mindful Pause Before Every Purchase",
   "description": "A typed code, not a timer. Not Yet pauses checkout and payment pages until you've actually thought it through, for impulse shoppers, parents, and couples sharing a budget.",
   "datePublished": "2026-09-15",
-  "publisher": { "@type": "Organization", "name": "Not Yet: Checkout Blocker" },
+  "image": ["https://notyetcb.com/images/app-icon.png"],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Not Yet: Checkout Blocker",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://notyetcb.com/images/app-icon.png",
+      "width": 512,
+      "height": 512
+    }
+  },
   "mainEntityOfPage": "https://notyetcb.com/press/"
 }
 </script>
@@ -36,7 +52,7 @@
   <div class="container">
     <a class="brand" href="../index.html">
       <img src="../images/app-icon.png" alt="Not Yet app icon">
-      Not Yet
+      Not Yet: Checkout Blocker
     </a>
     <div class="nav-links">
       <a href="../index.html#free">Free</a>

@@ -28,7 +28,6 @@
   var successView = document.getElementById("mock-success-view");
   var successMethod = document.getElementById("mock-success-method");
   var storeBuyBtn = document.getElementById("mock-store-buy");
-  var walletRow = document.getElementById("mock-wallet-row");
   var walletShield = document.getElementById("mock-wallet-shield");
   var storeResetBtn = document.getElementById("mock-store-reset");
   var calmBtn = document.getElementById("mock-calm");
@@ -182,11 +181,14 @@
 
   function setBlocked(next) {
     blocked = next;
+    frame.classList.toggle("mock-demo-blocked", blocked);
     frame.querySelectorAll(".mock-toggle-btn").forEach(function (btn) {
       var on = btn.getAttribute("data-demo-toggle") === (next ? "on" : "off");
       btn.classList.toggle("active", on);
     });
-    if (walletRow) walletRow.hidden = blocked;
+    // The wallet row itself stays visible either way now (matching the
+    // extension's own demo) -- only the frosted shield toggles on top
+    // of it, blurring the buttons underneath rather than replacing them.
     if (walletShield) walletShield.hidden = !blocked;
     setView("store");
   }
@@ -222,8 +224,8 @@
       attemptCheckout(btn.getAttribute("data-demo-wallet") || btn.textContent.trim());
     });
   });
-  // Only reachable at all while blocked (walletRow is hidden then --
-  // see setBlocked), same as the real shield only ever sitting on top
+  // Only reachable at all while blocked (walletShield.hidden is toggled
+  // in setBlocked), same as the real shield only ever sitting on top
   // of a button while protection is active.
   if (walletShield) walletShield.addEventListener("click", function () { attemptCheckout(""); });
 

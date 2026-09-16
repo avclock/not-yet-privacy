@@ -137,6 +137,11 @@ section:last-of-type { border-bottom: none; }
   border-radius: 40px;
   box-shadow: 0 24px 60px -18px rgba(140, 132, 116, 0.45), 0 0 0 1px var(--hairline-strong);
 }
+/* The official name, spelled out once, plainly, below the icon and
+   above the marketing label-caps line -- the rest of the hero uses
+   "Not Yet" on its own, which reads fine once someone already knows
+   what that's short for. */
+.hero-official-name { font-family: var(--serif); font-weight: 600; font-size: 15px; color: var(--text-secondary); margin: 0 0 18px; }
 .hero .label-caps { margin-bottom: 16px; justify-content: center; }
 /* margin-left/right:auto is load-bearing, not decorative -- max-width
    narrows the h1's own box below its centered flex-item parent's
@@ -207,36 +212,52 @@ section:last-of-type { border-bottom: none; }
    read as a broken button rather than a decorative form field. */
 .mock-store-field { display: flex; align-items: center; height: 34px; padding: 0 12px; border-radius: var(--radius-sm); background: var(--bg); border: 1px solid var(--hairline-strong); margin-bottom: 8px; font-size: 13px; color: var(--text-tertiary); }
 .mock-store-order { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--hairline); }
+.mock-order-label { margin: 0 0 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-tertiary); }
 .mock-store-row { display: flex; justify-content: space-between; font-size: 13.5px; color: var(--text-secondary); padding: 4px 0; }
-.mock-store-order .mock-btn { margin-top: 14px; }
+/* Static "this is paused" cue right on Place order itself, matching the
+   extension's own onboarding demo -- a separate line above the button
+   rather than swapping the button's own label, since a real store's
+   "Place order" button wouldn't change its own text. Pure CSS, driven
+   by the .mock-demo-blocked class + [data-demo-view] state
+   js/hero-demo.js already sets on the frame. */
+.mock-place-order-note { display: none; margin: 8px 0 0; font-size: 11.5px; font-weight: 600; color: var(--accent-strong); text-align: center; }
+.mock-frame.mock-demo-blocked[data-demo-view="store"] .mock-place-order-note { display: block; }
+.mock-store-order .mock-btn { margin-top: 10px; }
 .mock-wallet-label { font-size: 12px; color: var(--text-tertiary); text-align: center; margin: 14px 0 8px; }
-/* display:none as the default, grid only when :not([hidden]) -- same
-   [hidden]-vs-author-rule cascade footgun as .mock-wallet-shield
-   above, hit for real here on the first render check: an unconditional
-   display:grid here beat the UA [hidden]{display:none} rule, so this
-   row and the shield banner both showed at once instead of swapping. */
-.mock-wallet-row { display: none; grid-template-columns: 1fr 1fr; gap: 8px; }
-.mock-wallet-row:not([hidden]) { display: grid; }
+/* Four wallet/BNPL options in a 2x2 grid, matching the extension's own
+   demo -- the row stays visible in both toggle states now (unlike the
+   old swap-in-swap-out version), since the shield below overlays it
+   with a real blur instead of replacing it outright. position:relative
+   is what the shield's inset:0 covers. */
+.mock-wallet-row { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .mock-wallet-btn { font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--text-secondary); background: var(--bg-elevated); border: 1px solid var(--hairline-strong); border-radius: var(--radius-sm); padding: 10px; cursor: pointer; }
-/* Only shown while the toggle is on -- swaps in for the two wallet
-   buttons above rather than layering on top of them, same "one thing
-   visible at a time" rule as the three main views. Mirrors the real
-   buy-button shield's own click-to-continue behavior. */
+/* Frosted-glass shield overlaying the wallet row (rather than swapping
+   it out) -- same technique as the real buy-button shield in
+   overlay.css's .nyc-btn-shield-root: a translucent, blurred badge sits
+   on top so the buttons underneath still read as blocked buttons, not
+   just missing ones. [hidden] alone isn't enough here: the UA
+   stylesheet's [hidden] { display:none } rule loses to an equally-
+   specific author rule that sets display, so an unconditional
+   display:flex on this class would defeat the hidden attribute when
+   JS toggles it (hit for real on an earlier version of this element). */
 .mock-wallet-shield {
-  width: 100%;
-  /* [hidden] alone isn't enough here: the UA stylesheet's [hidden] {
-     display:none } rule loses to an equally-specific author rule that
-     sets display, so an unconditional display:flex on this class
-     would win and defeat the hidden attribute when JS toggles it. */
+  position: absolute; inset: 0;
   display: none;
   align-items: center; justify-content: center; gap: 8px;
   font-family: var(--sans); font-size: 13px; font-weight: 600;
-  color: var(--accent-strong);
-  background: var(--accent-wash); border: 1px dashed var(--accent);
-  border-radius: var(--radius-sm); padding: 10px;
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  backdrop-filter: blur(6px) saturate(160%);
+  -webkit-backdrop-filter: blur(6px) saturate(160%);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
   cursor: pointer;
+  box-shadow: 0 6px 20px -10px rgba(46, 44, 40, 0.35);
 }
 .mock-wallet-shield:not([hidden]) { display: flex; }
+.mock-wallet-shield-badge { flex: none; width: 26px; height: 26px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #EFE8DC; border: 1px solid color-mix(in srgb, #C9BEA9 55%, transparent); }
+.mock-wallet-shield-badge img { width: 76%; height: 76%; object-fit: contain; display: block; }
 
 .mock-pause-view { padding: 20px; }
 .mock-pause-view .mock-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 16px; }
@@ -249,6 +270,14 @@ section:last-of-type { border-bottom: none; }
 .mock-success-method { font-size: 13.5px; color: var(--text-secondary); min-height: 1.4em; margin-bottom: 8px; }
 .mock-success-note { font-size: 12.5px; color: var(--text-tertiary); margin-bottom: 22px; }
 .mock-success-view .mock-btn { display: inline-block; width: auto; padding: 10px 20px; }
+
+/* Captions below the demo card itself -- the demo-code disclaimer and
+   the Premium-shield explanation, both ported verbatim from the
+   extension's own onboarding demo so a visitor gets the same context
+   someone setting up the real thing would. */
+.mock-frame-caption { max-width: 420px; margin: 10px auto 0; font-size: 11.5px; color: var(--text-tertiary); text-align: center; }
+.mock-frame-caption.premium { margin-top: 6px; }
+.mock-lock-badge { display: inline-block; vertical-align: -3px; width: 14px; height: 14px; margin-right: 2px; }
 
 /* Tabs -- one real unlock-method demo each, matching content.js's
    setupCode()/setupReflect()/setupWait(). Plain buttons, not an
