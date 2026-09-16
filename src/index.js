@@ -17,13 +17,25 @@ export default {
       return handleTrack(request, env);
     }
     if (url.pathname === "/api/stats" && request.method === "GET") {
-      return handleStats(env);
+      return handleStats(env, request, ctx);
     }
 
     return env.ASSETS.fetch(request);
   }
 };
 
+// KV writes wrapped in try/catch (2026-09-16) -- once the free tier's
+// daily KV write quota (1,000/day) is used up for the day, a kv.put()
+// call throws instead of failing quietly. js/track.js's own beacon call
+// already treats any non-2xx/error response as a silent no-op (see its
+// header comment: "analytics should never break the page"), so this
+// was never visitor-facing -- but an uncaught throw here still surfaces
+// as a Worker exception in the dashboard's Observability/Analytics
+// tab, which reads like the SITE broke rather than "the analytics
+// counter quietly skipped one write for the day." Catching it here
+// keeps that distinction clear and lets the request still return its
+// normal 204 either way. Same quota resets daily at 00:00 UTC -- no
+// action needed, it just starts counting again.
 async function handleTrack(request, env) {
   if (!env.ANALYTICS_KV) return new Response(null, { status: 204 });
 
@@ -46,18 +58,44 @@ async function handleTrack(request, env) {
     : `count:${type}:${path}:${day}`;
 
   const kv = env.ANALYTICS_KV;
-  const current = parseInt((await kv.get(counterKey)) || "0", 10);
-  await kv.put(counterKey, String(current + 1));
+  try {
+    const current = parseInt((await kv.get(counterKey)) || "0", 10);
+    await kv.put(counterKey, String(current + 1));
 
-  const recentRaw = await kv.get(RECENT_KEY);
-  const recent = recentRaw ? JSON.parse(recentRaw) : [];
-  recent.unshift({ type, path, detail, t: Date.now() });
-  await kv.put(RECENT_KEY, JSON.stringify(recent.slice(0, RECENT_LIMIT)));
+    const recentRaw = await kv.get(RECENT_KEY);
+    const recent = recentRaw ? JSON.parse(recentRaw) : [];
+    recent.unshift({ type, path, detail, t: Date.now() });
+    await kv.put(RECENT_KEY, JSON.stringify(recent.slice(0, RECENT_LIMIT)));
+  } catch (e) {
+    // Quota exceeded or a transient KV error -- this one event just
+    // doesn't get counted. Never surface that as a broken response.
+  }
 
   return new Response(null, { status: 204 });
 }
 
-async function handleStats(env) {
+// Edge-cached for 8 seconds (2026-09-16, real KV read-quota headroom
+// concern) -- analytics.html polls this endpoint every 10s, and every
+// poll used to re-walk EVERY count:* key ever written (kv.list() plus
+// one kv.get() per key), from the very first day this went live, every
+// single time. That cost is small today but only ever grows: more
+// distinct pages/event-type/day combinations pile up as keys over
+// months of daily operation, and a dashboard tab left open for hours
+// multiplies it further. An 8s Cache API entry (shorter than the 10s
+// poll interval, so the dashboard never reads stale-by-more-than-a-
+// poll data) means repeat polls within that window are served from
+// cache instead of re-reading the entire KV namespace from scratch --
+// this is the actual lever against the free tier's 100,000 KV
+// reads/day limit, which (unlike the 1,000 writes/day limit) scales
+// with total history, not just today's traffic. request.cf.cacheKey
+// isn't used here on purpose: this response has no per-visitor
+// variation to worry about, a plain URL-keyed cache entry is correct.
+async function handleStats(env, request, ctx) {
+  const cache = caches.default;
+  const cacheKey = new Request(new URL(request.url).toString(), { method: "GET" });
+  const cached = await cache.match(cacheKey);
+  if (cached) return cached;
+
   if (!env.ANALYTICS_KV) {
     return json({ totals: {}, recent: [], error: "ANALYTICS_KV not bound" });
   }
@@ -85,11 +123,21 @@ async function handleStats(env) {
   const recentRaw = await kv.get("recent");
   const recent = recentRaw ? JSON.parse(recentRaw) : [];
 
-  return json({ totals, recent });
+  const response = json({ totals, recent }, 8);
+  ctx.waitUntil(cache.put(cacheKey, response.clone()));
+  return response;
 }
 
-function json(obj) {
+function json(obj, maxAgeSeconds) {
   return new Response(JSON.stringify(obj), {
-    headers: { "content-type": "application/json", "cache-control": "no-store" }
+    headers: {
+      "content-type": "application/json",
+      // no-store (the default) keeps the KV-unbound error response and
+      // the client's own always-fresh poll intent honest; the real
+      // stats response overrides this with a short max-age specifically
+      // so the Cache API write above actually takes -- cache.put()
+      // silently declines to store a response marked no-store.
+      "cache-control": maxAgeSeconds ? `public, max-age=${maxAgeSeconds}` : "no-store"
+    }
   });
 }
