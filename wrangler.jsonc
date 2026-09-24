@@ -15,10 +15,16 @@
     // automatic URL resolution, not just the .html-extension redirect
     // it was meant to stop. Leave this on Cloudflare's default
     // ("auto-trailing-slash").
-  }
-  // No kv_namespaces here yet -- add one once you create a real KV
-  // namespace in the Cloudflare dashboard for analytics (see
-  // README.md's "Live analytics" section). Until then, js/track.js's
-  // beacon calls just fail silently and analytics.html shows
-  // "couldn't reach /api/stats" -- both harmless, not bugs.
+  },
+  // The analytics store. This has to live here, not only in the
+  // dashboard: every deploy (each push to main) sets the Worker's
+  // bindings to exactly what this file declares, so a binding added
+  // by hand under Settings -> Bindings was silently dropped by the
+  // next deploy, and analytics.html went back to "Not connected yet."
+  // No "id" on purpose: Wrangler keeps using the namespace already
+  // bound as ANALYTICS_KV if there is one, and otherwise creates one
+  // (named "not-yet-website-analytics-kv") on the next deploy.
+  "kv_namespaces": [
+    { "binding": "ANALYTICS_KV" }
+  ]
 }
