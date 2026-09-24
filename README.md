@@ -116,42 +116,37 @@ once deployed on Cloudflare** — a plain local `python3 -m http.server`
 preview has no Worker runtime, so `analytics.html` will just show
 "couldn't reach /api/stats" locally. That's expected, not a bug.
 
-### 1. Create the KV namespace
+### 1. The KV namespace (automatic)
 
-KV is Cloudflare's key-value store — this is where every pageview,
-click, and share count actually lives. It's a separate object from
-the Worker itself, which is why it needs its own creation step and its
-own binding.
+KV is Cloudflare's key-value store, where every pageview, click, and
+share count lives. `wrangler.jsonc` declares it as `ANALYTICS_KV`
+without an ID, and Wrangler handles the rest on deploy:
 
-1. Cloudflare dashboard → left sidebar **Workers & Pages** → top tab
-   **KV**.
-2. **Create a namespace**. Name it something recognizable, e.g.
-   `not-yet-analytics`. Leave everything else default. Create.
-3. You now have an empty namespace with an ID (a long hex string) —
-   you won't need to copy that ID by hand; the next step's dropdown
-   picks it up automatically.
+- If the Worker already has a KV namespace bound as `ANALYTICS_KV`,
+  the deploy keeps using it.
+- Otherwise the deploy creates one, named
+  `not-yet-website-analytics-kv`, and binds it.
 
-### 2. Bind it to the Worker
+**Don't add or change this binding in the dashboard.** Every deploy
+sets the Worker's bindings to exactly what `wrangler.jsonc` declares,
+so a binding added by hand under Settings → Bindings is dropped by the
+next push to `main`. That's what kept `analytics.html` stuck on "Not
+connected yet" until this was moved into the config (2026-09-24).
 
-A namespace existing isn't enough on its own — the Worker's code
-reads/writes it through a **binding**, a name the code refers to
-(`env.ANALYTICS_KV`, already written into `src/index.js`) that has to
-be pointed at the real namespace in the dashboard.
+To pin a specific namespace instead (say, one you created by hand
+called `not-yet-analytics`): Workers & Pages → KV → copy its ID, then
+set `"id": "<that ID>"` on the `ANALYTICS_KV` entry in
+`wrangler.jsonc`.
 
-1. **Workers & Pages** → your Worker project (`not-yet-website`) →
-   **Settings** → **Bindings** (sometimes labeled **Variables and
-   Bindings**).
-2. **Add binding** → type **KV namespace**.
-3. **Variable name**: exactly `ANALYTICS_KV` (this has to match
-   `src/index.js`'s `env.ANALYTICS_KV` character-for-character — a
-   typo here just makes every write/read silently no-op, no error
-   anywhere, since the code already treats a missing binding as "not
-   set up yet" rather than a bug).
-4. **KV namespace**: pick `not-yet-analytics` (the one from step 1)
-   from the dropdown.
-5. Save/Deploy. A binding takes effect on the *next* request, no code
-   redeploy needed — `analytics.html` starts showing real `0`s
-   immediately, and real numbers as soon as anyone visits any page.
+### 2. Check it's live
+
+After the next deploy, open `/analytics.html`: the "Not connected
+yet" notice is gone and the tiles show real `0`s, then real numbers as
+soon as anyone visits a page. If the notice stays, open the Worker's
+**Deployments** tab and read the latest build log: a permissions error
+there means the build token can't create KV namespaces, and the
+one-time fix is creating the namespace by hand and pinning its ID as
+above.
 
 ### 3. Gate the dashboard to just your own email
 

@@ -39,7 +39,7 @@
     </div>
 
     <div id="kv-warning" class="setup-note" style="display:none;">
-      <strong>Not connected yet.</strong> This page needs a Cloudflare KV namespace bound to this Worker project as <code>ANALYTICS_KV</code> before any data will show up. In the Cloudflare dashboard: your Worker project &rarr; <strong>Settings &rarr; Bindings</strong> &rarr; add a KV namespace binding named <code>ANALYTICS_KV</code> (create a new KV namespace if you don't have one yet). See <code>README.md</code> for the full walkthrough, including how to keep this page actually private with Cloudflare Access.
+      <strong>Not connected yet.</strong> The analytics store (<code>ANALYTICS_KV</code>) isn't bound to this Worker. It's declared in <code>wrangler.jsonc</code>, so the next deploy from <code>main</code> connects it, creating the store if needed. If this still shows after a deploy, open the Cloudflare dashboard: your Worker project &rarr; <strong>Deployments</strong>, and check the latest build log for a KV permission error. See <code>README.md</code>, including how to keep this page private with Cloudflare Access.
     </div>
 
     <div class="stat-grid" id="totals-tiles"></div>
