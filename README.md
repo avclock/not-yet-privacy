@@ -14,12 +14,18 @@ index.html                        Homepage
 blog/index.html                   Blog listing
 blog/why-a-typed-code-beats-a-timer.html   Post (live)
 blog/what-guard-mode-protects.html          Post (live)
+blog/not-yet-screen-by-screen.html          Post (live): a tour using the App Store screenshots
 privacy/index.html                Privacy Policy
 terms/index.html                  Terms of Use
 support/index.html                Support / FAQ
 press/index.html                  Press release + media contact -- fill in the [CITY], [STATE] placeholder in the dateline before publishing
 css/style.css                     Shared styles (the "Calm" palette)
 images/app-icon.png               Real app icon (from Assets.xcassets)
+images/previews/{iphone,ipad,mac}/ The App Store screenshots, web-sized: NN-name.jpg (large, for the
+                                  closer look) and NN-name-sm.jpg (the strips). Made from the
+                                  extension repo's app-store-screenshots/; regenerate both together.
+images/og-app-previews.jpg        Share image for the tour post
+js/previews.js                    Homepage App previews: device tabs + closer look (works without it)
 js/nav.js                         Mobile nav toggle
 js/track.js                       First-party analytics beacon (every page)
 src/index.js                      Cloudflare Worker entry (serves static assets + /api/track, /api/stats)
