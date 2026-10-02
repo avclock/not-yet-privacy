@@ -24,6 +24,10 @@
 
   send("view");
 
+  // For the homepage demos (home-extras.js): one "demo" event per
+  // demo per page load at most.
+  window.nyTrack = send;
+
   // Scroll-depth milestones, each fired at most once per page load.
   // Trimmed from [25, 50, 75, 100] to just 100 (2026-09-04, real KV
   // write-quota pressure): four milestones meant up to four extra
