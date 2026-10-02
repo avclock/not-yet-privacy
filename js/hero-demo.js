@@ -185,6 +185,7 @@
     frame.querySelectorAll(".mock-toggle-btn").forEach(function (btn) {
       var on = btn.getAttribute("data-demo-toggle") === (next ? "on" : "off");
       btn.classList.toggle("active", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
     });
     // The wallet row itself stays visible either way now (matching the
     // extension's own demo) -- only the frosted shield toggles on top
