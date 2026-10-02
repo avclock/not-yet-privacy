@@ -138,13 +138,21 @@
       <div class="mock-chrome" aria-hidden="true">
         <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
         <span class="mock-url">northfieldgoods.example/checkout</span>
+        <span class="mock-ext-badge"><img src="images/icons/notyet-64.webp" alt="" width="18" height="18"></span>
       </div>
 
+      <!-- A sliding switch: the two buttons keep their data-demo-toggle
+           hooks for js/hero-demo.js; the thumb and the status line are
+           pure CSS off .mock-demo-blocked. -->
       <div class="mock-toggle" role="group" aria-label="Toggle Not Yet on this fake store">
-        <button type="button" class="mock-toggle-btn active" data-demo-toggle="off">Not Yet: off</button>
-        <button type="button" class="mock-toggle-btn" data-demo-toggle="on">Not Yet: on</button>
+        <span class="mock-toggle-thumb" aria-hidden="true"></span>
+        <button type="button" class="mock-toggle-btn active" data-demo-toggle="off" aria-pressed="true"><svg class="mock-toggle-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 8h12l-1 12H7L6 8Z M9 8V6a3 3 0 0 1 6 0v2"/></svg><span>Not Yet: off</span></button>
+        <button type="button" class="mock-toggle-btn" data-demo-toggle="on" aria-pressed="false"><img class="mock-toggle-icon" src="images/icons/notyet-64.webp" alt="" width="18" height="18"><span>Not Yet: on</span></button>
       </div>
-      <p class="mock-toggle-hint">Try Place order, or a wallet button, below. Then switch Not Yet on to see the difference.</p>
+      <p class="mock-toggle-hint" aria-live="polite">
+        <span class="hint-off"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 11h12v9H6z M9 11V7a3 3 0 0 1 5.8-1"/></svg>Off: this store checks out like any other. Try Place order, then switch Not Yet on.</span>
+        <span class="hint-on"><span class="hint-pulse" aria-hidden="true"></span>On: Place order and the wallet buttons pause first. Try them now.</span>
+      </p>
 
       <div class="mock-store-page" id="mock-store-page">
         <p class="mock-store-name">Northfield Goods</p>

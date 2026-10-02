@@ -194,17 +194,92 @@ section:last-of-type { border-bottom: none; }
 .mock-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--hairline-strong); flex-shrink: 0; }
 .mock-url { margin-left: 8px; font-family: var(--mono); font-size: 11.5px; color: var(--text-tertiary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-.mock-toggle { display: flex; gap: 6px; padding: 20px 20px 0; }
-.mock-toggle-btn {
-  flex: 1;
-  font-family: var(--sans); font-size: 13px; font-weight: 600;
-  color: var(--text-secondary);
-  background: var(--bg-elevated); border: 1px solid var(--hairline-strong);
-  border-radius: var(--radius-sm); padding: 8px 10px;
-  cursor: pointer;
+/* On/off switch (2026-10): one pill with a sliding thumb instead of
+   two flat buttons. "On" is a calm slate blue taken from the Not Yet
+   icon's rope, never a red/alarm color. All state comes from
+   .mock-demo-blocked on .mock-frame (js/hero-demo.js). */
+.mock-frame { --ny-on: #4F6D8F; --ny-on-2: #6F8CAB; transition: box-shadow 0.45s ease, border-color 0.45s ease; }
+.mock-toggle {
+  position: relative;
+  display: flex;
+  margin: 18px 20px 0;
+  padding: 4px;
+  background: var(--bg);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 999px;
 }
-.mock-toggle-btn.active { color: #fff; background: var(--accent-gradient); border-color: transparent; }
-.mock-toggle-hint { padding: 0 20px; font-size: 12.5px; color: var(--text-tertiary); margin: 10px 0 0; }
+.mock-toggle-thumb {
+  position: absolute;
+  top: 4px; bottom: 4px; left: 4px;
+  width: calc(50% - 4px);
+  border-radius: 999px;
+  background: var(--panel-2);
+  box-shadow: 0 2px 8px rgba(46, 44, 40, 0.14), 0 0 0 1px var(--hairline);
+  transition: transform 0.42s cubic-bezier(.3, 1.35, .5, 1), background 0.3s ease, box-shadow 0.3s ease;
+}
+.mock-toggle-btn {
+  position: relative; z-index: 1;
+  flex: 1;
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  font-family: var(--sans); font-size: 13.5px; font-weight: 600;
+  color: var(--text-tertiary);
+  background: none; border: none; border-radius: 999px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  -webkit-appearance: none; appearance: none;
+}
+.mock-toggle-btn:hover { color: var(--text-primary); }
+.mock-toggle-btn:focus-visible { outline: 2px solid var(--ny-on); outline-offset: 2px; }
+.mock-toggle-btn.active { color: var(--text-primary); }
+.mock-toggle-icon { width: 18px; height: 18px; flex: none; }
+img.mock-toggle-icon { border-radius: 5px; filter: grayscale(1) opacity(0.6); transition: filter 0.3s ease, transform 0.42s cubic-bezier(.3, 1.6, .5, 1); }
+.mock-demo-blocked .mock-toggle-thumb {
+  transform: translateX(100%);
+  background: linear-gradient(135deg, var(--ny-on-2), var(--ny-on));
+  box-shadow: 0 4px 14px rgba(79, 109, 143, 0.4);
+}
+.mock-demo-blocked .mock-toggle-btn.active { color: #fff; }
+.mock-demo-blocked img.mock-toggle-icon { filter: none; transform: rotate(-8deg) scale(1.1); }
+
+/* Status line under the switch: one sentence per state. */
+.mock-toggle-hint { padding: 0 20px; font-size: 12.5px; color: var(--text-secondary); margin: 12px 0 0; min-height: 2.6em; }
+.mock-toggle-hint > span { display: flex; gap: 8px; align-items: flex-start; }
+.mock-toggle-hint svg { width: 15px; height: 15px; flex: none; margin-top: 1px; color: var(--text-tertiary); }
+.mock-toggle-hint .hint-on { display: none; color: var(--ny-on); font-weight: 600; }
+.mock-demo-blocked .mock-toggle-hint .hint-off { display: none; }
+.mock-demo-blocked .mock-toggle-hint .hint-on { display: flex; animation: hintIn 0.4s ease-out backwards; }
+@keyframes hintIn { from { opacity: 0; transform: translateY(4px); } }
+.hint-pulse { position: relative; width: 9px; height: 9px; flex: none; margin: 4px 3px 0 2px; border-radius: 50%; background: var(--ny-on); }
+.hint-pulse::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid var(--ny-on); opacity: 0; animation: hintPulse 1.8s ease-out infinite; }
+@keyframes hintPulse { 0% { transform: scale(0.6); opacity: 0.7; } 100% { transform: scale(1.6); opacity: 0; } }
+
+/* The whole mock lights up while Not Yet is on: a soft blue ring, the
+   extension's badge popping into the address bar, and one gentle sheen
+   across the store as it switches on. */
+.mock-frame.mock-demo-blocked { border-color: rgba(79, 109, 143, 0.55); box-shadow: 0 0 0 4px rgba(79, 109, 143, 0.14), 0 30px 70px -30px rgba(46, 44, 40, 0.28); }
+.mock-chrome { position: relative; }
+.mock-ext-badge {
+  margin-left: auto; flex: none;
+  width: 24px; height: 24px; border-radius: 7px;
+  display: grid; place-items: center;
+  background: var(--panel-2); box-shadow: 0 0 0 1px var(--hairline-strong);
+  transform: scale(0); opacity: 0;
+  transition: transform 0.45s cubic-bezier(.3, 1.6, .5, 1), opacity 0.2s ease;
+}
+.mock-ext-badge img { width: 18px; height: 18px; border-radius: 5px; }
+.mock-demo-blocked .mock-ext-badge { transform: scale(1); opacity: 1; box-shadow: 0 0 0 2px var(--ny-on); }
+.mock-store-page { position: relative; }
+.mock-demo-blocked .mock-store-page::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(105deg, transparent 30%, rgba(111, 140, 171, 0.18) 50%, transparent 70%);
+  transform: translateX(-100%);
+  animation: nySheen 0.9s ease-out 0.1s forwards;
+}
+@keyframes nySheen { to { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) {
+  .hint-pulse::after, .mock-demo-blocked .mock-store-page::after { animation: none !important; display: none; }
+}
 
 .mock-store-page { padding: 20px; }
 .mock-store-name { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 14px; }
@@ -671,7 +746,12 @@ article.legal .contact { margin-top: 48px; padding-top: 24px; border-top: 1px so
    card instead of the Setup & Help page's much wider column. Using
    the same wrap/default padding here would frame a wide swath of
    empty hero space around a narrow card instead of the card itself. */
-.rope-frame-wrap.hero-demo-frame { max-width: 480px; padding: 24px 0; }
+/* Side gutters and a taller bottom so the rope (drawn ~22px in from
+   these edges) circles the mock AND the two notes under it, instead of
+   running behind the mock's edges and stopping above the notes. */
+.rope-frame-wrap.hero-demo-frame { max-width: 540px; padding: 52px 52px 64px; }
+.rope-frame-wrap.hero-demo-frame .mock-frame { margin-top: 0; }
+.rope-frame-wrap.hero-demo-frame .mock-frame-caption { max-width: 400px; }
 .rope-frame {
   position: absolute;
   top: 0; left: 0;
@@ -692,6 +772,7 @@ article.legal .contact { margin-top: 48px; padding-top: 24px; border-top: 1px so
      phone widths rather than a third blind guess in an environment
      that can't test against a real device. */
   .rope-frame { display: none; }
+  .rope-frame-wrap.hero-demo-frame { padding: 0; margin-top: 36px; }
 }
 
 /* ============ Setup & Help page — mirrors the extension's own
@@ -924,3 +1005,20 @@ article.post .post-tag { font-family: var(--mono); font-size: 11px; font-weight:
    color alone (WCAG 1.4.1). Buttons and badges carry classes and are
    unaffected. */
 p a:not([class]), li a:not([class]) { text-decoration: underline; text-underline-offset: 2px; }
+
+/* The fake store's own buttons look like a real checkout (2026-10):
+   a solid Place order, and wallet buttons in their familiar colors
+   (names only, no brand marks). While Not Yet is on, Place order wears
+   the same slate-blue ring as the rest of the demo. */
+#mock-store-buy {
+  background: var(--text-primary); color: #fff; opacity: 1;
+  transition: box-shadow 0.35s ease, transform 0.15s ease;
+}
+#mock-store-buy:hover { transform: translateY(-1px); }
+.mock-demo-blocked #mock-store-buy { box-shadow: 0 0 0 3px rgba(79, 109, 143, 0.35); }
+.mock-wallet-btn { transition: transform 0.15s ease, filter 0.15s ease; }
+.mock-wallet-btn:hover { transform: translateY(-1px); filter: brightness(0.97); }
+.mock-wallet-btn[data-demo-wallet="Apple Pay"] { background: #000; color: #fff; border-color: #000; }
+.mock-wallet-btn[data-demo-wallet="Google Pay"] { background: #fff; color: #3c4043; border-color: #dadce0; }
+.mock-wallet-btn[data-demo-wallet="PayPal"] { background: #FFC439; color: #003087; border-color: #FFC439; font-style: italic; font-weight: 800; }
+.mock-wallet-btn[data-demo-wallet="Klarna"] { background: #FFB3C7; color: #17120F; border-color: #FFB3C7; font-weight: 800; }
