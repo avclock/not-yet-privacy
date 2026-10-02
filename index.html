@@ -11,8 +11,11 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Not Yet: Checkout Blocker — A Mindful Pause Before You Buy">
 <meta property="og:description" content="A typed code, not a timer. Not Yet pauses checkout and payment pages until you've actually thought it through, for impulse shoppers, parents, and couples sharing a budget. Free for the essentials, always.">
-<meta property="og:image" content="https://notyetcb.com/images/app-icon.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://notyetcb.com/images/og-notyet.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://notyetcb.com/images/og-notyet.png">
 
 <link rel="icon" type="image/png" href="images/app-icon.png">
 <link rel="apple-touch-icon" href="images/app-icon.png">
@@ -228,7 +231,7 @@
 <!-- SECTION 2 — HOW IT WORKS -->
 <section id="how">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="section-eyebrow">How it works</div>
       <h2>Four steps, every single time</h2>
       <p>No setup beyond picking what to pause. From there, every checkout page gets the same treatment, automatically.</p>
@@ -264,7 +267,7 @@
      closer look; without it all three strips show, each titled. -->
 <section id="previews">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="section-eyebrow">App previews</div>
       <h2>See it on every screen</h2>
       <p>Real screens from Not Yet on iPhone, iPad, and Mac, shown on a demo store. Tap any one for a closer look.</p>
@@ -359,10 +362,46 @@
 <!-- SECTION 3 — WHY THIS EXISTS -->
 <section id="about">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="section-eyebrow">Why Not Yet exists</div>
       <h2>Impulse doesn't wait for a timer to run out</h2>
       <p>A countdown just asks you to wait it out, which most people do without thinking about anything in particular. A "snooze" button is worse: tap it once and the moment's already gone. Not Yet works differently. It shows a random code and asks you to retype it, character for character, before a checkout or payment page will continue. Nothing is cached or reused: reload the page and you get a brand new code. The point is a genuine pause, not a puzzle you solve once and remember.</p>
+    </div>
+
+    <!-- Comparison, working: js/home-extras.js -->
+    <div class="compare-grid reveal">
+      <div class="compare-card" id="cmp-countdown">
+        <div class="compare-label">A countdown</div>
+        <div class="cmp-demo">
+          <div class="cmp-bar"><div class="cmp-bar-fill"></div></div>
+          <div class="cmp-count">10s</div>
+          <button type="button" class="cmp-btn" disabled>Continue to checkout</button>
+        </div>
+        <p>You can wait it out without thinking about anything. Most people do.</p>
+      </div>
+      <div class="compare-card" id="cmp-snooze">
+        <div class="compare-label">A snooze button</div>
+        <div class="cmp-demo">
+          <p class="cmp-prompt">Take a break from shopping?</p>
+          <button type="button" class="cmp-btn">Snooze</button>
+          <p class="cmp-out" aria-live="polite"></p>
+        </div>
+        <p>One tap, and the moment is already gone.</p>
+      </div>
+      <div class="compare-card ours" id="cmp-code">
+        <div class="compare-label">Not Yet</div>
+        <div class="cmp-demo">
+          <p class="cmp-prompt">Retype this code to continue</p>
+          <div class="cmp-code" aria-label="Code to retype"></div>
+          <input type="text" aria-label="Retype the code" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+          <div class="cmp-actions">
+            <button type="button" class="cmp-btn" disabled>Continue to checkout</button>
+            <button type="button" class="cmp-new">New code</button>
+          </div>
+          <p class="cmp-out" aria-live="polite"></p>
+        </div>
+        <p>It takes your attention, not just your time. Case matters, and the app's code is 40 characters by default.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -370,7 +409,7 @@
 <!-- SECTION 4 — FREE TIER -->
 <section id="free">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="section-eyebrow">Free tier</div>
       <h2>Free, genuinely</h2>
       <p>No account, no ads, and nothing collected, ever. Everything below works with no purchase at all, on both Safari and Chrome.</p>
@@ -495,11 +534,11 @@
     <div class="showcase reverse">
       <div class="showcase-visual">
         <div class="mock-recap" aria-hidden="true">
-          <div class="mock-eyebrow">Your Recap &middot; This Week</div>
+          <div class="mock-eyebrow">Your Recap &middot; Example week</div>
           <div class="recap-stat-row">
-            <div class="recap-stat"><div class="num">14</div><div class="lbl">Times paused</div></div>
-            <div class="recap-stat"><div class="num">$212</div><div class="lbl">Not spent</div></div>
-            <div class="recap-stat"><div class="num">3</div><div class="lbl">Went anyway</div></div>
+            <div class="recap-stat"><div class="num" data-count="14">14</div><div class="lbl">Times paused</div></div>
+            <div class="recap-stat"><div class="num" data-count="212" data-prefix="$">$212</div><div class="lbl">Not spent</div></div>
+            <div class="recap-stat"><div class="num" data-count="3">3</div><div class="lbl">Went anyway</div></div>
           </div>
           <div class="recap-chart">
             <div class="bar" style="height:35%;"></div>
@@ -532,10 +571,27 @@
 <!-- SECTION 7 — PREMIUM (Safari and Chrome) -->
 <section id="premium">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="section-eyebrow">Premium &middot; Safari and Chrome</div>
       <h2>A little more friction, on purpose</h2>
       <p>On Safari, a monthly subscription or a one-time lifetime unlock. On Chrome, one payment for a Premium key that's checked on your own computer, so there's still no server. Bought lifetime in the Not Yet app? It covers Chrome too, at no extra cost.</p>
+    </div>
+
+
+    <!-- How Premium works on each browser -->
+    <div class="premium-ways reveal">
+      <div class="way-card">
+        <div class="way-head"><span class="way-label">Safari</span><span class="way-sub">iPhone, iPad, and Mac</span></div>
+        <p>Buy in the Not Yet app with your Apple Account: monthly, or lifetime for $39.99 once. Restore Purchases brings it back on a new device.</p>
+      </div>
+      <div class="way-card">
+        <div class="way-head"><span class="way-label">Chrome</span><span class="way-sub">Any computer with Chrome</span></div>
+        <p>$39.99 once for a Premium key, checked on your own computer, so there's still no server. <a href="https://payhip.com/b/bRTM4" target="_blank" rel="noopener">Get a Chrome key</a></p>
+      </div>
+      <div class="way-card both">
+        <div class="way-head"><span class="way-label">Both</span><span class="way-sub">One lifetime purchase</span></div>
+        <p>Bought lifetime in the Not Yet app? Tap Copy code for Chrome and paste it into Chrome. It's Apple's own signed record of your purchase, so Chrome is covered at no extra cost.</p>
+      </div>
     </div>
 
     <div class="feature-cards">
@@ -588,7 +644,7 @@
 <!-- SECTION 8 — WHO IT'S FOR -->
 <section>
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <h2>Built for a pause, not a punishment</h2>
     </div>
     <div class="two-col">
@@ -615,7 +671,7 @@
 <!-- SECTION 9 — FAQ -->
 <section id="faq">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <h2>Frequently asked questions</h2>
     </div>
 
@@ -711,6 +767,14 @@
         <a href="mailto:avclock@protonmail.com">Contact</a>
       </div>
     </div>
+    <div class="more-apps">
+      <div class="more-apps-label">More apps from the same developer</div>
+      <div class="more-apps-row">
+        <a class="more-app" href="https://avclockapp.com/" target="_blank" rel="noopener"><img src="images/avclock-icon.png" alt="" width="40" height="40"><span><strong>AvClock</strong><small>Airport world clock</small></span></a>
+        <a class="more-app" href="https://avclockapp.com/avgrav" target="_blank" rel="noopener"><img src="images/avgrav-icon.png" alt="" width="40" height="40"><span><strong>AvGrav</strong><small>API fuel gravity</small></span></a>
+        <a class="more-app" href="shotstand/"><img src="images/shotstand-icon.png" alt="" width="40" height="40"><span><strong>Shotstand</strong><small>App Store screenshots, coming soon</small></span></a>
+      </div>
+    </div>
     <p class="footer-note">Not Yet: Checkout Blocker is a pause and friction tool, not a treatment program, and is not affiliated with or endorsed by any gambling harm-reduction organization.</p>
   </div>
 </footer>
@@ -722,6 +786,8 @@
 <script src="js/info-popovers.js" defer></script>
 <script src="js/rope-frame.js" defer></script>
 <script src="js/previews.js" defer></script>
+<script src="js/reveal.js" defer></script>
+<script src="js/home-extras.js" defer></script>
 
 </body>
 </html>

@@ -29,6 +29,10 @@ images/previews/{iphone,ipad,mac}/ The App Store screenshots, web-sized: NN-name
                                   extension repo's app-store-screenshots/; regenerate both together.
 images/og-app-previews.jpg        Share image for the tour post
 js/previews.js                    Homepage App previews: device tabs + closer look (works without it)
+js/home-extras.js                 Homepage: countdown vs snooze vs retyped-code comparison (working), recap count-up
+js/reveal.js                      Fade-in as sections scroll into view (off with reduced motion; same file as avclock-website)
+images/og-notyet.png              1200x630 share image for the homepage
+images/avclock-icon.png, avgrav-icon.png   Footer "More apps" strip
 js/nav.js                         Mobile nav toggle
 js/track.js                       First-party analytics beacon (every page)
 src/index.js                      Cloudflare Worker entry (serves static assets + /api/track, /api/stats)

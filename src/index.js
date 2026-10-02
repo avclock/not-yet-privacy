@@ -5,7 +5,7 @@
 // for reference; this file supersedes it). Mirrors the working setup
 // in avclock-website -- see that repo's own src/index.js.
 
-const ALLOWED_TYPES = new Set(["view", "scroll", "outbound", "share"]);
+const ALLOWED_TYPES = new Set(["view", "scroll", "outbound", "share", "demo"]);
 const RECENT_KEY = "recent";
 const RECENT_LIMIT = 50;
 

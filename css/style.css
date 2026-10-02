@@ -815,3 +815,107 @@ article.post .post-tag { font-family: var(--mono); font-size: 11px; font-weight:
   .preview-nav { display: none; }
   .preview-tab { padding: 8px 16px; }
 }
+
+/* ============================================================
+   2026-10 overhaul: comparison cards, Premium by browser, the recap
+   count-up, scroll reveal, and the More apps strip. Motion is off
+   under prefers-reduced-motion (global rule above, and the scripts
+   check it too).
+   ============================================================ */
+
+/* Scroll reveal (reveal.js opts the page in) */
+.reveal-ready .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-ready .reveal.revealed { opacity: 1; transform: none; }
+
+/* Countdown vs snooze vs Not Yet */
+.compare-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 8px; }
+@media (max-width: 860px) { .compare-grid { grid-template-columns: 1fr; } }
+.compare-card {
+  background: var(--panel-2);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  padding: 22px 22px 18px;
+  display: flex; flex-direction: column;
+}
+.compare-card.ours { border-color: var(--accent); box-shadow: 0 10px 30px rgba(140, 132, 116, 0.18); }
+.compare-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 14px; }
+.compare-card.ours .compare-label { color: var(--accent-strong); }
+.compare-card > p { font-size: 14.5px; margin: 14px 0 0; }
+.cmp-demo {
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  min-height: 168px;
+  display: flex; flex-direction: column; justify-content: center; gap: 10px;
+}
+.cmp-prompt { font-size: 14px; margin: 0; color: var(--text-secondary); }
+.cmp-bar { height: 8px; border-radius: 999px; background: var(--hairline); overflow: hidden; }
+.cmp-bar-fill { height: 100%; background: var(--accent-gradient); transform-origin: left center; transition: transform 1s linear; }
+.cmp-count { font-family: var(--serif); font-size: 30px; color: var(--text-primary); }
+.cmp-btn {
+  font: 600 14px var(--sans);
+  color: #fff;
+  background: var(--text-primary);
+  border: none; border-radius: 999px;
+  padding: 10px 16px;
+  cursor: pointer;
+  -webkit-appearance: none; appearance: none;
+}
+.cmp-btn:disabled { background: var(--hairline-strong); color: var(--text-tertiary); cursor: default; }
+.cmp-new {
+  font: 600 13px var(--sans); color: var(--text-secondary);
+  background: none; border: none; cursor: pointer; padding: 6px 4px; text-decoration: underline;
+  -webkit-appearance: none; appearance: none;
+}
+.cmp-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.cmp-code {
+  font-family: var(--mono); font-size: 22px; letter-spacing: 0.12em;
+  color: var(--text-primary); background: var(--panel-2);
+  border: 1px dashed var(--hairline-strong); border-radius: 12px;
+  padding: 8px 12px; text-align: center;
+}
+.cmp-demo input {
+  font: 600 18px var(--mono); letter-spacing: 0.08em;
+  color: var(--text-primary); background: var(--panel-2);
+  border: 1px solid var(--hairline-strong); border-radius: 12px;
+  padding: 9px 12px; width: 100%;
+}
+.cmp-demo input:focus { outline: 2px solid var(--accent-strong); outline-offset: 2px; }
+.cmp-out { font-size: 13px; color: var(--accent-strong); margin: 0; min-height: 1.4em; }
+
+/* How Premium works on each browser */
+.premium-ways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 22px; }
+@media (max-width: 860px) { .premium-ways { grid-template-columns: 1fr; } }
+.way-card { background: var(--panel-2); border: 1px solid var(--hairline); border-radius: var(--radius); padding: 20px 22px; }
+.way-card.both { background: var(--bg-elevated); border-color: var(--accent); }
+.way-head { display: flex; flex-direction: column; gap: 2px; margin-bottom: 10px; }
+.way-label { font-family: var(--serif); font-size: 21px; color: var(--text-primary); }
+.way-sub { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); }
+.way-card p { font-size: 14.5px; margin: 0; }
+
+/* Recap mock: bars grow and numbers count up once (home-extras.js) */
+.mock-recap.recap-armed .recap-chart .bar { transform: scaleY(0); transform-origin: bottom; }
+.mock-recap.recap-play .recap-chart .bar { transform: scaleY(1); transition: transform 0.9s cubic-bezier(.2, .8, .2, 1); }
+.mock-recap.recap-play .recap-chart .bar:nth-child(2) { transition-delay: 0.06s; }
+.mock-recap.recap-play .recap-chart .bar:nth-child(3) { transition-delay: 0.12s; }
+.mock-recap.recap-play .recap-chart .bar:nth-child(4) { transition-delay: 0.18s; }
+.mock-recap.recap-play .recap-chart .bar:nth-child(5) { transition-delay: 0.24s; }
+.mock-recap.recap-play .recap-chart .bar:nth-child(6) { transition-delay: 0.3s; }
+.mock-recap.recap-play .recap-chart .bar:nth-child(7) { transition-delay: 0.36s; }
+
+/* More apps strip (footer) */
+.more-apps { margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--hairline); }
+.more-apps-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 12px; }
+.more-apps-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 760px) { .more-apps-row { grid-template-columns: 1fr; } }
+.more-app {
+  display: flex; gap: 10px; align-items: center;
+  padding: 10px 12px; border: 1px solid var(--hairline); border-radius: var(--radius-sm);
+  background: var(--panel-2); color: var(--text-primary);
+  transition: border-color 0.15s ease;
+}
+.more-app:hover { text-decoration: none; border-color: var(--accent); }
+.more-app img { width: 40px; height: 40px; border-radius: 10px; flex: none; }
+.more-app span { display: flex; flex-direction: column; min-width: 0; }
+.more-app strong { font-size: 14px; }
+.more-app small { font-size: 12px; color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
