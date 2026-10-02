@@ -35,7 +35,7 @@
     <div class="section-head">
       <div class="section-eyebrow">Private &middot; noindex</div>
       <h2>Not Yet Site Analytics</h2>
-      <p>Live pageviews, scroll completion, backlink clicks, and shares, reads directly from <code>/api/stats</code>, refreshes every 10 seconds.</p>
+      <p>Live pageviews, scroll completion, backlink clicks, and shares, reads directly from <code>/api/stats</code>, refreshes every minute while this tab is open (the numbers themselves update every 5 minutes, to stay inside Cloudflare's free limits).</p>
     </div>
 
     <div id="kv-warning" class="setup-note" style="display:none;">
@@ -127,7 +127,7 @@
     tiles.appendChild(tile(totalViews, "Total pageviews"));
     tiles.appendChild(tile(totalShares, "Total shares"));
     tiles.appendChild(tile(totalOutbound, "Backlink clicks"));
-    tiles.appendChild(tile((data.recent || []).length, "Recent events tracked"));
+    tiles.appendChild(tile((data.recent || []).length, "Recent activity (latest per page)"));
 
     var vt = document.querySelector("#views-table tbody");
     vt.innerHTML = "";
@@ -167,7 +167,7 @@
     });
     if (!(data.recent || []).length) feed.innerHTML = '<div class="live-row"><span>Nothing tracked yet, visit the site to generate activity.</span></div>';
 
-    document.getElementById("refresh-note").textContent = "last updated " + new Date().toLocaleTimeString() + " · auto-refreshes every 10s";
+    document.getElementById("refresh-note").textContent = "last updated " + new Date().toLocaleTimeString() + " · server numbers refresh every 5 min";
   }
 
   function load() {
@@ -180,7 +180,11 @@
   }
 
   load();
-  setInterval(load, 10000);
+  // Once a minute, and only while the tab is visible: /api/stats is
+  // cached for 5 minutes at the edge, so polling faster only adds
+  // Worker requests, and a forgotten background tab shouldn't add any.
+  setInterval(function () { if (document.visibilityState === "visible") load(); }, 60000);
+  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "visible") load(); });
 })();
 </script>
 

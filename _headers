@@ -1,0 +1,8 @@
+# Cloudflare static-assets headers (read by Cloudflare, not served).
+# Images and data change rarely: browsers keep them a day and refresh
+# in the background for a week after that, so repeat visits don't
+# re-download icons, screenshots, or the airport list. HTML, CSS, and
+# JS keep Cloudflare's default (always revalidated), since their file
+# names don't change between deploys.
+/images/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
