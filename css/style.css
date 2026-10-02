@@ -20,10 +20,10 @@
   --hairline: #E3E0D8;
   --hairline-strong: #D6D2C6;
   --text-primary: #2E2C28;
-  --text-secondary: #6F6C64;
-  --text-tertiary: #938F85;
+  --text-secondary: #5F5B54;
+  --text-tertiary: #706C64; /* was #938F85: 2.8:1 on --bg, under WCAG AA. Now 4.5:1; --text-secondary darkened to keep a step above it */
   --accent: #A39B8B;
-  --accent-strong: #8C8474;
+  --accent-strong: #706858; /* was #8C8474: 3.2:1 as text on --bg. Now 4.75:1 (WCAG AA). The gradient keeps its own lighter stops. */
   --accent-gradient: linear-gradient(135deg, #C9C2B4 0%, #A39B8B 50%, #8C8474 100%);
   --accent-wash: rgba(163, 155, 139, 0.14);
   --gambling: #7C8598;
@@ -380,7 +380,7 @@ section:last-of-type { border-bottom: none; }
 #free .feature-cards { grid-template-columns: repeat(3, 1fr); }
 #premium .feature-cards { grid-template-columns: repeat(4, 1fr); }
 .feature-card { background: var(--panel-2); padding: 22px 22px 24px; }
-.feature-card h4 { font-size: 15.5px; margin-bottom: 6px; color: var(--text-primary); }
+.feature-card h3, .feature-card h4 { font-size: 15.5px; margin-bottom: 6px; color: var(--text-primary); }
 .feature-card p { font-size: 14px; margin: 0; }
 .feature-card .badge {
   display: inline-block;
@@ -391,10 +391,10 @@ section:last-of-type { border-bottom: none; }
   padding: 2px 8px;
   margin-bottom: 10px;
 }
-.feature-card.premium .badge { color: #8A6D3B; background: rgba(212, 165, 90, 0.14); }
+.feature-card.premium .badge { color: #7A5F30; background: rgba(212, 165, 90, 0.14); }
 .feature-card.soon { background: var(--bg-elevated); }
-.feature-card.soon .badge { color: var(--text-tertiary); background: var(--hairline); }
-.feature-card.soon h4 { color: var(--text-secondary); }
+.feature-card.soon .badge { color: var(--text-secondary); background: var(--hairline); }
+.feature-card.soon h3, .feature-card.soon h4 { color: var(--text-secondary); }
 
 /* ============ Quiet Place / pinboard showcase — an honest mock of
    the real corkboard (pinboard.js): CSS "photos" (gradient tiles, no
@@ -572,7 +572,7 @@ a.blog-row:hover .row-title { color: var(--accent-strong); }
 .row-excerpt { color: var(--text-secondary); font-size: 14px; }
 .row-status { font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-align: right; white-space: nowrap; display: inline-flex; align-items: center; justify-content: flex-end; gap: 5px; }
 .row-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-.row-status.live { color: #6E9B6E; }
+.row-status.live { color: #4A7A4A; } /* was #6E9B6E: 3.2:1 on white, under WCAG AA */
 .row-status.soon { color: var(--text-tertiary); }
 
 .more-posts { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--hairline); }
@@ -919,3 +919,8 @@ article.post .post-tag { font-family: var(--mono); font-size: 11px; font-weight:
 .more-app span { display: flex; flex-direction: column; min-width: 0; }
 .more-app strong { font-size: 14px; }
 .more-app small { font-size: 12px; color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Links inside running text are underlined, so they don't rely on
+   color alone (WCAG 1.4.1). Buttons and badges carry classes and are
+   unaffected. */
+p a:not([class]), li a:not([class]) { text-decoration: underline; text-underline-offset: 2px; }
