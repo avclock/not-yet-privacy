@@ -18,6 +18,9 @@ blog/not-yet-screen-by-screen.html          Post (live): a tour using the App St
 privacy/index.html                Privacy Policy
 terms/index.html                  Terms of Use
 support/index.html                Support / FAQ
+shotstand/index.html              Shotstand (separate app): support page
+shotstand/privacy/index.html      Shotstand: privacy policy
+images/shotstand-icon.png         Shotstand's app icon
 press/index.html                  Press release + media contact -- fill in the [CITY], [STATE] placeholder in the dateline before publishing
 css/style.css                     Shared styles (the "Calm" palette)
 images/app-icon.png               Real app icon (from Assets.xcassets)
