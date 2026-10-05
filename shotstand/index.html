@@ -3,100 +3,393 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shotstand: Support</title>
-<meta name="description" content="Help with Shotstand, the App Store screenshot maker for iPhone, iPad, and Mac: moving things, reframing, saving every size, and how to reach us.">
+<title>Shotstand: App Store Screenshot Maker for iPhone, iPad, and Mac</title>
+<meta name="description" content="Make App Store screenshots that sell your app, right on your iPhone, iPad, or Mac. Real device frames, headlines, and backgrounds, saved at every size App Store Connect asks for. Free, with a one-time Premium upgrade.">
 <link rel="canonical" href="https://notyetcb.com/shotstand/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Shotstand: Screenshots that sell your app">
+<meta property="og:description" content="Make App Store screenshots that sell your app, right on your iPhone, iPad, or Mac. Real device frames, headlines, and backgrounds, saved at every size App Store Connect asks for. Free, with a one-time Premium upgrade.">
+<meta property="og:image" content="https://notyetcb.com/images/og-shotstand.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://notyetcb.com/images/og-shotstand.jpg">
 <link rel="icon" type="image/png" href="../images/shotstand-icon.png">
 <link rel="apple-touch-icon" href="../images/shotstand-icon.png">
 <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/shotstand.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Shotstand: App Image Maker",
+  "operatingSystem": "iOS, iPadOS, macOS",
+  "applicationCategory": "DesignApplication",
+  "url": "https://notyetcb.com/shotstand/",
+  "image": "https://notyetcb.com/images/shotstand-icon.png",
+  "description": "Make App Store screenshots on your iPhone, iPad, or Mac: real device frames, headlines, and backgrounds, saved at every size App Store Connect asks for.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Shotstand"
+  }
+}
+</script>
 </head>
 <body>
 
 <nav class="site-nav">
   <div class="container">
-    <a class="brand" href="../shotstand/">
+    <a class="brand" href="./">
       <img src="../images/icons/shotstand-64.webp" alt="Shotstand app icon">
       Shotstand
     </a>
     <div class="nav-links">
-      <a href="../shotstand/">Support</a>
-      <a href="../shotstand/privacy/">Privacy</a>
-      <a href="mailto:avclock@protonmail.com">Contact</a>
+      <a href="#try">Try it</a>
+      <a href="#features">Features</a>
+      <a href="#premium">Premium</a>
+      <a href="blog/">Blog</a>
+      <a href="#faq">FAQ</a>
+      <a href="support/">Support</a>
+      <a href="../">Not Yet</a>
     </div>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-icon">
+        <img src="../images/icons/shotstand-384.webp" alt="Shotstand app icon: a phone standing on a stand" width="168" height="168">
+      </div>
+      <p class="hero-official-name">Shotstand: App Image Maker</p>
+      <div>
+        <span class="sr-only">App Store screenshots for iPhone, iPad, Mac, and Apple Watch</span>
+        <div class="marquee" aria-hidden="true"><div class="marquee-track"><span class="label-caps">APP STORE SCREENSHOTS &middot; IPHONE &middot; IPAD &middot; MAC &middot; APPLE WATCH</span><span class="label-caps">APP STORE SCREENSHOTS &middot; IPHONE &middot; IPAD &middot; MAC &middot; APPLE WATCH</span><span class="label-caps">APP STORE SCREENSHOTS &middot; IPHONE &middot; IPAD &middot; MAC &middot; APPLE WATCH</span><span class="label-caps">APP STORE SCREENSHOTS &middot; IPHONE &middot; IPAD &middot; MAC &middot; APPLE WATCH</span><span class="label-caps">APP STORE SCREENSHOTS &middot; IPHONE &middot; IPAD &middot; MAC &middot; APPLE WATCH</span><span class="label-caps">APP STORE SCREENSHOTS &middot; IPHONE &middot; IPAD &middot; MAC &middot; APPLE WATCH</span></div></div>
+        <h1>Screenshots That Sell Your App</h1>
+        <p class="subhead">Your screenshots are the first thing people see on the App Store. Shotstand puts them in real device frames with headlines and a background, right on your iPhone, iPad, or Mac, and saves every size App Store Connect asks for. Try it right below.</p>
+        <div class="badge-row">
+          <span class="store-badge soon"><svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>Coming soon to the App Store</span>
+          <a class="store-badge secondary" href="#try">Try it in your browser</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- The live demo: js/shotstand-demo.js drawing with the app's own
+         engine (js/shotstand-engine.js). -->
+    <div class="ss-demo reveal" id="ss-demo" data-images="../images/shotstand/demo/">
+      <span id="try" style="position:absolute;top:-90px"></span>
+      <div class="ss-demo-bar">
+        <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
+        <span class="ss-demo-title">Shotstand engine, running in your browser</span>
+        <span class="ss-live">LIVE</span>
+      </div>
+      <div class="ss-stage">
+        <canvas class="ss-canvas" role="img" aria-label="A live preview of App Store screenshots"></canvas>
+        <span class="ss-hint">Drag a device to move it</span>
+      </div>
+      <div class="ss-controls">
+        <div class="ss-field"><span>Device</span>
+          <div class="ss-seg" role="group" aria-label="Device">
+            <button type="button" data-device="iphone" aria-pressed="true">iPhone</button>
+            <button type="button" data-device="ipad" aria-pressed="false">iPad</button>
+            <button type="button" data-device="mac" aria-pressed="false">Mac</button>
+            <button type="button" data-device="watch" aria-pressed="false">Watch</button>
+          </div>
+        </div>
+        <div class="ss-field"><span>Layout</span>
+          <div class="ss-seg" role="group" aria-label="Layout">
+            <button type="button" data-look="rising" aria-pressed="true">Rising</button>
+            <button type="button" data-look="turned" aria-pressed="false">Turned</button>
+            <button type="button" data-look="across" aria-pressed="false">Across</button>
+            <button type="button" data-look="pair" aria-pressed="false">Pair</button>
+          </div>
+        </div>
+        <div class="ss-field"><span>Background</span>
+          <div class="ss-swatches" role="group" aria-label="Background palette"></div>
+        </div>
+        <div class="ss-field"><span>Texture</span>
+          <label class="ss-check"><input type="checkbox" id="ss-grain"> Film grain</label>
+        </div>
+        <label class="ss-field wide"><span>Headline (put *stars* around a word to color it)</span>
+          <input class="ss-input" id="ss-head" maxlength="70" value="Screenshots that *sell* your app." autocomplete="off" spellcheck="false">
+        </label>
+      </div>
+      <noscript><p class="ss-demo-note">The live demo needs JavaScript. The screenshots below show the real thing.</p></noscript>
+    </div>
+    <p class="ss-demo-note">The same drawing engine as the app, with Shotstand's own screens as the screenshots. In the app you bring your own, and there's a lot more to adjust.</p>
+  </div>
+</header>
+
+<section id="previews">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">App previews</div>
+      <h2>Shotstand, made with Shotstand</h2>
+      <p>Its own App Store screenshots, framed by its own engine, on iPhone, iPad, and Mac. Tap any one for a closer look.</p>
+    </div>
+    <div class="preview-tabs" role="tablist" aria-label="Choose a device" hidden>
+      <button type="button" class="preview-tab" role="tab" id="preview-tab-iphone" data-device="iphone" aria-controls="previews-iphone" aria-selected="false">iPhone</button>
+      <button type="button" class="preview-tab" role="tab" id="preview-tab-ipad" data-device="ipad" aria-controls="previews-ipad" aria-selected="false">iPad</button>
+      <button type="button" class="preview-tab" role="tab" id="preview-tab-mac" data-device="mac" aria-controls="previews-mac" aria-selected="false">Mac</button>
+    </div>
+    <div class="preview-group" id="previews-iphone" data-device="iphone" role="tabpanel" aria-labelledby="preview-tab-iphone">
+      <h3 class="preview-group-title">iPhone</h3>
+      <button type="button" class="preview-nav prev" aria-label="Scroll back" hidden>&lsaquo;</button>
+      <div class="preview-strip">
+        <a class="preview-shot" href="../images/shotstand/previews/iphone/01-screenshots-that-sell.jpg"><img src="../images/shotstand/previews/iphone/01-screenshots-that-sell-sm.jpg" width="440" height="956" loading="lazy" decoding="async" alt="Screenshots that sell your app. Device frames, headlines, and backgrounds, made right on the device."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/iphone/02-drag-pinch-done.jpg"><img src="../images/shotstand/previews/iphone/02-drag-pinch-done-sm.jpg" width="440" height="956" loading="lazy" decoding="async" alt="Drag, pinch, done. Move, size, and turn anything; it snaps to the center and the edges."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/iphone/03-reframe-any-screenshot.jpg"><img src="../images/shotstand/previews/iphone/03-reframe-any-screenshot-sm.jpg" width="440" height="956" loading="lazy" decoding="async" alt="Reframe any screenshot. Double-tap a device and move the screenshot inside its frame."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/iphone/04-words-at-a-glance.jpg"><img src="../images/shotstand/previews/iphone/04-words-at-a-glance-sm.jpg" width="440" height="956" loading="lazy" decoding="async" alt="Words that read at a glance. Headlines with a colored word, in fonts built into your device."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/iphone/05-backgrounds-that-flow.jpg"><img src="../images/shotstand/previews/iphone/05-backgrounds-that-flow-sm.jpg" width="440" height="956" loading="lazy" decoding="async" alt="Backgrounds that flow. Ready-made palettes, your own gradient, or a photo across the whole set."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/iphone/06-see-it-like-the-app-store.jpg"><img src="../images/shotstand/previews/iphone/06-see-it-like-the-app-store-sm.jpg" width="440" height="956" loading="lazy" decoding="async" alt="See it like the App Store does. Preview shows the set the way people swipe through it."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/iphone/07-every-size-one-tap.jpg"><img src="../images/shotstand/previews/iphone/07-every-size-one-tap-sm.jpg" width="440" height="956" loading="lazy" decoding="async" alt="Every size, one tap. iPhone, iPad, and Mac at the exact sizes App Store Connect asks for."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/iphone/08-learn-it-in-a-minute.jpg"><img src="../images/shotstand/previews/iphone/08-learn-it-in-a-minute-sm.jpg" width="440" height="956" loading="lazy" decoding="async" alt="Learn it in a minute. A short tour points out every part of the editor."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/iphone/09-nothing-uploaded.jpg"><img src="../images/shotstand/previews/iphone/09-nothing-uploaded-sm.jpg" width="440" height="956" loading="lazy" decoding="async" alt="Nothing uploaded. No account, and your screenshots never leave your device."></a>
+      </div>
+      <button type="button" class="preview-nav next" aria-label="Scroll forward" hidden>&rsaquo;</button>
+    </div>
+    <div class="preview-group" id="previews-ipad" data-device="ipad" role="tabpanel" aria-labelledby="preview-tab-ipad">
+      <h3 class="preview-group-title">iPad</h3>
+      <button type="button" class="preview-nav prev" aria-label="Scroll back" hidden>&lsaquo;</button>
+      <div class="preview-strip">
+        <a class="preview-shot" href="../images/shotstand/previews/ipad/01-screenshots-that-sell.jpg"><img src="../images/shotstand/previews/ipad/01-screenshots-that-sell-sm.jpg" width="600" height="800" loading="lazy" decoding="async" alt="Screenshots that sell your app. Device frames, headlines, and backgrounds, made right on the device."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/ipad/02-drag-pinch-done.jpg"><img src="../images/shotstand/previews/ipad/02-drag-pinch-done-sm.jpg" width="600" height="800" loading="lazy" decoding="async" alt="Drag, pinch, done. Move, size, and turn anything; it snaps to the center and the edges."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/ipad/03-reframe-any-screenshot.jpg"><img src="../images/shotstand/previews/ipad/03-reframe-any-screenshot-sm.jpg" width="600" height="800" loading="lazy" decoding="async" alt="Reframe any screenshot. Double-tap a device and move the screenshot inside its frame."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/ipad/04-words-at-a-glance.jpg"><img src="../images/shotstand/previews/ipad/04-words-at-a-glance-sm.jpg" width="600" height="800" loading="lazy" decoding="async" alt="Words that read at a glance. Headlines with a colored word, in fonts built into your device."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/ipad/05-backgrounds-that-flow.jpg"><img src="../images/shotstand/previews/ipad/05-backgrounds-that-flow-sm.jpg" width="600" height="800" loading="lazy" decoding="async" alt="Backgrounds that flow. Ready-made palettes, your own gradient, or a photo across the whole set."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/ipad/06-see-it-like-the-app-store.jpg"><img src="../images/shotstand/previews/ipad/06-see-it-like-the-app-store-sm.jpg" width="600" height="800" loading="lazy" decoding="async" alt="See it like the App Store does. Preview shows the set the way people swipe through it."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/ipad/07-every-size-one-tap.jpg"><img src="../images/shotstand/previews/ipad/07-every-size-one-tap-sm.jpg" width="600" height="800" loading="lazy" decoding="async" alt="Every size, one tap. iPhone, iPad, and Mac at the exact sizes App Store Connect asks for."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/ipad/08-learn-it-in-a-minute.jpg"><img src="../images/shotstand/previews/ipad/08-learn-it-in-a-minute-sm.jpg" width="600" height="800" loading="lazy" decoding="async" alt="Learn it in a minute. A short tour points out every part of the editor."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/ipad/09-nothing-uploaded.jpg"><img src="../images/shotstand/previews/ipad/09-nothing-uploaded-sm.jpg" width="600" height="800" loading="lazy" decoding="async" alt="Nothing uploaded. No account, and your screenshots never leave your device."></a>
+      </div>
+      <button type="button" class="preview-nav next" aria-label="Scroll forward" hidden>&rsaquo;</button>
+    </div>
+    <div class="preview-group" id="previews-mac" data-device="mac" role="tabpanel" aria-labelledby="preview-tab-mac">
+      <h3 class="preview-group-title">Mac</h3>
+      <button type="button" class="preview-nav prev" aria-label="Scroll back" hidden>&lsaquo;</button>
+      <div class="preview-strip">
+        <a class="preview-shot" href="../images/shotstand/previews/mac/01-screenshots-that-sell.jpg"><img src="../images/shotstand/previews/mac/01-screenshots-that-sell-sm.jpg" width="960" height="600" loading="lazy" decoding="async" alt="Screenshots that sell your app. Device frames, headlines, and backgrounds, made right on the device."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/mac/02-drag-drop-done.jpg"><img src="../images/shotstand/previews/mac/02-drag-drop-done-sm.jpg" width="960" height="600" loading="lazy" decoding="async" alt="Drag, drop, done. Move, size, and turn anything; it snaps to the center and the edges."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/mac/03-reframe-any-screenshot.jpg"><img src="../images/shotstand/previews/mac/03-reframe-any-screenshot-sm.jpg" width="960" height="600" loading="lazy" decoding="async" alt="Reframe any screenshot. Double-tap a device and move the screenshot inside its frame."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/mac/04-words-at-a-glance.jpg"><img src="../images/shotstand/previews/mac/04-words-at-a-glance-sm.jpg" width="960" height="600" loading="lazy" decoding="async" alt="Words that read at a glance. Headlines with a colored word, in fonts built into your device."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/mac/05-backgrounds-that-flow.jpg"><img src="../images/shotstand/previews/mac/05-backgrounds-that-flow-sm.jpg" width="960" height="600" loading="lazy" decoding="async" alt="Backgrounds that flow. Ready-made palettes, your own gradient, or a photo across the whole set."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/mac/06-see-it-like-the-app-store.jpg"><img src="../images/shotstand/previews/mac/06-see-it-like-the-app-store-sm.jpg" width="960" height="600" loading="lazy" decoding="async" alt="See it like the App Store does. Preview shows the set the way people swipe through it."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/mac/07-every-size-one-click.jpg"><img src="../images/shotstand/previews/mac/07-every-size-one-click-sm.jpg" width="960" height="600" loading="lazy" decoding="async" alt="Every size, one click. iPhone, iPad, and Mac at the exact sizes App Store Connect asks for."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/mac/08-learn-it-in-a-minute.jpg"><img src="../images/shotstand/previews/mac/08-learn-it-in-a-minute-sm.jpg" width="960" height="600" loading="lazy" decoding="async" alt="Learn it in a minute. A short tour points out every part of the editor."></a>
+        <a class="preview-shot" href="../images/shotstand/previews/mac/09-nothing-uploaded.jpg"><img src="../images/shotstand/previews/mac/09-nothing-uploaded-sm.jpg" width="960" height="600" loading="lazy" decoding="async" alt="Nothing uploaded. No account, and your screenshots never leave your device."></a>
+      </div>
+      <button type="button" class="preview-nav next" aria-label="Scroll forward" hidden>&rsaquo;</button>
+    </div>
+    <p class="preview-foot">The story behind each one: <a href="blog/shotstand-slide-by-slide">Shotstand, slide by slide</a>.</p>
+  </div>
+</section>
+
+<dialog class="preview-lightbox" id="preview-lightbox" aria-label="Screenshot">
+  <figure>
+    <img src="" alt="">
+    <figcaption><span class="preview-lightbox-caption"></span><span class="preview-lightbox-count"></span></figcaption>
+    <div class="preview-lightbox-bar">
+      <button type="button" class="preview-lightbox-prev">Previous</button>
+      <button type="button" class="preview-lightbox-close">Close</button>
+      <button type="button" class="preview-lightbox-next">Next</button>
+    </div>
+  </figure>
+</dialog>
+
+<section id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">How it works</div>
+      <h2>From plain screenshots to a finished set</h2>
+      <p>A few minutes, start to finish, on the device you already have in your hand.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step"><div class="step-num">1</div><h3>Pick a layout</h3><p>Rising, floating, turned, or one device across two slides. Change it any time.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Drop in your screenshots</h3><p>Add several at once and each fills the next slide, in a real iPhone, iPad, Mac, or Apple Watch frame.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Say what it does</h3><p>A short headline on each slide, a word in color, a background that runs across the set.</p></div>
+      <div class="step"><div class="step-num">4</div><h3>Save every size</h3><p>The exact pixel sizes App Store Connect asks for, ready to drag into your listing.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Free</div>
+      <h2>Everything you need for a great set, free</h2>
+      <p>No account, no watermark, no limit on how many sets you make. All of this works without paying anything.</p>
+    </div>
+    <div class="feature-cards reveal">
+      <div class="feature-card"><div class="ss-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="4" y="3" width="7" height="18" rx="2"/><rect x="13" y="3" width="7" height="11" rx="2"/></svg></div><h3>Eleven layouts</h3><p>Rising, floating, turned, a pair, one device across two slides, a title card, full screen, or blank.</p></div>
+      <div class="feature-card"><div class="ss-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M9 6l3-3 3 3M9 18l3 3 3-3M6 9l-3 3 3 3M18 9l3 3-3 3"/></svg></div><h3>Move anything</h3><p>Drag, size, and turn devices, text, and images. Pink lines show when something snaps to the center or a slide edge.</p></div>
+      <div class="feature-card"><div class="ss-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M9 8h6M9 12h4"/></svg></div><h3>Reframe inside the device</h3><p>Double-tap a device and slide or zoom the screenshot to show the part that matters.</p></div>
+      <div class="feature-card"><div class="ss-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 6V4h14v2M12 4v16M9 20h6"/></svg></div><h3>Headlines that read</h3><p>A headline and a detail line on every slide. Put *stars* around a word to color it, and long headlines shrink to fit.</p></div>
+      <div class="feature-card"><div class="ss-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg></div><h3>Backgrounds that flow</h3><p>Sixteen palettes, your own gradient or color, soft noise or grain, and one background across the whole set.</p></div>
+      <div class="feature-card"><div class="ss-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="2" y="6" width="13" height="9" rx="1.5"/><rect x="16" y="4" width="6" height="12" rx="1.5"/><path d="M6 19h5"/></svg></div><h3>Every size Apple asks for</h3><p>iPhone 6.9" and 6.5", iPad 13", Mac, and Apple Watch, at the exact pixel sizes App Store Connect takes.</p></div>
+      <div class="feature-card"><div class="ss-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4 10-10"/></svg></div><h3>Checked before you upload</h3><p>Text off the edge, a headline too long for search results, or a screenshot that will look soft. You see it before Apple does.</p></div>
+      <div class="feature-card"><div class="ss-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="3"/><path d="M8 6.5h2.5M14 6.5h2"/></svg></div><h3>Clean status bar</h3><p>Cover a messy status bar with a tidy 9:41, full signal, and a full battery, on the screenshot's own color.</p></div>
+      <div class="feature-card"><div class="ss-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 0 1 6 0v3H9Z"/></svg></div><h3>Private by design</h3><p>No account, no tracking, no ads. Shotstand works offline and your screenshots never leave your device.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="sizes">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Sizes</div>
+      <h2>The exact sizes App Store Connect asks for</h2>
+      <p>Drawn to scale. Switch sizes and your words and screenshots come along, with each layout refitted for the new device.</p>
+    </div>
+    <div class="ss-sizes reveal">
+      <div class="ss-size"><div class="ss-size-box" style="width:69px;height:150px"></div><span><strong>iPhone 6.9"</strong><small>1320 × 2868</small></span></div>
+      <div class="ss-size"><div class="ss-size-box" style="width:108px;height:144px"></div><span><strong>iPad 13"</strong><small>2064 × 2752</small></span></div>
+      <div class="ss-size"><div class="ss-size-box" style="width:151px;height:94px"></div><span><strong>Mac</strong><small>2880 × 1800</small></span></div>
+      <div class="ss-size"><div class="ss-size-box" style="width:59px;height:72px"></div><span><strong>Apple Watch</strong><small>422 × 514</small></span></div>
+      <div class="ss-size"><div class="ss-size-box" style="width:67px;height:145px"></div><span><strong>iPhone 6.5"</strong><small>1284 × 2778</small></span></div>
+    </div>
+    <p class="preview-foot">Which ones you actually need, and why: <a href="blog/app-store-screenshot-sizes">Every App Store screenshot size, explained</a>.</p>
+  </div>
+</section>
+
+<section id="premium">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Shotstand Premium</div>
+      <h2>One payment, no subscription</h2>
+      <p>Shotstand is free. Premium is a single in-app purchase for people shipping to several devices or languages, and it covers your iPhone, iPad, and Mac with the same Apple Account.</p>
+    </div>
+    <div class="ss-plans reveal">
+      <div class="ss-plan">
+        <h3>Free</h3>
+        <div class="ss-price"><b>$0</b><span>forever</span></div>
+        <ul class="ss-list">
+          <li>Every layout, device frame, font, and color</li>
+          <li>Moving, sizing, turning, and reframing</li>
+          <li>Sixteen palettes, gradients, noise, and grain</li>
+          <li>Clean status bar and checks before you upload</li>
+          <li>Save every slide as JPEG or PNG, at any size you pick</li>
+        </ul>
+      </div>
+      <div class="ss-plan premium">
+        <span class="pill">ONE TIME</span>
+        <h3>Premium</h3>
+        <div class="ss-price"><b>$0.99</b><span>once, on all your devices</span></div>
+        <ul class="ss-list">
+          <li>Save every size at once: iPhone, iPad, and Mac</li>
+          <li>More languages, each with its own words and screenshots</li>
+          <li>Templates for your next app's set</li>
+          <li>Photo backgrounds</li>
+          <li>The whole set as one wide image</li>
+          <li>Apple Watch sizes, frames, and a ready-made watch set</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="made-with">
+  <div class="container">
+    <div class="ss-made">
+      <div class="reveal">
+        <div class="section-eyebrow">Made with Shotstand</div>
+        <h2 style="font-size:clamp(26px,3.6vw,36px)">Built for a real launch first</h2>
+        <p>Shotstand started as the tool behind <a href="../">Not Yet: Checkout Blocker</a>'s App Store listing: 15 screenshots each for iPhone, iPad, and Mac, from the same set. Every one of them came out of the engine you just played with.</p>
+        <p><a href="blog/making-not-yets-screenshots">How Not Yet's App Store screenshots were made</a></p>
+      </div>
+      <div class="ss-made-strip reveal" aria-hidden="true">
+        <img src="../images/previews/iphone/01-pause-before-you-pay-sm.jpg" alt="" width="440" height="956" loading="lazy" decoding="async">
+        <img src="../images/previews/iphone/02-somewhere-calmer-to-go-sm.jpg" alt="" width="440" height="956" loading="lazy" decoding="async">
+        <img src="../images/previews/iphone/08-your-week-at-a-glance-sm.jpg" alt="" width="440" height="956" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="container">
-    <article class="legal">
-      <h1>Shotstand support</h1>
-
-      <div class="lede">
-        <p>Shotstand makes App Store screenshot sets on your iPhone, iPad, or Mac: your screenshots in device frames, with headlines and backgrounds, saved at the exact sizes App Store Connect asks for. Here's how to get around, and what to do if something isn't working.</p>
+    <div class="section-head reveal">
+      <h2>Also by the same developer</h2>
+    </div>
+    <div class="app-promo-card reveal">
+      <img src="../images/icons/notyet-192.webp" alt="Not Yet app icon" width="88" height="88" loading="lazy" decoding="async">
+      <div>
+        <div class="label-caps">SAFARI &middot; CHROME &middot; IPHONE, IPAD &amp; MAC</div>
+        <h3>Not Yet: Checkout Blocker</h3>
+        <p>A pause right before you buy. Not Yet holds checkout and payment pages until you retype a fresh code, so impulse buys get a real moment of thought.</p>
+        <div class="badge-row">
+          <a class="store-badge secondary" href="../">Go to the Not Yet site</a>
+        </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <h2>Getting started</h2>
-      <p>The first time you open Shotstand, a short tour points out each part of the editor. Tap anywhere to move to the next tip. To see it again, tap the gear at the top center, then <strong>Show the tour again</strong>.</p>
-      <p>The app opens with an example set. To use your own screenshots, tap a device, then <strong>Choose screenshot</strong>, or tap <strong>+ Image</strong> and pick several at once: each fills the next screen. On a Mac or iPad you can also drag images in from Finder or Files.</p>
+<section id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item"><summary>Is Shotstand free?</summary><p>Yes. Making a full set and saving it at any size is free, with no account, no watermark, and no limit. Shotstand Premium is an optional one-time purchase of $0.99 that adds saving every size at once, more languages, templates, photo backgrounds, the wide image, and Apple Watch.</p></details>
+      <details class="faq-item"><summary>Which devices does it run on?</summary><p>iPhone, iPad, and Mac. It's one app on all three, so Premium bought on one is yours on the others with the same Apple Account (tap Restore purchase if it doesn't show right away).</p></details>
+      <details class="faq-item"><summary>Which screenshot sizes does it make?</summary><p>iPhone 6.9" (1320 × 2868) and 6.5", iPad 13" (2064 × 2752), Mac (2880 × 1800 and 1440 × 900), and Apple Watch (422 × 514, 416 × 496, and 396 × 484). Those are the sizes App Store Connect scales down for every smaller device.</p></details>
+      <details class="faq-item"><summary>Do my screenshots get uploaded anywhere?</summary><p>No. Shotstand has no account and makes no network requests. Your screenshots and projects stay on your device. See the <a href="privacy/">Privacy Policy</a>.</p></details>
+      <details class="faq-item"><summary>Can I use it for an app that isn't mine?</summary><p>Yes, as long as you have the right to use the screenshots you put in it. Agencies and freelancers can make sets for clients the same way.</p></details>
+      <details class="faq-item"><summary>Is it affiliated with Apple?</summary><p>No. Shotstand is an independent app. The device frames are drawn by the app itself, not copied from Apple's artwork.</p></details>
+      <details class="faq-item"><summary>Something isn't working. Where do I get help?</summary><p>The <a href="support/">Support page</a> covers the common questions, and there's a Submit feedback button in the app's Settings, under Help. Or email <a href="mailto:avclock@protonmail.com?subject=Shotstand">avclock@protonmail.com</a>.</p></details>
+    </div>
+  </div>
+</section>
 
-      <h2>Moving things around</h2>
-      <ul>
-        <li><strong>Move:</strong> drag anything on the canvas. It snaps to the center and to the edges between screens, shown with pink lines. Hold Option while dragging on a Mac to move freely.</li>
-        <li><strong>Size and turn:</strong> pull the corner handle to resize; pull the round handle above a device to turn it.</li>
-        <li><strong>Reframe a screenshot:</strong> double-tap (double-click on a Mac) a device, then drag the screenshot to show the part that matters. Pinch, or scroll on a Mac, to zoom. It snaps to the center and to the screen's edges, and its zoom settles on 100%.</li>
-        <li><strong>Text:</strong> double-tap a headline to type. Put stars around a word, like *this*, to color it.</li>
-        <li><strong>More room on iPad and Mac:</strong> tap the left edge of the settings panel to hide it and work on the whole canvas. Tap the edge again to bring it back.</li>
-      </ul>
-      <p>Snapping, tap feedback, light or dark appearance, and the file type you save are all in Settings (the gear at the top center).</p>
-
-      <h2>Saving your screenshots</h2>
-      <p>Tap <strong>Export</strong>. <strong>Save all</strong> saves every screen at the size picked at the top. <strong>Save every size</strong> saves the set for iPhone 6.9", iPad 13", and Mac at once, each refitted for its device, without changing the set you're working on.</p>
-      <p><strong>On iPhone and iPad</strong> the share sheet opens: choose Save Images for Photos, AirDrop, or Save to Files. <strong>On a Mac</strong>, pick a folder and the files are saved there. File &gt; Save Screenshots (Cmd+E) and Save Every Size (Shift+Cmd+E) do the same.</p>
-      <p>Before you save, the Export panel checks the set: text running off the edge, a headline too long to read in search results, a screenshot shown bigger than its real size (it would look soft), or more than the 10 screenshots per size App Store Connect allows.</p>
-
-      <h2>"Save Images" isn't in the share sheet, or Photos says no</h2>
-      <p>Shotstand asks for permission only to add images to Photos, never to read them. If you declined it once, iOS won't ask again: open Settings, then Apps, then Shotstand, then Photos, and choose <strong>Add Photos Only</strong>. Or choose Save to Files instead.</p>
-
-      <h2>My set is gone</h2>
-      <p>Your set saves on the device as you work, and comes back when you reopen the app. It's stored only inside Shotstand, so deleting the app deletes it too, and it doesn't move between devices. Save your screenshots before deleting the app or changing phones.</p>
-
-      <h2>Which sizes does the App Store need?</h2>
-      <p>For iPhone, the 6.9" size (1320 × 2868) is the one App Store Connect requires; it scales it down for smaller phones. Add iPad 13" (2064 × 2752) if your app runs on iPad, and Mac (2880 × 1800) for a Mac app. Shotstand also offers iPhone 6.5" and a smaller Mac size if you need them. You can upload up to 10 screenshots per size.</p>
-
-      <h2>Purchases and refunds</h2>
-      <p>Shotstand is a one-time purchase on the App Store with no subscription and no in-app purchases. One purchase covers iPhone, iPad, and Mac with the same Apple ID. Refunds are handled by Apple through <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.</p>
-
-      <h2>Your data</h2>
-      <p>Shotstand has no account and doesn't connect to the internet. Your screenshots and projects stay on your device. Details are in the <a href="privacy/">Privacy Policy</a>.</p>
-
-      <div class="contact">
-        <h2 style="margin-top:0;">Still stuck?</h2>
-        <p>Email us and we'll help:<br><strong><a href="mailto:avclock@protonmail.com?subject=Shotstand">avclock@protonmail.com</a></strong></p>
-        <p>It helps to include your device and its iOS, iPadOS, or macOS version, and what you were doing when it went wrong. A screenshot of the problem is the fastest way to explain it.</p>
-      </div>
-    </article>
+<section style="padding-bottom:64px;">
+  <div class="container" style="text-align:center;">
+    <h2>Get Shotstand</h2>
+    <p style="max-width:50ch;margin-left:auto;margin-right:auto;">Free on iPhone, iPad, and Mac, with a one-time Premium upgrade. Coming soon to the App Store.</p>
+    <div class="badge-row" style="justify-content:center;">
+      <span class="store-badge soon"><svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>Coming soon to the App Store</span>
+      <a class="store-badge secondary" href="press/">Press release</a>
+    </div>
   </div>
 </section>
 
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <a class="brand" href="../shotstand/">
+      <a class="brand" href="./">
         <img src="../images/icons/shotstand-64.webp" alt="Shotstand app icon">
         Shotstand
       </a>
       <div class="footer-links">
-        <a href="../shotstand/">Support</a>
-        <a href="../shotstand/privacy/">Privacy Policy</a>
-        <a href="mailto:avclock@protonmail.com">Contact</a>
-        <a href="../">Also by us: Not Yet</a>
+        <a href="blog/">Blog</a>
+        <a href="support/">Support</a>
+        <a href="privacy/">Privacy Policy</a>
+        <a href="terms/">Terms of Use</a>
+        <a href="press/">Press</a>
+        <a href="mailto:avclock@protonmail.com?subject=Shotstand">Contact</a>
       </div>
     </div>
+    <div class="more-apps">
+      <div class="more-apps-label">More apps from the same developer</div>
+      <div class="more-apps-row">
+        <a class="more-app" href="../"><img src="../images/icons/notyet-96.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><strong>Not Yet</strong><small>Checkout blocker</small></span></a>
+        <a class="more-app" href="https://avclockapp.com/" target="_blank" rel="noopener"><img src="../images/icons/avclock-96.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><strong>AvClock</strong><small>Airport world clock</small></span></a>
+        <a class="more-app" href="https://avclockapp.com/avgrav" target="_blank" rel="noopener"><img src="../images/icons/avgrav-96.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><strong>AvGrav</strong><small>API fuel gravity</small></span></a>
+      </div>
+    </div>
+    <p class="footer-note">Shotstand isn't affiliated with or endorsed by Apple. App Store, iPhone, iPad, Mac, and Apple Watch are trademarks of Apple Inc.</p>
   </div>
 </footer>
-
 <script src="../js/nav.js" defer></script>
 <script src="../js/track.js" defer></script>
+<script src="../js/shotstand-engine.js" defer></script>
+<script src="../js/shotstand-demo.js" defer></script>
+<script src="../js/previews.js" defer></script>
+<script src="../js/reveal.js" defer></script>
 </body>
 </html>

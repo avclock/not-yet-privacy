@@ -1022,3 +1022,11 @@ p a:not([class]), li a:not([class]) { text-decoration: underline; text-underline
 .mock-wallet-btn[data-demo-wallet="Google Pay"] { background: #fff; color: #3c4043; border-color: #dadce0; }
 .mock-wallet-btn[data-demo-wallet="PayPal"] { background: #FFC439; color: #003087; border-color: #FFC439; font-style: italic; font-weight: 800; }
 .mock-wallet-btn[data-demo-wallet="Klarna"] { background: #FFB3C7; color: #17120F; border-color: #FFB3C7; font-weight: 800; }
+
+/* ============ Also by the same developer (Not Yet home, Shotstand) ============ */
+.app-promo-card { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center; background: var(--panel-2); border: 1px solid var(--hairline); border-radius: var(--radius); padding: 28px; }
+.app-promo-card img { width: 88px; height: 88px; border-radius: 20px; box-shadow: 0 14px 40px -14px rgba(46, 44, 40, 0.45), 0 0 0 1px var(--hairline-strong); }
+.app-promo-card h3 { font-size: 22px; margin-bottom: 6px; }
+.app-promo-card .label-caps { margin-bottom: 8px; }
+.app-promo-card .badge-row { justify-content: flex-start; margin-top: 4px; }
+@media (max-width: 600px) { .app-promo-card { grid-template-columns: 1fr; text-align: left; } }
