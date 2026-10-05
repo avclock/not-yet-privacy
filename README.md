@@ -18,8 +18,26 @@ blog/not-yet-screen-by-screen.html          Post (live): a tour using the App St
 privacy/index.html                Privacy Policy
 terms/index.html                  Terms of Use
 support/index.html                Support / FAQ
-shotstand/index.html              Shotstand (separate app): support page
+shotstand/index.html              Shotstand (separate app): its own product page, paired with Not Yet the
+                                  way avclock-website pairs AvClock with AvGrav. Live demo in the hero.
+shotstand/support/index.html      Shotstand: support (the App Store listing's Support URL)
 shotstand/privacy/index.html      Shotstand: privacy policy
+shotstand/terms/index.html        Shotstand: terms of use
+shotstand/press/index.html        Shotstand: press release + press kit
+shotstand/blog/                   Shotstand blog: index, a slide-by-slide tour, screenshot sizes, screenshot
+                                  tips, and "How Not Yet's App Store screenshots were made" (also listed on
+                                  Not Yet's own blog)
+css/shotstand.css                 Shotstand pages only, after style.css: its indigo accent, the demo, sizes,
+                                  plans. .app-promo-card lives in style.css (Not Yet's home uses it too).
+js/shotstand-engine.js            Shotstand's drawing engine, copied unchanged from the app repo
+                                  (Shotstand/web/editor-core.js). Copy it again when the app's drawing changes.
+js/shotstand-demo.js              The live demo: device, layout, palette, grain, headline, drag a device
+images/shotstand/previews/        Shotstand's App Store screenshots, web-sized (NN-name.jpg + -sm.jpg), from the
+                                  app repo's Shotstand/app-store-screenshots/
+images/shotstand/demo/            The demo's screenshots: Shotstand's own raw editor captures
+                                  (Shotstand/screenshots/out/raw) plus the app's example watch screens
+images/shotstand/shotstand-icon-1024.png   Press kit icon
+images/og-shotstand.jpg           1200x630 share image for the Shotstand pages
 images/shotstand-icon.png         Shotstand's app icon
 press/index.html                  Press release + media contact -- fill in the [CITY], [STATE] placeholder in the dateline before publishing
 css/style.css                     Shared styles (the "Calm" palette)

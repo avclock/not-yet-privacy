@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Every App Store Screenshot Size, Explained: Shotstand</title>
+<meta name="description" content="Which sizes App Store Connect actually needs for iPhone, iPad, Mac, and Apple Watch, and which you can skip.">
+<link rel="canonical" href="https://notyetcb.com/shotstand/blog/app-store-screenshot-sizes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Every App Store Screenshot Size, Explained">
+<meta property="og:description" content="Which sizes App Store Connect actually needs for iPhone, iPad, Mac, and Apple Watch, and which you can skip.">
+<meta property="og:image" content="https://notyetcb.com/images/og-shotstand.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://notyetcb.com/images/og-shotstand.jpg">
+<link rel="icon" type="image/png" href="../../images/shotstand-icon.png">
+<link rel="apple-touch-icon" href="../../images/shotstand-icon.png">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/shotstand.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Every App Store Screenshot Size, Explained",
+  "description": "Which sizes App Store Connect actually needs for iPhone, iPad, Mac, and Apple Watch, and which you can skip.",
+  "datePublished": "2026-10-05",
+  "image": [
+    "https://notyetcb.com/images/og-shotstand.jpg"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Shotstand",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://notyetcb.com/images/shotstand-icon.png",
+      "width": 256,
+      "height": 256
+    }
+  },
+  "mainEntityOfPage": "https://notyetcb.com/shotstand/blog/app-store-screenshot-sizes"
+}
+</script>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand" href="../">
+      <img src="../../images/icons/shotstand-64.webp" alt="Shotstand app icon">
+      Shotstand
+    </a>
+    <div class="nav-links">
+      <a href="../#try">Try it</a>
+      <a href="../#features">Features</a>
+      <a href="../#premium">Premium</a>
+      <a href="../blog/" aria-current="page">Blog</a>
+      <a href="../#faq">FAQ</a>
+      <a href="../support/">Support</a>
+      <a href="../../">Not Yet</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section>
+  <div class="container">
+    <article class="post">
+      <p><a href="./">&larr; Back to the Shotstand blog</a></p>
+      <div class="label-caps" style="margin-bottom:14px;">SIZES &middot; 2026</div>
+      <h1>Every App Store Screenshot Size, Explained</h1>
+      <div class="post-meta">4 min read &middot; October 5, 2026 <button class="share-btn" data-track="share">Share</button></div>
+
+      <p>App Store Connect lists a lot of screenshot sizes, and it isn't obvious which ones you actually have to make. The good news: for most apps it's one set per kind of device, because Apple scales the largest size down for everything smaller. Here's the whole list, and what to do with it.</p>
+
+      <div class="callout"><p><strong>The short answer:</strong> make iPhone 6.9" (1320 &times; 2868). Add iPad 13" (2064 &times; 2752) if your app runs on iPad, Mac (2880 &times; 1800) if it runs on the Mac, and one Apple Watch size if it has a watch app. Up to 10 screenshots per size, JPEG or PNG.</p></div>
+
+      <h2>iPhone</h2>
+      <p>The 6.9" display size is the one to make. App Store Connect uses it for every smaller iPhone, so one set covers them all. Accepted portrait sizes are 1320 &times; 2868, 1290 &times; 2796, and 1260 &times; 2736, with the same sizes turned sideways for landscape. The 6.5" size (1284 &times; 2778 or 1242 &times; 2688) is the older alternative; you only need it if you're not providing 6.9".</p>
+
+      <h2>iPad</h2>
+      <p>If your app runs on iPad, App Store Connect needs the 13" display size: 2064 &times; 2752 (or 2048 &times; 2732), portrait or landscape. As with iPhone, it scales this set down for every smaller iPad. An iPhone-only app doesn't need iPad screenshots at all.</p>
+
+      <h2>Mac</h2>
+      <p>Mac screenshots are 16:10, at one of four sizes: 1280 &times; 800, 1440 &times; 900, 2560 &times; 1600, or 2880 &times; 1800. Make the largest; there's no reason to send a smaller one. A Mac Catalyst or iPad app that also runs on the Mac uses these too.</p>
+
+      <h2>Apple Watch</h2>
+      <p>Watch apps need watch screenshots, and these are the one place where the sizes are tiny: 422 &times; 514 for the largest Ultra, then 410 &times; 502, 416 &times; 496, 396 &times; 484, 368 &times; 448, and 312 &times; 390 for older models. Upload one size and App Store Connect uses it for every watch. At this size, keep any words to two or three short lines.</p>
+
+      <h2>Rules that apply to every size</h2>
+      <ul>
+        <li><strong>Up to 10 per size.</strong> The first three matter most: they're the ones people see in search results.</li>
+        <li><strong>JPEG or PNG,</strong> in RGB, with no transparency.</li>
+        <li><strong>Exact pixels.</strong> A screenshot even one pixel off is rejected when you upload it, so export at the size itself rather than resizing later.</li>
+        <li><strong>Each localization can have its own set.</strong> If your listing is in several languages, each can show its own words and screenshots.</li>
+      </ul>
+      <p>Apple's own <a href="https://developer.apple.com/help/app-store-connect/reference/screenshot-specifications" target="_blank" rel="noopener">screenshot specifications</a> page has the complete, current list, including App Previews (videos), which have their own sizes.</p>
+
+      <h2>How Shotstand handles it</h2>
+      <p>Pick the size at the top of the editor: iPhone 6.9" or 6.5", iPad 13", Mac at 2880 &times; 1800 or 1440 &times; 900, or an Apple Watch size. Everything is saved at exactly that size. Switch sizes and your words and screenshots carry over, with every layout refitted for the new device, so making the iPad set after the iPhone one takes seconds. With Premium, Save every size does iPhone, iPad, and Mac in one go.</p>
+      <figure class="post-figure pair"><img src="../../images/shotstand/previews/ipad/07-every-size-one-tap-sm.jpg" width="600" height="800" loading="lazy" decoding="async" alt="Every size, one tap. iPhone, iPad, and Mac at the exact sizes App Store Connect asks for."><img src="../../images/shotstand/previews/ipad/01-screenshots-that-sell-sm.jpg" width="600" height="800" loading="lazy" decoding="async" alt="Screenshots that sell your app. Device frames, headlines, and backgrounds, made right on the device."></figure>
+
+      <div class="more-posts">
+        <div class="label-caps">More from the Shotstand blog</div>
+<div class="blog-board">
+  <a class="blog-row" href="../blog/shotstand-slide-by-slide">
+    <span class="tag">Tour</span>
+    <span class="row-main">
+      <span class="row-title">Shotstand, Slide by Slide</span>
+      <span class="row-excerpt">Its own nine App Store screenshots, one at a time, and what each part of the editor does.</span>
+    </span>
+    <span class="row-status live">LIVE</span>
+  </a>
+  <a class="blog-row" href="../blog/app-store-screenshot-tips">
+    <span class="tag">Tips</span>
+    <span class="row-main">
+      <span class="row-title">8 App Store Screenshot Tips That Help People Tap Get</span>
+      <span class="row-excerpt">Most people never read your description. Here's how to make the first three screenshots do the work.</span>
+    </span>
+    <span class="row-status live">LIVE</span>
+  </a>
+        <a class="blog-row" href="./">
+          <span class="tag">All</span>
+          <span class="row-main"><span class="row-title">See every post</span><span class="row-excerpt">Back to the Shotstand blog.</span></span>
+          <span class="row-status live">&rarr;</span>
+        </a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <a class="brand" href="../">
+        <img src="../../images/icons/shotstand-64.webp" alt="Shotstand app icon">
+        Shotstand
+      </a>
+      <div class="footer-links">
+        <a href="../blog/">Blog</a>
+        <a href="../support/">Support</a>
+        <a href="../privacy/">Privacy Policy</a>
+        <a href="../terms/">Terms of Use</a>
+        <a href="../press/">Press</a>
+        <a href="mailto:avclock@protonmail.com?subject=Shotstand">Contact</a>
+      </div>
+    </div>
+    <div class="more-apps">
+      <div class="more-apps-label">More apps from the same developer</div>
+      <div class="more-apps-row">
+        <a class="more-app" href="../../"><img src="../../images/icons/notyet-96.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><strong>Not Yet</strong><small>Checkout blocker</small></span></a>
+        <a class="more-app" href="https://avclockapp.com/" target="_blank" rel="noopener"><img src="../../images/icons/avclock-96.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><strong>AvClock</strong><small>Airport world clock</small></span></a>
+        <a class="more-app" href="https://avclockapp.com/avgrav" target="_blank" rel="noopener"><img src="../../images/icons/avgrav-96.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><strong>AvGrav</strong><small>API fuel gravity</small></span></a>
+      </div>
+    </div>
+    <p class="footer-note">Shotstand isn't affiliated with or endorsed by Apple. App Store, iPhone, iPad, Mac, and Apple Watch are trademarks of Apple Inc.</p>
+  </div>
+</footer>
+<script src="../../js/nav.js" defer></script>
+<script src="../../js/track.js" defer></script>
+</body>
+</html>
