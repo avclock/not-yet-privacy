@@ -31,7 +31,6 @@
 .marquee-track { display: flex; width: max-content; gap: 3em; animation: ss-marquee 38s linear infinite; }
 .marquee-track .label-caps { margin: 0; white-space: nowrap; }
 @keyframes ss-marquee { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
-@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
 
 /* ============ Hero: the live demo ============ */
 .ss-demo { position: relative; width: 100%; max-width: 980px; margin: 44px auto 0; background: var(--panel-2); border: 1px solid var(--hairline-strong); border-radius: var(--radius); box-shadow: 0 40px 90px -50px rgba(45, 58, 124, 0.55); overflow: hidden; text-align: left; }

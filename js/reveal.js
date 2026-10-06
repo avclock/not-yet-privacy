@@ -1,10 +1,9 @@
-// Gentle fade-and-rise as sections scroll into view. Content is
-// visible without JavaScript and for anyone with reduced motion on:
-// the hidden starting state only applies once this script has added
-// the "reveal-ready" class to <html>.
+// Gentle fade-and-rise as sections scroll into view, whatever the
+// device's Reduce Motion setting says. Content is visible without
+// JavaScript: the hidden starting state only applies once this script
+// has added the "reveal-ready" class to <html>.
 (function () {
   if (!("IntersectionObserver" in window)) return;
-  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   var els = document.querySelectorAll(".reveal");
   if (!els.length) return;
   document.documentElement.classList.add("reveal-ready");
