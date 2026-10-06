@@ -37,10 +37,6 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
-}
 
 body {
   margin: 0;
@@ -277,9 +273,6 @@ img.mock-toggle-icon { border-radius: 5px; filter: grayscale(1) opacity(0.6); tr
   animation: nySheen 0.9s ease-out 0.1s forwards;
 }
 @keyframes nySheen { to { transform: translateX(100%); } }
-@media (prefers-reduced-motion: reduce) {
-  .hint-pulse::after, .mock-demo-blocked .mock-store-page::after { animation: none !important; display: none; }
-}
 
 .mock-store-page { padding: 20px; }
 .mock-store-name { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 14px; }
@@ -899,9 +892,8 @@ article.post .post-tag { font-family: var(--mono); font-size: 11px; font-weight:
 
 /* ============================================================
    2026-10 overhaul: comparison cards, Premium by browser, the recap
-   count-up, scroll reveal, and the More apps strip. Motion is off
-   under prefers-reduced-motion (global rule above, and the scripts
-   check it too).
+   count-up, scroll reveal, and the More apps strip. Motion plays
+   whatever the device's Reduce Motion setting says (2026-10-06).
    ============================================================ */
 
 /* Scroll reveal (reveal.js opts the page in) */

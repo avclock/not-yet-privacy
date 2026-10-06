@@ -42,22 +42,8 @@ function initRopeFrame() {
     maskPath.setAttribute("d", d);
   }
 
-  function prefersReducedMotion() {
-    return typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
-  }
-
-  function showStatic() {
-    maskPath.getAnimations().forEach(function (a) { a.cancel(); });
-    maskPath.style.strokeDasharray = "100 0";
-    maskPath.style.strokeDashoffset = "-50";
-  }
-
   function playDraw() {
     maskPath.getAnimations().forEach(function (a) { a.cancel(); });
-    if (prefersReducedMotion()) {
-      showStatic();
-      return;
-    }
     maskPath.animate(
       [
         { strokeDasharray: "0 100", strokeDashoffset: "0" },

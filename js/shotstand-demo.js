@@ -12,7 +12,6 @@
   var hint = root.querySelector(".ss-hint");
   var input = root.querySelector("#ss-head");
   var IMG = root.getAttribute("data-images") || "";
-  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var SETS = {
     iphone: { target: "iphone-69", n: 3, label: "iPhone", shots: ["phone-edit", "phone-bg", "phone-export", "phone-device"] },
@@ -105,7 +104,6 @@
   // Devices rise into place, one after another.
   function rise() {
     cancelAnimationFrame(raf);
-    if (reduce) { draw(); return; }
     var devs = project.items.filter(function (d) { return d.type === "device"; });
     var to = devs.map(function (d) { return d.cy; });
     var t0 = performance.now(), dur = 720, step = 90;
@@ -127,7 +125,6 @@
     project.bg.palette = id; project.style.accent = pal.accent;
     describe(); syncButtons();
     cancelAnimationFrame(raf);
-    if (reduce) { project.bg.colors = pal.colors.slice(); draw(); return; }
     var t0 = performance.now(), dur = 520;
     (function frame(now) {
       var p = ease(clamp01((now - t0) / dur));
@@ -213,7 +210,7 @@
 
   // Now and then, a new palette, until the visitor takes over.
   setInterval(function () {
-    if (touched || !visible || reduce || drag || document.hidden) return;
+    if (touched || !visible || drag || document.hidden) return;
     var i = DEMO_PALETTES.indexOf(state.palette);
     blendTo(DEMO_PALETTES[(i + 1) % DEMO_PALETTES.length]);
   }, 4200);

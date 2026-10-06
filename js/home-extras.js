@@ -6,11 +6,10 @@
 //   - The recap mock counts up and its bars grow when scrolled to.
 // Nothing here is required to read the page: without JavaScript the
 // comparison cards show their text and the recap shows its numbers.
-// All motion is skipped under prefers-reduced-motion.
+// Motion plays whatever the device's Reduce Motion setting says.
 // ============================================================
 (function () {
   "use strict";
-  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var track = window.nyTrack || function () {};
   var used = false;
   function trackOnce() { if (!used) { used = true; track("demo", "compare"); } }
@@ -31,7 +30,6 @@
       clearInterval(timer);
       left = total;
       render();
-      if (reduceMotion) return;
       timer = setInterval(function () {
         left -= 1;
         render();
@@ -99,7 +97,7 @@
   // ---- Recap mock: count up and grow when scrolled to -------------
   (function recap() {
     var mock = document.querySelector(".mock-recap");
-    if (!mock || reduceMotion || !("IntersectionObserver" in window)) return;
+    if (!mock || !("IntersectionObserver" in window)) return;
     var nums = mock.querySelectorAll(".num[data-count]");
     mock.classList.add("recap-armed");
     var io = new IntersectionObserver(function (entries) {
