@@ -1,5 +1,5 @@
 // Shotstand's drawing engine, copied unchanged from the app:
-// not-yet-checkout-blocker/Shotstand/web/editor-core.js (2026-10-05).
+// not-yet-checkout-blocker/Shotstand/web/editor-core.js (2026-10-07).
 // The Shotstand page's live demo (js/shotstand-demo.js) draws with it, so
 // what visitors see is exactly what the app draws. Copy it again when the
 // app's drawing changes; never edit it here.
@@ -23,6 +23,18 @@ var TARGETS = {
   "ipad-13": { label: 'iPad 13" (2064 × 2752)', w: 2064, h: 2752, device: "ipad", family: "iPad 13-inch display" },
   "mac": { label: "Mac (2880 × 1800)", w: 2880, h: 1800, device: "mac", family: "Mac" },
   "mac-1440": { label: "Mac (1440 × 900)", w: 1440, h: 900, device: "mac", family: "Mac" },
+  // iPhone Duo's two displays (App Store Connect asks for these from
+  // April 2027 for apps that run on it). Premium.
+  "iphone-duo-outer": { label: "iPhone Duo outer (1398 × 2034)", w: 1398, h: 2034, device: "iphone", family: "iPhone Duo outer display", duo: true },
+  "iphone-duo-inner": { label: "iPhone Duo inner (2007 × 2853)", w: 2007, h: 2853, device: "iphone", family: "iPhone Duo inner display", duo: true },
+  // iOS 27's App Store art: the product page header, the search result
+  // image, and one 16:9 image Apple crops to both (21:9 and 3:2, so
+  // `safe` keeps words inside both crops). iPhones on a wide canvas.
+  // Saved as PNG with no alpha, which is what App Store Connect takes.
+  // `text` scales headlines up for the short, wide header. Premium.
+  "store-header": { label: "App Store header (3840 × 1646)", w: 3840, h: 1646, device: "iphone", family: "product page header", art: "header", text: 1.3 },
+  "store-search": { label: "App Store search image (3840 × 2560)", w: 3840, h: 2560, device: "iphone", family: "search result image", art: "search" },
+  "store-universal": { label: "Header and search in one (5244 × 2950)", w: 5244, h: 2950, device: "iphone", family: "universal header and search image", art: "universal", safe: { x: 0.08, y: 0.12 } },
   // Apple Watch: App Store Connect takes one size and scales it.
   "watch-ultra": { label: "Apple Watch Ultra 3 (422 × 514)", w: 422, h: 514, device: "watch", family: "Apple Watch" },
   "watch-46": { label: "Apple Watch Series 11 (416 × 496)", w: 416, h: 496, device: "watch", family: "Apple Watch" },
@@ -135,6 +147,10 @@ var LAYOUTS = [
   { id: "duo", label: "Pair", caption: "top", devices: [{ dx: 0.34, cy: 0.69, size: 0.6, roll: -7, shot: 1 }, { dx: 0.64, cy: 0.73, size: 0.64, roll: 5, shot: 0 }] },
   { id: "spread", label: "Across two", caption: "top", spansNext: true, devices: [{ dx: 1.0, cy: 0.69, size: 0.78, roll: -9 }] },
   { id: "lying", label: "Lying across", caption: "top", spansNext: true, devices: [{ dx: 1.0, cy: 0.67, size: 0.9, roll: -82 }] },
+  // App Store art only (headers and search images): three phones, the
+  // middle one in front. `spread` places the side phones by the slide's
+  // height, so they sit the same on 21:9, 16:9, and 3:2.
+  { id: "trio", label: "Three phones", caption: "top", art: true, devices: [{ dx: 0.5, cy: 0.8, size: 0.72, roll: -8, shot: 1, spread: -1 }, { dx: 0.5, cy: 0.8, size: 0.72, roll: 8, shot: 2, spread: 1 }, { dx: 0.5, cy: 0.76, size: 0.8, shot: 0 }] },
   { id: "text", label: "Title card", caption: "center", devices: [], icon: true },
   { id: "full", label: "Full screen", caption: "none", devices: [] },
   { id: "blank", label: "Blank", caption: "none", devices: [] }
@@ -743,7 +759,7 @@ function tokens(text) {
   });
   return out;
 }
-function textUnit(W, H) { return Math.min(W, H * 0.6); }
+function textUnit(W, H) { return Math.min(W, H * 0.6) * (target().text || 1); }
 function textFont(it) {
   var f = fontById(it.font || project.style.font);
   var w = weightFor(f, it.weight || project.style.weight);
@@ -988,12 +1004,13 @@ function ensureCaption(slot) {
   return { head: head, sub: sub };
 }
 function placeCaption(slot) {
-  var lay = layoutById(slot.layout), cap = ensureCaption(slot);
+  var lay = layoutById(slot.layout), cap = ensureCaption(slot), safe = target().safe || { x: 0, y: 0 };
   cap.head.dx = 0.5;
   cap.sub.attached = true;
-  if (lay.caption === "bottom") { cap.head.y = 0.935; cap.head.valign = "bottom"; }
+  if (safe.x) cap.head.w = Math.min(cap.head.w || 0.84, 1 - safe.x * 2 - 0.04);
+  if (lay.caption === "bottom") { cap.head.y = Math.min(0.935, 0.97 - safe.y); cap.head.valign = "bottom"; }
   else if (lay.caption === "center") { cap.head.y = lay.icon ? 0.6 : 0.5; cap.head.valign = "middle"; }
-  else { cap.head.y = 0.065; cap.head.valign = "top"; }
+  else { cap.head.y = Math.max(0.065, safe.y + 0.03); cap.head.valign = "top"; }
   cap.head.size = lay.caption === "center" ? project.style.headSize * 1.2 : project.style.headSize;
   cap.head.hidden = lay.caption === "none";
   cap.sub.hidden = lay.caption === "none";
@@ -1004,6 +1021,10 @@ function applyLayout(slot, layoutId, keepPartner) {
     project.slots[i + 1].layout = "float";
     applyLayout(project.slots[i + 1], "float", true);
   }
+  // The art-only layout anywhere else becomes a pair, and comes back
+  // when the set returns to an App Store art size.
+  if (layoutById(layoutId).art && !target().art) { slot.artLayout = layoutId; layoutId = "duo"; }
+  else if (slot.artLayout && target().art && layoutId === "duo") layoutId = slot.artLayout;
   slot.layout = layoutId;
   project.items = project.items.filter(function (it) { return !(it.home === slot.id && (it.type === "device" || it.layoutIcon)); });
   var lay = layoutById(layoutId), kind = target().device;
@@ -1011,6 +1032,7 @@ function applyLayout(slot, layoutId, keepPartner) {
     var k = spec.shot || 0;
     var dev = newDevice(slot.id, kind, slot.shots[k] || slot.shots[0] || null);
     dev.dx = spec.dx; dev.cy = spec.cy; dev.size = spec.size; dev.roll = spec.roll || 0; dev.yaw = spec.yaw || 0; dev.pitch = spec.pitch || 0; dev.shotIdx = k;
+    if (spec.spread) dev.dx = 0.5 + spec.spread * 0.31 * target().h / target().w;
     if (kind === "mac" && lay.id === "lying") { dev.roll = -4; dev.size = 0.7; dev.cy = 0.64; }
     // Devices go under the text.
     project.items.splice(firstTextIndex(), 0, dev);

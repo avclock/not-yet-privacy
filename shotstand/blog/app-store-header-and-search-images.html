@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Make iOS 27 App Store Header and Search Images: Shotstand</title>
+<meta name="description" content="The new product page header and search result image: sizes, Apple's rules, where it covers and crops, and how to make all three in a few minutes.">
+<link rel="canonical" href="https://notyetcb.com/shotstand/blog/app-store-header-and-search-images">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Make iOS 27 App Store Header and Search Images">
+<meta property="og:description" content="The new product page header and search result image: sizes, Apple's rules, where it covers and crops, and how to make all three in a few minutes.">
+<meta property="og:image" content="https://notyetcb.com/images/shotstand/blog/header-shotstand.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://notyetcb.com/images/shotstand/blog/header-shotstand.jpg">
+<link rel="icon" type="image/png" href="../../images/shotstand-icon.png">
+<link rel="apple-touch-icon" href="../../images/shotstand-icon.png">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/shotstand.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Make iOS 27 App Store Header and Search Images",
+  "description": "The new product page header and search result image: sizes, Apple's rules, where it covers and crops, and how to make all three in a few minutes.",
+  "datePublished": "2026-10-07",
+  "image": [
+    "https://notyetcb.com/images/shotstand/blog/header-shotstand.jpg"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Shotstand",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://notyetcb.com/images/shotstand-icon.png",
+      "width": 256,
+      "height": 256
+    }
+  },
+  "mainEntityOfPage": "https://notyetcb.com/shotstand/blog/app-store-header-and-search-images"
+}
+</script>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand" href="../">
+      <img src="../../images/icons/shotstand-64.webp" alt="Shotstand app icon">
+      Shotstand
+    </a>
+    <div class="nav-links">
+      <a href="../#try">Try it</a>
+      <a href="../#features">Features</a>
+      <a href="../#premium">Premium</a>
+      <a href="../blog/" aria-current="page">Blog</a>
+      <a href="../#faq">FAQ</a>
+      <a href="../support/">Support</a>
+      <a href="../../">Not Yet</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section>
+  <div class="container">
+    <article class="post">
+      <p><a href="./">&larr; Back to the Shotstand blog</a></p>
+      <div class="label-caps" style="margin-bottom:14px;">iOS 27 &middot; HEADERS AND SEARCH</div>
+      <h1>How to Make iOS 27 App Store Header and Search Images</h1>
+      <div class="post-meta">5 min read &middot; October 7, 2026 <button class="share-btn" data-track="share">Share</button></div>
+
+      <p>iOS 27 gives every App Store product page two new images. A wide <strong>header</strong> runs across the top of your page, behind your icon, name, and Get button. A <strong>search result image</strong> shows up when your app comes up in search, before anyone taps through. Both are optional, and both are a big, bright first impression most apps don't have yet.</p>
+      <p>Here's what Apple asks for, the rules that trip people up, and how to make them from the screenshots you already have.</p>
+
+      <h2>The Sizes</h2>
+      <ul>
+        <li><strong>Product page header:</strong> 21:9, 3840 &times; 1646 pixels.</li>
+        <li><strong>Search result image:</strong> 3:2, from 1920 &times; 1280 up to 3840 &times; 2560 pixels.</li>
+        <li><strong>One image for both:</strong> 16:9, 5244 &times; 2950 pixels, PNG only. App Store Connect crops it to 21:9 for the header and 3:2 for search.</li>
+        <li><strong>No transparency.</strong> None of these can have an alpha channel, even a fully opaque one.</li>
+        <li><strong>Video works too:</strong> the same sizes, 5 to 30 seconds, at 30 or 60 frames per second.</li>
+      </ul>
+      <div class="callout"><p><strong>Use PNG.</strong> Apple's spec page lists JPEG for the header, but App Store Connect turned down a .jpg header of ours with "File has an invalid extension." PNG with no transparency is the safe choice for all three, and the only choice for the 16:9 image.</p></div>
+
+      <h2>Apple's Rules for These Images</h2>
+      <p>Apple's asset guidelines are short, and they're stricter than for screenshots:</p>
+      <ul>
+        <li><strong>One clear idea.</strong> A busy header reads as noise at the top of the page.</li>
+        <li><strong>Keep the important part in the middle.</strong> Different devices crop differently.</li>
+        <li><strong>No prices, discounts, links, or the &copy; symbol.</strong></li>
+        <li><strong>No other platforms' logos</strong> and no mention of other app stores.</li>
+        <li><strong>Nothing you can't back up,</strong> and no Apple awards.</li>
+        <li><strong>For search, state the obvious</strong> and show the real app, since people searching want to know what it does at a glance.</li>
+      </ul>
+
+      <h2>Where Apple Covers and Crops</h2>
+      <p>On the product page, your icon, name, and Get button sit over the bottom of the header. Anything important down there disappears under them, so keep headlines and faces in the top two thirds. The 16:9 image loses its top and bottom for the header and its sides for search, so everything that matters has to sit inside both crops.</p>
+      <figure class="post-figure wide"><img src="../../images/shotstand/blog/editor-header.jpg" width="1440" height="900" loading="lazy" decoding="async" alt="Shotstand's editor with an App Store header: a headline and three iPhones, with the bottom third dimmed where the product page covers it."><figcaption>The dimmed band shows where your icon, name, and Get button will sit.</figcaption></figure>
+
+      <h2>Making Them in Shotstand</h2>
+      <p>Shotstand has all three as sizes, plus a starter set:</p>
+      <ol>
+        <li>Tap <strong>+</strong>, then <strong>Start a new set</strong>, then <strong>App Store header and search</strong>. You get a header with three phones and a headline, and a second, simpler header to try.</li>
+        <li>Drop in your own screenshots and write one line about what your app does. Put *stars* around a word to color it.</li>
+        <li>Switch the size at the top to see the search image or the 16:9 image. The layout refits for each shape, and the canvas shows Apple's crops as dashed boxes.</li>
+        <li>Open <strong>Export</strong> and tap <strong>Save all three</strong>. You get the header, the search image, and the 16:9 image as PNG files with no transparency, ready to upload.</li>
+      </ol>
+      <figure class="post-figure wide"><img src="../../images/shotstand/blog/editor-universal-export.jpg" width="1440" height="900" loading="lazy" decoding="async" alt="Shotstand's Export panel for the 16:9 image, with dashed boxes for the header and search crops and a Save all three button."><figcaption>The 16:9 image with both crops marked, and Save all three.</figcaption></figure>
+
+      <p>The checks under <strong>Before you upload</strong> remind you of the rules above, so nothing gets turned down for a price in the corner.</p>
+
+      <h2>iPhone Duo Screenshots</h2>
+      <p>Apple will also ask for screenshots of iPhone Duo's two displays, from April 2027, for apps that run on it: <strong>1398 &times; 2034</strong> for the outer display and <strong>2007 &times; 2853</strong> for the inner one (or turned sideways for landscape). Both are in Shotstand's size menu, and your set refits to them like any other size.</p>
+
+      <h2>Examples</h2>
+      <p>These are the headers for four apps from the same developer as Shotstand, made with its device frames:</p>
+      <figure class="post-figure wide"><img src="../../images/shotstand/blog/header-avclock.jpg" width="1200" height="514" loading="lazy" decoding="async" alt="AvClock's header: a split-flap departure board of airport times under the line Local time at every airport."></figure>
+      <figure class="post-figure wide"><img src="../../images/shotstand/blog/header-avgrav.jpg" width="1200" height="514" loading="lazy" decoding="async" alt="AvGrav's header: a large corrected reading, 43.79, over a hydrometer scale."></figure>
+      <figure class="post-figure wide"><img src="../../images/shotstand/blog/header-notyet.jpg" width="1200" height="514" loading="lazy" decoding="async" alt="Not Yet's header: a rope frame around the line A pause before you pay and a code being typed."></figure>
+      <figure class="post-figure wide"><img src="../../images/shotstand/blog/header-shotstand.jpg" width="1200" height="514" loading="lazy" decoding="async" alt="Shotstand's header: five of its own App Store screenshots fanned out under Screenshots that sell."></figure>
+
+      <h2>What It Costs</h2>
+      <p>The header, search, and 16:9 sizes, Save all three, the starter set, and the iPhone Duo sizes are part of Shotstand Premium: one $0.99 purchase, not a subscription, on iPhone, iPad, and Mac. Everything else in Shotstand, including every screenshot size, stays free.</p>
+      <div class="callout"><p>Shotstand is coming soon to the App Store. Until then, try the <a href="../#try">live demo</a>, or read <a href="app-store-screenshot-sizes">every App Store screenshot size, explained</a>.</p></div>
+
+      <div class="more-posts">
+        <div class="label-caps">More from the Shotstand blog</div>
+<div class="blog-board">
+  <a class="blog-row" href="../blog/why-i-built-shotstand">
+    <span class="tag">Story</span>
+    <span class="row-main">
+      <span class="row-title">Why I Built Shotstand: Screenshot Tools Shouldn't Cost More Than Your App</span>
+      <span class="row-excerpt">Built out of frustration with pricey, gatekept screenshot makers.</span>
+    </span>
+    <span class="row-status live">LIVE</span>
+  </a>
+  <a class="blog-row" href="../blog/shotstand-slide-by-slide">
+    <span class="tag">Tour</span>
+    <span class="row-main">
+      <span class="row-title">Shotstand, Slide by Slide</span>
+      <span class="row-excerpt">Its own nine App Store screenshots, one at a time, and what each part of the editor does.</span>
+    </span>
+    <span class="row-status live">LIVE</span>
+  </a>
+        <a class="blog-row" href="./">
+          <span class="tag">All</span>
+          <span class="row-main"><span class="row-title">See every post</span><span class="row-excerpt">Back to the Shotstand blog.</span></span>
+          <span class="row-status live">&rarr;</span>
+        </a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <a class="brand" href="../">
+        <img src="../../images/icons/shotstand-64.webp" alt="Shotstand app icon">
+        Shotstand
+      </a>
+      <div class="footer-links">
+        <a href="../blog/">Blog</a>
+        <a href="../support/">Support</a>
+        <a href="../privacy/">Privacy Policy</a>
+        <a href="../terms/">Terms of Use</a>
+        <a href="../press/">Press</a>
+        <a href="mailto:avclock@protonmail.com?subject=Shotstand">Contact</a>
+      </div>
+    </div>
+    <div class="more-apps">
+      <div class="more-apps-label">More apps from the same developer</div>
+      <div class="more-apps-row">
+        <a class="more-app" href="../../"><img src="../../images/icons/notyet-96.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><strong>Not Yet</strong><small>Checkout blocker</small></span></a>
+        <a class="more-app" href="https://avclockapp.com/" target="_blank" rel="noopener"><img src="../../images/icons/avclock-96.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><strong>AvClock</strong><small>Airport world clock</small></span></a>
+        <a class="more-app" href="https://avclockapp.com/avgrav" target="_blank" rel="noopener"><img src="../../images/icons/avgrav-96.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><strong>AvGrav</strong><small>API fuel gravity</small></span></a>
+      </div>
+    </div>
+    <p class="footer-note">Shotstand isn't affiliated with or endorsed by Apple. App Store, iPhone, iPad, Mac, and Apple Watch are trademarks of Apple Inc.</p>
+  </div>
+</footer>
+<script src="../../js/nav.js" defer></script>
+<script src="../../js/track.js" defer></script>
+</body>
+</html>
