@@ -28,7 +28,7 @@
 //     the day, or the 1-write-per-second-per-key limit during a burst)
 //     just drops that one count with a normal 204.
 
-const ALLOWED_TYPES = new Set(["view", "scroll", "outbound", "share", "demo"]);
+const ALLOWED_TYPES = new Set(["view", "scroll", "outbound", "share", "demo", "promo"]);
 const RECENT_LIMIT = 50;
 const STATS_CACHE_SECONDS = 300;
 const BOT_UA = /bot|crawl|spider|slurp|headless|lighthouse|pagespeed|preview|facebookexternalhit|embedly|monitor/i;

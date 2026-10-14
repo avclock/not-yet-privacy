@@ -6,6 +6,8 @@
 // fail quietly, never blocks the page.
 (function () {
   var ENDPOINT = "/api/track";
+  // App Store IDs, so a redeem link's code is logged against the right app.
+  var PROMO_APPS = { "6780675251": "avclock", "6804878148": "avgrav", "6809032127": "notyet", "6819417224": "shotstand" };
 
   function send(type, detail) {
     var payload = JSON.stringify({
@@ -59,6 +61,17 @@
     try {
       var url = new URL(a.getAttribute("href"), location.href);
       if (url.origin !== location.origin) send("outbound", url.hostname);
+      // Discount-code clicks -- an App Store offer-code redeem link, or
+      // any link marked data-promo="app/CODE", logged as "app/CODE" so
+      // each code (MILITARY, STUDENT, ...) gets its own count on top of
+      // the plain outbound click above. "/" not ":" as the separator:
+      // stats.js splits KV keys on ":".
+      var promo = a.getAttribute("data-promo");
+      if (!promo && url.hostname === "apps.apple.com" && url.pathname.indexOf("/redeem") === 0) {
+        var code = url.searchParams.get("code"), id = url.searchParams.get("id");
+        if (code) promo = (PROMO_APPS[id] || id || "app") + "/" + code;
+      }
+      if (promo) send("promo", promo);
     } catch (err) { /* relative/invalid href, ignore */ }
   });
 

@@ -63,6 +63,12 @@
     </div>
 
     <div class="panel-block">
+      <div class="label-caps">Discount code clicks</div>
+      <p style="color:var(--muted-2);font-size:12.5px;margin:0 0 4px;">Taps on a discount-code redeem link, by app/code and the page it was tapped on. A tap opens the App Store; it doesn't mean the code was redeemed (App Store Connect has that).</p>
+      <table class="data-table" id="promo-table"><tbody></tbody></table>
+    </div>
+
+    <div class="panel-block">
       <div class="label-caps">Shares / reposts by page</div>
       <table class="data-table" id="share-table"><tbody></tbody></table>
     </div>
@@ -110,7 +116,7 @@
     document.getElementById("kv-warning").style.display = data.error ? "block" : "none";
 
     var views = {}, scroll = {}, outbound = {}, share = {};
-    var totalViews = 0, totalShares = 0, totalOutbound = 0;
+    var totalViews = 0, totalShares = 0, totalOutbound = 0, promo = {}, totalPromo = 0;
 
     Object.keys(totals).forEach(function (key) {
       var parts = key.split("|");
@@ -120,6 +126,7 @@
       else if (type === "scroll") { scroll[path] = (scroll[path] || 0) + n; }
       else if (type === "outbound") { outbound[detail] = (outbound[detail] || 0) + n; totalOutbound += n; }
       else if (type === "share") { share[path] = (share[path] || 0) + n; totalShares += n; }
+      else if (type === "promo") { var pk = detail + "|" + path; promo[pk] = (promo[pk] || 0) + n; totalPromo += n; }
     });
 
     var tiles = document.getElementById("totals-tiles");
@@ -127,6 +134,7 @@
     tiles.appendChild(tile(totalViews, "Total pageviews"));
     tiles.appendChild(tile(totalShares, "Total shares"));
     tiles.appendChild(tile(totalOutbound, "Backlink clicks"));
+    tiles.appendChild(tile(totalPromo, "Discount code clicks"));
     tiles.appendChild(tile((data.recent || []).length, "Recent activity (latest per page)"));
 
     var vt = document.querySelector("#views-table tbody");
@@ -149,6 +157,14 @@
       ot.appendChild(row([h, outbound[h]]));
     });
     if (!Object.keys(outbound).length) ot.appendChild(row(["No outbound clicks yet", ""]));
+
+    var pt = document.querySelector("#promo-table tbody");
+    pt.innerHTML = "";
+    Object.keys(promo).sort(function (a, b) { return promo[b] - promo[a]; }).forEach(function (k) {
+      var kp = k.split("|");
+      pt.appendChild(row([kp[0], kp[1], promo[k]]));
+    });
+    if (!Object.keys(promo).length) pt.appendChild(row(["No discount code clicks yet", "", ""]));
 
     var sht = document.querySelector("#share-table tbody");
     sht.innerHTML = "";
