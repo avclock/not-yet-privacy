@@ -319,3 +319,13 @@ URLs once the domain is decided.
   The dashboard polls once a minute and only while visible. Free tier:
   1,000 KV writes/day, so roughly 400-700 visits a day before counts
   stop for the rest of that UTC day; the site itself is unaffected.
+
+## Audience tests
+
+Posts written to see whether a new audience finds Not Yet. Compare views,
+Chrome Web Store clicks (`/analytics.html`), and installs by UTM campaign
+in the Chrome Web Store dashboard after a few weeks.
+
+| Date | Post | Audience | UTM campaign |
+| --- | --- | --- | --- |
+| 2026-10-16 | `blog/student-budget-impulse-buying` | Students | `student-budget-impulse-buying` |
