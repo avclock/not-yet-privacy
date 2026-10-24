@@ -40,6 +40,11 @@ images/shotstand/shotstand-icon-1024.png   Press kit icon
 images/og-shotstand.jpg           1200x630 share image for the Shotstand pages
 images/shotstand-icon.png         Shotstand's app icon
 press/index.html                  Press release + media contact -- fill in the [CITY], [STATE] placeholder in the dateline before publishing
+tools/indexnow.py                 Tells Bing and the other IndexNow engines a page is new or changed
+                                  (key file: the 32-hex .txt at the root; tools/ isn't served, see
+                                  .assetsignore). After a deploy: python3 tools/indexnow.py blog/<post>.html
+                                  blog/index.html (no args: the whole sitemap). Same file as avclock-website's.
+sitemap.xml                       Every page, with <lastmod>: update a page's date when it changes
 css/style.css                     Shared styles (the "Calm" palette)
 images/app-icon.png               Real app icon (from Assets.xcassets)
 images/previews/{iphone,ipad,mac}/ The App Store screenshots, web-sized: NN-name.jpg (large, for the

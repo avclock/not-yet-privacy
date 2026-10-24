@@ -4,3 +4,6 @@
 node_modules
 README.md
 wrangler.jsonc
+package.json
+package-lock.json
+tools
