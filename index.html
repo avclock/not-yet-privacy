@@ -102,7 +102,7 @@
             Add to Chrome
           </a>
         </div>
-        <p class="hero-note">On Chrome? <a href="#chrome-premium">Premium is $39.99 once</a>, with a key you keep for good.</p>
+        <p class="hero-note">On Chrome? <a href="#chrome-premium" data-sale="price">Premium is $39.99 once</a>, with a key you keep for good.</p>
       </div>
     </div>
 
@@ -595,7 +595,8 @@
       </div>
       <div class="way-card" id="chrome-premium">
         <div class="way-head"><span class="way-label">Chrome</span><span class="way-sub">Any computer with Chrome</span></div>
-        <p class="way-price">$39.99<span>once, no subscription</span></p>
+        <p class="way-price" data-sale="price">$39.99<span>once, no subscription</span></p>
+        <p data-sale="note" hidden style="font-weight:600;margin:6px 0 10px;"></p>
         <p>A Premium key, checked on your own computer, so there's still no server. It arrives by email. Paste it into Not Yet and Premium is on.</p>
         <a class="store-badge way-buy" href="https://payhip.com/b/bRTM4" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3 20 3"/><path d="M16.5 6.5l3 3"/><path d="M14 9l2 2"/></svg>
@@ -819,6 +820,7 @@
 
 <script src="js/nav.js" defer></script>
 <script src="js/track.js" defer></script>
+<script src="js/sale.js" defer></script>
 <script src="js/pinboard-demo.js" defer></script>
 <script src="js/hero-demo.js" defer></script>
 <script src="js/info-popovers.js" defer></script>
